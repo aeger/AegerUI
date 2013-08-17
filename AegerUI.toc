@@ -1,4 +1,4 @@
-## Interface:30300
+## Interface:50300
 ## Title: AegerUI
 ## Notes: AegersUI and BT4 setup
 setup.lua
