@@ -159,7 +159,7 @@ SlashCmdList.ONEBAR = function()
 	if IsAddOnLoaded("Bartender4") then
     Bartender4.db:SetProfile("aegerUI1bar")
   end
-	
+	ReloadUI()
 end
 SLASH_ONEBAR1 = "/bar1"
 
@@ -168,7 +168,7 @@ SlashCmdList.TWOBAR = function()
 	if IsAddOnLoaded("Bartender4") then
     Bartender4.db:SetProfile("aegerUI2bar")
   end
-	
+	ReloadUI()
 end
 SLASH_TWOBAR1 = "/bar2"
 
