@@ -1,4 +1,14 @@
-## Interface:50300
-## Title: AegerUI
-## Notes: AegersUI and BT4 setup
+## Interface: 50300
+## Version: 0.1
+
+## Title: aegerUI
+## Notes: Aeger's UI Interface
+## Author: Aeger
+
+## SavedVariablesPerCharacter: FirstRun, Bbars
+
+## Dependencies: Bartender4
+
 setup.lua
+aegerUI.lua
+
