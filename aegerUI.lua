@@ -11,18 +11,30 @@ local DisplayBars = CreateFrame("Frame")
 DisplayBars:RegisterEvent("ADDON_LOADED")
 DisplayBars:RegisterEvent("ONUPDATE")
 DisplayBars:RegisterEvent("ONLOAD")
+DisplayBars:RegisterEvent("UNIT_ENTERING_VEHICLE")
+DisplayBars:RegisterEvent("UNIT_ENTERED_VEHICLE")
+DisplayBars:RegisterEvent("UNIT_EXITING_VEHICLE")
+DisplayBars:RegisterEvent("UNIT_EXITED_VEHICLE")
 
 local function BbarDisplay()
-if Bbars == 1 then
-  BottomBarFrame1:Show()
-  BottomBarFrame2:Hide()
- else
+if ( not MainMenuBar.busy and not UnitHasVehicleUI("player") ) then
+  if Bbars == 1 then
+    BottomBarFrame1:Show()
+    BottomBarFrame2:Hide()
+ end
+  
 if Bbars == 2 then
   BottomBarFrame2:Show()
   BottomBarFrame1:Hide()
-  end
+end
+
+elseif
+  UnitHasVehicleUI("player") then
+    BottomBarFrame1:Hide()
+    BottomBarFrame2:Hide()
 end
 end
+
 
 DisplayBars:SetScript("OnEvent", function(self, event, ...)
 BbarDisplay()
