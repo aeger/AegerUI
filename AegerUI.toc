@@ -5,10 +5,16 @@
 ## Notes: Aeger's UI Interface
 ## Author: Aeger
 
-## SavedVariablesPerCharacter: FirstRun, Bbars
+## SavedVariablesPerCharacter: FirstRun, Bbars, MoveableFramesSaved
 
 ## Dependencies: Bartender4
 
 setup.lua
 aegerUI.lua
+Core.lua
+Map.lua
+eAlign.lua
+MovableFrames.lua
+
+## Credit for setup, core and Map to Mayron, Moveableframes by Azilroka
 

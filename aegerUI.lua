@@ -1,5 +1,6 @@
 local aegerUI = ...
 local MEDIAPATH = "Interface\\AddOns\\" .. aegerUI .. "\\Media\\"
+local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
 
 local BottomBarFrame1 = CreateFrame("Frame", "BottomBarFrame1", UIParent)
 BottomBarFrame1:Hide()
@@ -59,8 +60,7 @@ BottomBarFrame1:SetScript("OnShow", function(self)
 	Bar1BorderDisplay:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -3)
 	Bar1BorderDisplay:SetPoint("CENTER", UIParent, "CENTER")
 	Bar1BorderDisplay:SetTexture(MEDIAPATH .. "btroundedborder")
-	local_,class = UnitClass("player")
-	Bar1BorderDisplay:SetVertexColor(RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b, 1.0)
+	Bar1BorderDisplay:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 end)
 
 BottomBarFrame2:SetScript("OnShow", function(self)
@@ -82,6 +82,5 @@ BottomBarFrame2:SetScript("OnShow", function(self)
 	Bar2BorderDisplay:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -4)
 	Bar2BorderDisplay:SetPoint("CENTER", UIParent, "CENTER")
 	Bar2BorderDisplay:SetTexture(MEDIAPATH .. "btroundedborder")
-	local_,class = UnitClass("player")
-	Bar2BorderDisplay:SetVertexColor(RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b, 1.0)
+	Bar2BorderDisplay:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 end)

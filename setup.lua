@@ -4,7 +4,6 @@ local MEDIAPATH = "Interface\\AddOns\\" .. aegerUI .. "\\Media\\"
 local FONT = "Fonts\\FRIZQT__.ttf"
 
 local ADDONS = {
-  "Chinchilla",
   "Bartender4",
   }
   
@@ -45,10 +44,15 @@ elseif event == "CINEMATIC_STOP" then
 
  local function SetProfiles()
   if IsAddOnLoaded("Bartender4") then
-    Bartender4.db:SetProfile("aegerUI1bar")
-  end
-  if IsAddOnLoaded("Chinchilla") then
-    Chinchilla.db:SetProfile("aegerUI")
+    Bartender4.db:SetProfile("aegerUI2bar")
+	Bartender4:GetModule("ActionBars"):EnableBar(10)
+	Bartender4:GetModule("ActionBars"):EnableBar(9)
+	Bartender4:GetModule("ActionBars"):EnableBar(3)
+	Bartender4:GetModule("ActionBars"):EnableBar(4)
+	Bartender4.Bar.barregistry["10"]:SetVisibilityOption("always", true)
+	Bartender4.Bar.barregistry["9"]:SetVisibilityOption("always", true)
+	Bartender4.Bar.barregistry["3"]:SetVisibilityOption("always", true)
+	Bartender4.Bar.barregistry["4"]:SetVisibilityOption("always", true)
   end
 end
 
@@ -67,7 +71,7 @@ local reload
 local AceAddon = LibStub("AceAddon-3.0")
 FirstRun = 0
 SetProfiles()
-SetBbars1()
+SetBbars2()
 reload = true
   if reload then
     ReloadUI()
@@ -158,6 +162,14 @@ SlashCmdList.ONEBAR = function()
 	Bbars = 1
 	if IsAddOnLoaded("Bartender4") then
     Bartender4.db:SetProfile("aegerUI1bar")
+	Bartender4:GetModule("ActionBars"):EnableBar(10)
+	Bartender4:GetModule("ActionBars"):EnableBar(9)
+	Bartender4:GetModule("ActionBars"):EnableBar(3)
+	Bartender4:GetModule("ActionBars"):EnableBar(4)
+	Bartender4.Bar.barregistry["10"]:SetVisibilityOption("always", true)
+	Bartender4.Bar.barregistry["9"]:SetVisibilityOption("always", true)
+	Bartender4.Bar.barregistry["3"]:SetVisibilityOption("always", true)
+	Bartender4.Bar.barregistry["4"]:SetVisibilityOption("always", true)
   end
 	ReloadUI()
 end
