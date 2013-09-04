@@ -182,7 +182,7 @@ local border = CreateFrame("frame", nil, Minimap)
 	border:SetSize(206, 206)
 	border:SetFrameLevel(1)
 	border:SetBackdrop(backdrop1)
-	border:SetBackdropColor(1, 1, 1)
+	border:SetBackdropColor(1, 1, 1, .5)
 	
 -- Right Click Menu
 local menuFrame = CreateFrame("Frame", "MinimapRightClickMenu", UIParent, "UIDropDownMenuTemplate")
