@@ -7,7 +7,7 @@
 
 ## SavedVariablesPerCharacter: FirstRun, Bbars, MoveableFramesSaved, TopmenuShow
 
-## Dependencies: Bartender4
+## Dependencies: Bartender4, Bazooka
 
 setup.lua
 aegerUI.lua
@@ -16,6 +16,11 @@ Map.lua
 eAlign.lua
 MovableFrames.lua
 topmenu.lua
+Broker_aegerUI.lua
+
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+LibDataBroker-1.1.lua
 
 ## Credit for setup, core and Map to Mayron, Moveableframes by Azilroka
 

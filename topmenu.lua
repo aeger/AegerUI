@@ -1,6 +1,8 @@
 local aegerUI = ...
-local MEDIAPATH = "Interface\\AddOns\\" .. aegerUI .. "\\Media\\"
+
+local MEDIAPATH = "Interface\\AddOns\\aegerUI\\Media\\"
 local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
+
 
 local topmenu = CreateFrame("Frame", "topmenu", UIParent)
 topmenu:RegisterEvent("ADDON_LOADED")
@@ -13,20 +15,32 @@ topmenuborder:RegisterEvent("PLAYER_REGEN_ENABLED")
 topmenuborder:RegisterEvent("PLAYER_REGEN_DISABLED")
 topmenuborder:Hide()
 
-local function topmenudisplay()
+function topmenudisplay()
+
 if TopmenuShow == 1 then
 topmenu:Show()
 topmenuborder:Show()
-end
-
+_G["BazookaBar_1"]:Show()
+else
 if TopmenuShow == nil then
 topmenu:Hide()
 topmenuborder:Hide()
+_G["BazookaBar_1"]:Hide()
 end
 end
+end 
 
 topmenu:SetScript("OnEvent", function(self, event, ...)
-topmenudisplay()
+local timeleft = 1 --set the countdown to w/e you want
+local f = CreateFrame("Frame", nil, UIParent)
+f:SetScript("OnUpdate", function(_,arg)
+  timeleft = timeleft - arg
+  if timeleft >= 0 then
+    timeleft = nil
+    f:SetScript("OnUpdate", nil)
+    topmenudisplay()
+  end
+end)
 end)
 
 local function flip(texture,horizontal)
@@ -73,3 +87,15 @@ topmenuborder:SetScript("OnShow", function(self)
 end
 end)
 end)
+
+SlashCmdList.TOPMENUSHOW = function()
+	TopmenuShow = 1
+	ReloadUI()
+end
+SLASH_TOPMENUSHOW1 = "/tmshow"
+
+SlashCmdList.TOPMENUHIDE = function()
+	TopmenuShow = nil
+	ReloadUI()
+end
+SLASH_TOPMENUHIDE1 = "/tmhide"
