@@ -1,5 +1,5 @@
 local aegerUI = ...
-local MEDIAPATH = "Interface\\AddOns\\" .. aegerUI .. "\\Media\\"
+local MEDIAPATH = "Interface\\AddOns\\aegerUI\\Media\\"
 
 local FONT = "Fonts\\FRIZQT__.ttf"
 
@@ -11,12 +11,13 @@ local TEXT = {
 
   Install = "Install",
   Cancel = "Cancel",
+  Intro = "aegerUI",
   
   }
  
  --Frames------------------------------------------------------------------
   
-local SetupFrame = CreateFrame("Frame", "aegerUISetupFrame", UIParent)
+local SetupFrame = CreateFrame("Frame", "SetupFrame", UIParent)
 SetupFrame:Hide()
 
 local FirstRunFrame = CreateFrame("Frame")
@@ -44,7 +45,7 @@ elseif event == "CINEMATIC_STOP" then
 
  local function SetProfiles()
   if IsAddOnLoaded("Bartender4") then
-    Bartender4.db:SetProfile("aegerUI2bar")
+    Bartender4.db:SetProfile("aegerUI1bar")
 	Bartender4:GetModule("ActionBars"):EnableBar(10)
 	Bartender4:GetModule("ActionBars"):EnableBar(9)
 	Bartender4:GetModule("ActionBars"):EnableBar(3)
@@ -58,28 +59,22 @@ end
 
 local function SetBbars1()
   Bbars = 1
+  TopmenuShow = 1
 end
 
 local function SetBbars2()
   Bbars = 2
+  TopmenuShow = 1
 end
 
 local function DoSetup()
 PlaySoundFile(MEDIAPATH .. "Sound\\click.mp3")
 SetupFrame:Hide()
-local reload
-local AceAddon = LibStub("AceAddon-3.0")
 FirstRun = 0
 SetProfiles()
-SetBbars2()
-reload = true
-  if reload then
-    ReloadUI()
-  end
+SetBbars1()
+ReloadUI()
 end
-  
-
-
 
 local function BigButton_OnEnter(self)
 	self:GetNormalTexture():SetVertexColor(0, 1, 0)
@@ -89,14 +84,12 @@ local function Button_OnLeave(self)
 	self:GetNormalTexture():SetVertexColor(1, 1, 1)
 end
 
-
-
 --Setup frame----------------------------------------------------------------
 
 SetupFrame:SetScript("OnShow", function(self)
   self:SetScript("OnShow", nil)
-  self:SetPoint("CENTER")
-  self:SetSize(400, 400)
+  self:SetPoint("CENTER", UIParent, "CENTER")
+  self:SetSize(453, 194)
   self:SetFrameStrata("TOOLTIP")
   self:SetFrameLevel("18")
 
@@ -105,7 +98,12 @@ SetupFrame:SetScript("OnShow", function(self)
     Backdrop:SetTexture(0, 0, 0, 0.9)
     self.Backdrop = Backdrop
 	
---------------------
+  local aegerLogo = self:CreateTexture(nil, "BORDER")
+    aegerLogo:SetPoint("CENTER", SetupFrame, "CENTER")
+	aegerLogo:SetSize(453, 194)
+	aegerLogo:SetTexture(MEDIAPATH .. "aegerUIlogo")
+	
+  --------------------
 --  INSTALL Button  --
 --------------------
 
@@ -157,31 +155,3 @@ SlashCmdList.INSTALL = function()
 	SetupFrame:Show()
 end
 SLASH_INSTALL1 = "/install"
-
-SlashCmdList.ONEBAR = function()
-	Bbars = 1
-	if IsAddOnLoaded("Bartender4") then
-    Bartender4.db:SetProfile("aegerUI1bar")
-	Bartender4:GetModule("ActionBars"):EnableBar(10)
-	Bartender4:GetModule("ActionBars"):EnableBar(9)
-	Bartender4:GetModule("ActionBars"):EnableBar(3)
-	Bartender4:GetModule("ActionBars"):EnableBar(4)
-	Bartender4.Bar.barregistry["10"]:SetVisibilityOption("always", true)
-	Bartender4.Bar.barregistry["9"]:SetVisibilityOption("always", true)
-	Bartender4.Bar.barregistry["3"]:SetVisibilityOption("always", true)
-	Bartender4.Bar.barregistry["4"]:SetVisibilityOption("always", true)
-  end
-	ReloadUI()
-end
-SLASH_ONEBAR1 = "/bar1"
-
-SlashCmdList.TWOBAR = function()
-	Bbars = 2
-	if IsAddOnLoaded("Bartender4") then
-    Bartender4.db:SetProfile("aegerUI2bar")
-  end
-	ReloadUI()
-end
-SLASH_TWOBAR1 = "/bar2"
-
-
