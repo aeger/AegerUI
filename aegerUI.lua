@@ -6,7 +6,7 @@ local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitCla
 local BottomBarFrame1 = CreateFrame("Frame", "BottomBarFrame1", UIParent)
 BottomBarFrame1:Hide()
 
-local Bar1BorderFrame = CreateFrame("Frame", "BottomBarFrame1", UIParent)
+local Bar1BorderFrame = CreateFrame("Frame", "Bar1BorderFrame", UIParent)
 Bar1BorderFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
 Bar1BorderFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
 Bar1BorderFrame:Hide()
