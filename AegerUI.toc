@@ -1,5 +1,5 @@
 ## Interface: 50300
-## Version: 0.1
+## Version: 5.3.1
 
 ## Title: aegerUI
 ## Notes: Aeger's UI Interface
@@ -11,16 +11,19 @@
 
 setup.lua
 aegerUI.lua
-Core.lua
-Map.lua
-eAlign.lua
-MovableFrames.lua
-topmenu.lua
-Broker_aegerUI.lua
 
+## Modules
+Modules\Sidebars.lua
+Modules\MiniMap.lua
+Modules\eAlign.lua
+Modules\MovableFrames.lua
+Modules\topmenu.lua
+Modules\Broker_aegerUI.lua
+
+## Libraries
 libs\LibStub\LibStub.lua
 libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
-LibDataBroker-1.1.lua
+libs\LibDataBroker-1.1.lua
 
 ## Credit for setup, core and Map to Mayron, Moveableframes by Azilroka
 
