@@ -77,7 +77,7 @@ ReloadUI()
 end
 
 local function BigButton_OnEnter(self)
-	self:GetNormalTexture():SetVertexColor(0, 1, 0)
+	self:GetNormalTexture():SetVertexColor(1, 0, 0)
 end
 
 local function Button_OnLeave(self)
@@ -109,8 +109,9 @@ SetupFrame:SetScript("OnShow", function(self)
 
 	local SetupButton = CreateFrame("Button", nil, self)
 	SetupButton:SetPoint("TOP", SetupFrame, "BOTTOM")
-	SetupButton:SetSize(346, 68)
-	SetupButton:SetNormalTexture(MEDIAPATH .. "BigButton")
+	SetupButton:SetPoint("LEFT", SetupFrame, "LEFT")
+	SetupButton:SetSize(153, 56)
+	SetupButton:SetNormalTexture(MEDIAPATH .. "setupButton")
 	SetupButton:SetScript("OnEnter", BigButton_OnEnter)
 	SetupButton:SetScript("OnLeave", Button_OnLeave)
 	SetupButton:SetScript("OnClick", DoSetup)
@@ -129,9 +130,10 @@ SetupFrame:SetScript("OnShow", function(self)
 --------------------
 
 	local CancelButton = CreateFrame("Button", nil, self)
-	CancelButton:SetPoint("TOP", SetupButton, "BOTTOM", 0, 2)
-	CancelButton:SetSize(346, 68)
-	CancelButton:SetNormalTexture(MEDIAPATH .. "BigButton")
+	CancelButton:SetPoint("TOP", SetupFrame, "BOTTOM")
+	CancelButton:SetPoint("RIGHT", SetupFrame, "RIGHT")
+	CancelButton:SetSize(153, 56)
+	CancelButton:SetNormalTexture(MEDIAPATH .. "setupButton")
 	CancelButton:SetScript("OnEnter", BigButton_OnEnter)
 	CancelButton:SetScript("OnLeave", Button_OnLeave)
 	CancelButton:SetScript("OnClick", function(this)
