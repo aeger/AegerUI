@@ -32,15 +32,15 @@ local TEXT = {
 --Frames---------------------------------------------------------------------
 
 local SetupFrame = CreateFrame("Frame", "SetupFrame", UIParent)
-    SetupFrame:SetPoint("CENTER", UIParent, "CENTER")
-	SetupFrame:SetSize(453, 194)
-	SetupFrame:SetFrameStrata("TOOLTIP")
-	SetupFrame:SetFrameLevel("18")
+    self:SetPoint("CENTER", UIParent, "CENTER")
+	self:SetSize(453, 194)
+	self:SetFrameStrata("TOOLTIP")
+	self:SetFrameLevel("18")
 
 	local Backdrop = self:CreateTexture(nil, "BACKGROUND")
 	Backdrop:SetAllPoints(UIParent)
 	Backdrop:SetTexture(0, 0, 0, 0.9)
-	Backdrop.Backdrop = Backdrop
+	self.Backdrop = Backdrop
 
 	local aegerLogo = self:CreateTexture(nil, "BORDER")
 	aegerLogo:SetPoint("CENTER", self, "CENTER")
@@ -59,7 +59,7 @@ local SetupFrame = CreateFrame("Frame", "SetupFrame", UIParent)
 	SetupButton:SetScript("OnEnter", BigButton_OnEnter)
 	SetupButton:SetScript("OnLeave", Button_OnLeave)
 	SetupButton:SetScript("OnClick", DoSetup)
-	SetupButton.SetupButton = SetupButton
+	self.SetupButton = SetupButton
 
 	local SetupText = SetupButton:CreateFontString(nil, "OVERLAY")
 	SetupText:SetPoint("LEFT")
@@ -82,11 +82,11 @@ local SetupFrame = CreateFrame("Frame", "SetupFrame", UIParent)
 	CancelButton:SetScript("OnLeave", Button_OnLeave)
 	CancelButton:SetScript("OnClick", function(this)
 		PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
-		SetupDone = nil
-		CancelButton:Hide()
+		self.is_complete = nil
+		self:Hide()
 	end)
 
-	CancelButton.CancelButton = CancelButton
+	self.CancelButton = CancelButton
 	local CancelText = CancelButton:CreateFontString(nil, "OVERLAY")
 	CancelText:SetPoint("LEFT")
 	CancelText:SetPoint("RIGHT")
