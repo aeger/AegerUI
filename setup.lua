@@ -34,6 +34,7 @@
     local TEXT = {
             Install = "Install",
             Cancel = "Cancel",
+			Reload = "Reload",
     }
      
     -- Define locals and local functions up here so they're in scope for the whole file
@@ -87,6 +88,31 @@
             aegerLogo:SetPoint("CENTER", SetupFrame, "CENTER")
             aegerLogo:SetSize(453, 194)
             aegerLogo:SetTexture(MEDIA_PATH .. "aegerUIlogo")
+			
+			--------------------
+            -- RELOAD Button  --
+            --------------------
+			
+			local ReloadButton = CreateFrame("Button", nil, SetupFrame)
+			ReloadButton:SetPoint("TOP", SetupFrame, "BOTTOM")
+            ReloadButton:SetPoint("LEFT", SetupFrame, "LEFT")
+            ReloadButton:SetSize(153, 56)
+            ReloadButton:SetNormalTexture(MEDIA_PATH .. "reloadbtn")
+			ReloadButton:SetScript("OnEnter", BigButton_OnEnter)
+            ReloadButton:SetScript("OnLeave", Button_OnLeave)
+            ReloadButton:SetScript("OnClick", function(self)
+                    ReloadUI()
+            end)
+            SetupFrame.ReloadButton = ReloadButton
+			ReloadButton:Hide()
+     
+            local ReloadText = ReloadButton:CreateFontString(nil, "OVERLAY")
+            ReloadText:SetPoint("LEFT")
+            ReloadText:SetPoint("RIGHT")
+            ReloadText:SetFont(FONT, 32, "OUTLINE")
+            ReloadText:SetAlpha(0.8)
+            ReloadText:SetText(TEXT.Reload)
+            ReloadButton:SetFontString(ReloadText)
      
             --------------------
             -- INSTALL Button  --
@@ -110,6 +136,7 @@
             SetupButton:SetScript("OnClick", function(self)
                     ApplySetup()
                     self:Hide()
+					ReloadButton:Show()
             end)
             SetupFrame.SetupButton = SetupButton
      
@@ -134,8 +161,7 @@
             CancelButton:SetScript("OnLeave", Button_OnLeave)
             CancelButton:SetScript("OnClick", function(this)
                     PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
-                    SetupDone = nil
-                    self:Hide()
+                    SetupFrame:Hide()
             end)
      
             SetupFrame.CancelButton = CancelButton
@@ -146,7 +172,7 @@
             CancelText:SetAlpha(0.8)
             CancelText:SetText(TEXT.Cancel)
             CancelButton:SetFontString(CancelText)
-    end
+	end
      
      
      
@@ -176,8 +202,7 @@
     function ApplySetup()  -- the OK button calls this when clicked.
             SetProfiles()
             SetBbars1()
-			SetupFrame:Hide()
-            aegerUI_SetupDone = true  -- Your saved variable. ONLY set this true here, when you KNOW setup has been successfully performed.
+			aegerUI_SetupDone = true  -- Your saved variable. ONLY set this true here, when you KNOW setup has been successfully performed.
             print('Setup complete. Please reload UI to finish via "/rl".')  -- Never force a reload on a user.
     end
      
