@@ -5,7 +5,7 @@
 ## Notes: Aeger's UI Interface
 ## Author: Aeger
 
-## SavedVariablesPerCharacter: SetupDone, Bbars, MoveableFramesSaved, TopmenuShow
+## SavedVariablesPerCharacter: aegerUI_SetupDone, Bbars, MoveableFramesSaved, TopmenuShow
 
 ## Dependencies: Bartender4, Bazooka
 
