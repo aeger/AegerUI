@@ -65,7 +65,7 @@ local function MakeMovable(Frame)
 	if ElvUI and Frame:GetName() == "LossOfControlFrame" then return end
 	Frame:EnableMouse(true)
 	if Frame:GetName() == "LFGDungeonReadyPopup" then LFGDungeonReadyDialog:EnableMouse(false) end
-	
+
 	Frame:SetMovable(true)
 	Frame:RegisterForDrag("LeftButton")
 	Frame:SetClampedToScreen(true)
@@ -86,14 +86,14 @@ local function MakeMovable(Frame)
 		self.IsMoving = false
 		self:StopMovingOrSizing()
 		if self:GetName() == "GameMenuFrame" then return end
-		local a,b,c,d,e = self:GetPoint()
+		local a, b, c, d, e = self:GetPoint()
 		b = self:GetParent():GetName()
 		self:ClearAllPoints()
-		self:SetPoint(a,b,c,d,e)
+		self:SetPoint(a, b, c, d, e)
 		if self:GetName() == "QuestFrame" then
-			MoveableFramesSaved["GossipFrame"].Points = {a,b,c,d,e}
+			MoveableFramesSaved["GossipFrame"].Points = { a, b, c, d, e }
 		else
-			MoveableFramesSaved[self:GetName()].Points = {a,b,c,d,e}
+			MoveableFramesSaved[self:GetName()].Points = { a, b, c, d, e }
 		end
 	end)
 	if Frame:GetName() == "WorldStateAlwaysUpFrame" then

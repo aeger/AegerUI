@@ -5,9 +5,9 @@ local f
 SlashCmdList["EA"] = function()
 	if f then
 		f:Hide()
-		f = nil		
+		f = nil
 	else
-		f = CreateFrame('Frame', nil, UIParent) 
+		f = CreateFrame('Frame', nil, UIParent)
 		f:SetAllPoints(UIParent)
 		local w = GetScreenWidth() / 64
 		local h = GetScreenHeight() / 36
@@ -30,6 +30,6 @@ SlashCmdList["EA"] = function()
 			end
 			t:SetPoint('TOPLEFT', f, 'TOPLEFT', 0, -i * h + 1)
 			t:SetPoint('BOTTOMRIGHT', f, 'TOPRIGHT', 0, -i * h - 1)
-		end	
+		end
 	end
 end

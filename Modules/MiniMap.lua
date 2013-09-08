@@ -16,19 +16,19 @@ Minimap:SetMaskTexture('Interface\\ChatFrame\\ChatFrameBackground')
 Minimap:SetFrameStrata("LOW")
 
 local backdrop = {
-			bgFile = bg,
-			edgeFile = sb,
-			edgeSize = 16,
-			insets = {
-				left = 2,
-				right = 2,
-				top = 2,
-				bottom = 2,
-			}
-		}
+	bgFile = bg,
+	edgeFile = sb,
+	edgeSize = 16,
+	insets = {
+		left = 2,
+		right = 2,
+		top = 2,
+		bottom = 2,
+	}
+}
 
 -- Calendar	Events
-local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]	
+local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
 local cal = CreateFrame("Button", nil, Minimap)
 cal:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, -18)
 cal:SetSize(100, 20)
@@ -51,8 +51,8 @@ cal:SetScript("OnEvent", function()
 end)
 
 cal:SetScript("OnClick", function()
-if(not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
-Calendar_Toggle()
+	if (not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
+	Calendar_Toggle()
 end)
 
 -- Hide Blizzard Minimap Elements
@@ -114,20 +114,21 @@ local function settxt()
 		elseif difficultyIndex == 5 then
 			idtext:SetText("10 H")
 		elseif difficultyIndex == 6 then
-			idtext:SetText("25 H") 
+			idtext:SetText("25 H")
 		elseif difficultyIndex == 7 then
-			idtext:SetText("RF") 
+			idtext:SetText("RF")
 		elseif difficultyIndex == 8 then
-			idtext:SetText("CM") 
+			idtext:SetText("CM")
 		elseif difficultyIndex == 9 then
 			idtext:SetText("40")
 		else
 			idtext:SetText("")
 		end
 	else
-		idtext:SetText("") 
+		idtext:SetText("")
 	end
 end
+
 id:SetScript("OnEvent", settxt)
 
 -- Tracking
@@ -157,9 +158,9 @@ QueueStatusMinimapButton:SetPoint("BOTTOMLEFT", -4, -4)
 QueueStatusMinimapButtonBorder:Hide()
 
 local function LFGedit()
-MiniMapLFGFrame:ClearAllPoints()
-MiniMapLFGFrame:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", -4, -4)
-MiniMapLFGFrameBorder:Hide()
+	MiniMapLFGFrame:ClearAllPoints()
+	MiniMapLFGFrame:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMLEFT", -4, -4)
+	MiniMapLFGFrameBorder:Hide()
 end
 
 -- Minimap Changes
@@ -173,30 +174,34 @@ Minimap:SetScript("OnMouseWheel", function(self, minimap)
 	end
 end)
 local backdrop1 = {
-			bgFile = mframe,
-			edgeFile = false,
-		}
-	
+	bgFile = mframe,
+	edgeFile = false,
+}
+
 local border = CreateFrame("frame", nil, Minimap)
-	border:SetPoint("CENTER", 0, 0)
-	border:SetSize(206, 206)
-	border:SetFrameLevel(1)
-	border:SetBackdrop(backdrop1)
-	border:SetBackdropColor(1, 1, 1, .5)
-	
+border:SetPoint("CENTER", 0, 0)
+border:SetSize(206, 206)
+border:SetFrameLevel(1)
+border:SetBackdrop(backdrop1)
+border:SetBackdropColor(1, 1, 1, .5)
+
 -- Right Click Menu
 local menuFrame = CreateFrame("Frame", "MinimapRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
-    {text = "Calendar", func = function()
-    if(not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
-        Calendar_Toggle() end},
-    {text = "Customer Support",func = function() ToggleHelpFrame() end},
-	{text = "Close",func = function() menuFrame:Hide() end},
+	{
+		text = "Calendar",
+		func = function()
+			if (not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
+			Calendar_Toggle()
+		end
+	},
+	{ text = "Customer Support", func = function() ToggleHelpFrame() end },
+	{ text = "Close", func = function() menuFrame:Hide() end },
 }
 Minimap:SetScript("OnMouseUp", function(self, btn)
 	if btn == "RightButton" then
 		EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
-	
+
 	else
 		Minimap_OnClick(self)
 	end

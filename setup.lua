@@ -1,79 +1,94 @@
-local aegerUI = ...
-local MEDIAPATH = "Interface\\AddOns\\aegerUI\\Media\\"
+--Namespace------------------------------------------------------------------
+local FOLDER_NAME, private_data = ...
+
+--Constants------------------------------------------------------------------
+local MEDIA_PATH = ([[Interface\AddOns\%s\Media\]]):format(FOLDER_NAME)
 
 local FONT = "Fonts\\FRIZQT__.ttf"
 
-local ADDONS = {
-  "Bartender4",
-  }
-  
-local TEXT = {
+local ADDON_PROFILE_ASSIGNMENTS = {
+	Bartender4 = function(addon_obj)
+		addon_obj.db:SetProfile("aegerUI1bar")
 
-  Install = "Install",
-  Cancel = "Cancel",
-  Intro = "aegerUI",
-  
-  }
- 
- --Frames------------------------------------------------------------------
-  
+		local action_bars = addon_obj:GetModule("ActionBars")
+		action_bars:EnableBar(10)
+		action_bars:EnableBar(9)
+		action_bars:EnableBar(3)
+		action_bars:EnableBar(4)
+
+		local registry = addon_obj.Bar.barregistry
+		registry["10"]:SetVisibilityOption("always", true)
+		registry["9"]:SetVisibilityOption("always", true)
+		registry["3"]:SetVisibilityOption("always", true)
+		registry["4"]:SetVisibilityOption("always", true)
+	end,
+}
+
+local TEXT = {
+	Install = "Install",
+	Cancel = "Cancel",
+	Intro = "aegerUI",
+}
+
+--Frames---------------------------------------------------------------------
+
 local SetupFrame = CreateFrame("Frame", "SetupFrame", UIParent)
 SetupFrame:Hide()
 
 local FirstRunFrame = CreateFrame("Frame")
 FirstRunFrame:RegisterEvent("PLAYER_LOGIN")
+FirstRunFrame:RegisterEvent("CINEMATIC_START")
+FirstRunFrame:RegisterEvent("CINEMATIC_STOP")
 
 --Events---------------------------------------------------------------------
 
-FirstRunFrame:SetScript("OnEvent", function(self, event, ...)
-self:RegisterEvent("CINEMATIC_START")
-self:RegisterEvent("CINEMATIC_STOP")
-if event == "CINEMATIC_START" then 
-  SetupFrame:Hide()
-elseif event == "CINEMATIC_STOP" then
- if FirstRun == nil then
-  SetupFrame:Show()
- end
- else
- if FirstRun == nil then
-  SetupFrame:Show()
-  end
- end
- end)
+FirstRunFrame:SetScript("OnEvent", function(self, event_name, ...)
+	if not self[event_name] then
+		if not SetupFrame.is_complete then
+			SetupFrame:Show()
+		end
+		return
+	end
+	return self[event_name](self, event_name, ...)
+end)
+
+function FirstRunFrame:CINEMATIC_START()
+	SetupFrame:Hide()
+end
+
+function FirstRunFrame:CINEMATIC_STOP()
+	if not SetupFrame.is_complete then
+		SetupFrame:Show()
+	end
+end
 
 --Functions------------------------------------------------------------------
 
- local function SetProfiles()
-  if IsAddOnLoaded("Bartender4") then
-    Bartender4.db:SetProfile("aegerUI1bar")
-	Bartender4:GetModule("ActionBars"):EnableBar(10)
-	Bartender4:GetModule("ActionBars"):EnableBar(9)
-	Bartender4:GetModule("ActionBars"):EnableBar(3)
-	Bartender4:GetModule("ActionBars"):EnableBar(4)
-	Bartender4.Bar.barregistry["10"]:SetVisibilityOption("always", true)
-	Bartender4.Bar.barregistry["9"]:SetVisibilityOption("always", true)
-	Bartender4.Bar.barregistry["3"]:SetVisibilityOption("always", true)
-	Bartender4.Bar.barregistry["4"]:SetVisibilityOption("always", true)
-  end
+local function SetProfiles()
+	for addon_name, profile_func in pairs(ADDON_PROFILE_ASSIGNMENTS) do
+		if IsAddOnLoaded(addon_name) then
+			profile_func(_G[addon_name])
+		end
+	end
 end
 
 local function SetBbars1()
-  Bbars = 1
-  TopmenuShow = 1
+	Bbars = 1
+	TopmenuShow = 1
 end
 
 local function SetBbars2()
-  Bbars = 2
-  TopmenuShow = 1
+	Bbars = 2
+	TopmenuShow = 1
 end
 
 local function DoSetup()
-PlaySoundFile(MEDIAPATH .. "Sound\\click.mp3")
-SetupFrame:Hide()
-FirstRun = 0
-SetProfiles()
-SetBbars1()
-ReloadUI()
+	PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
+	SetupFrame:Hide()
+	SetupFrame.is_complete = nil
+	SetProfiles()
+	SetBbars1()
+	ReloadUI()
 end
 
 local function BigButton_OnEnter(self)
@@ -87,31 +102,30 @@ end
 --Setup frame----------------------------------------------------------------
 
 SetupFrame:SetScript("OnShow", function(self)
-  self:SetScript("OnShow", nil)
-  self:SetPoint("CENTER", UIParent, "CENTER")
-  self:SetSize(453, 194)
-  self:SetFrameStrata("TOOLTIP")
-  self:SetFrameLevel("18")
+	self:SetPoint("CENTER", UIParent, "CENTER")
+	self:SetSize(453, 194)
+	self:SetFrameStrata("TOOLTIP")
+	self:SetFrameLevel("18")
 
-  local Backdrop = self:CreateTexture(nil, "BACKGROUND")
-    Backdrop:SetAllPoints(UIParent)
-    Backdrop:SetTexture(0, 0, 0, 0.9)
-    self.Backdrop = Backdrop
-	
-  local aegerLogo = self:CreateTexture(nil, "BORDER")
-    aegerLogo:SetPoint("CENTER", SetupFrame, "CENTER")
+	local Backdrop = self:CreateTexture(nil, "BACKGROUND")
+	Backdrop:SetAllPoints(UIParent)
+	Backdrop:SetTexture(0, 0, 0, 0.9)
+	self.Backdrop = Backdrop
+
+	local aegerLogo = self:CreateTexture(nil, "BORDER")
+	aegerLogo:SetPoint("CENTER", self, "CENTER")
 	aegerLogo:SetSize(453, 194)
-	aegerLogo:SetTexture(MEDIAPATH .. "aegerUIlogo")
-	
-  --------------------
---  INSTALL Button  --
---------------------
+	aegerLogo:SetTexture(MEDIA_PATH .. "aegerUIlogo")
+
+	--------------------
+	-- INSTALL Button  --
+	--------------------
 
 	local SetupButton = CreateFrame("Button", nil, self)
-	SetupButton:SetPoint("TOP", SetupFrame, "BOTTOM")
-	SetupButton:SetPoint("LEFT", SetupFrame, "LEFT")
+	SetupButton:SetPoint("TOP", self, "BOTTOM")
+	SetupButton:SetPoint("LEFT", self, "LEFT")
 	SetupButton:SetSize(153, 56)
-	SetupButton:SetNormalTexture(MEDIAPATH .. "setupButton")
+	SetupButton:SetNormalTexture(MEDIA_PATH .. "setupButton")
 	SetupButton:SetScript("OnEnter", BigButton_OnEnter)
 	SetupButton:SetScript("OnLeave", Button_OnLeave)
 	SetupButton:SetScript("OnClick", DoSetup)
@@ -124,24 +138,24 @@ SetupFrame:SetScript("OnShow", function(self)
 	SetupText:SetAlpha(0.8)
 	SetupText:SetText(TEXT.Install)
 	SetupButton:SetFontString(SetupText)
-	
---------------------
---  CANCEL Button  --
---------------------
+
+	--------------------
+	-- CANCEL Button  --
+	--------------------
 
 	local CancelButton = CreateFrame("Button", nil, self)
-	CancelButton:SetPoint("TOP", SetupFrame, "BOTTOM")
-	CancelButton:SetPoint("RIGHT", SetupFrame, "RIGHT")
+	CancelButton:SetPoint("TOP", self, "BOTTOM")
+	CancelButton:SetPoint("RIGHT", self, "RIGHT")
 	CancelButton:SetSize(153, 56)
-	CancelButton:SetNormalTexture(MEDIAPATH .. "setupButton")
+	CancelButton:SetNormalTexture(MEDIA_PATH .. "setupButton")
 	CancelButton:SetScript("OnEnter", BigButton_OnEnter)
 	CancelButton:SetScript("OnLeave", Button_OnLeave)
 	CancelButton:SetScript("OnClick", function(this)
-		PlaySoundFile(MEDIAPATH .. "Sound\\click.mp3")
-		FirstRun = nil
-		SetupFrame:Hide()
-		UIParent:SetAlpha(1)
+		PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
+		self.is_complete = nil
+		self:Hide()
 	end)
+
 	self.CancelButton = CancelButton
 	local CancelText = CancelButton:CreateFontString(nil, "OVERLAY")
 	CancelText:SetPoint("LEFT")
@@ -153,7 +167,7 @@ SetupFrame:SetScript("OnShow", function(self)
 end)
 
 SlashCmdList.INSTALL = function()
-	FirstRun = nil
+	SetupFrame.is_complete = nil
 	SetupFrame:Show()
 end
 SLASH_INSTALL1 = "/install"
