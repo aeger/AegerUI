@@ -27,7 +27,6 @@ local ADDON_PROFILE_ASSIGNMENTS = {
 local TEXT = {
 	Install = "Install",
 	Cancel = "Cancel",
-	Intro = "aegerUI",
 }
 
 --Frames---------------------------------------------------------------------
@@ -37,30 +36,18 @@ SetupFrame:Hide()
 
 local FirstRunFrame = CreateFrame("Frame")
 FirstRunFrame:RegisterEvent("PLAYER_LOGIN")
-FirstRunFrame:RegisterEvent("CINEMATIC_START")
-FirstRunFrame:RegisterEvent("CINEMATIC_STOP")
 
 --Events---------------------------------------------------------------------
 
 FirstRunFrame:SetScript("OnEvent", function(self, event_name, ...)
 	if not self[event_name] then
-		if not SetupFrame.is_complete then
+		if not SetupDone then
 			SetupFrame:Show()
 		end
 		return
 	end
 	return self[event_name](self, event_name, ...)
 end)
-
-function FirstRunFrame:CINEMATIC_START()
-	SetupFrame:Hide()
-end
-
-function FirstRunFrame:CINEMATIC_STOP()
-	if not SetupFrame.is_complete then
-		SetupFrame:Show()
-	end
-end
 
 --Functions------------------------------------------------------------------
 
@@ -85,7 +72,7 @@ end
 local function DoSetup()
 	PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
 	SetupFrame:Hide()
-	SetupFrame.is_complete = nil
+	SetupDone = true
 	SetProfiles()
 	SetBbars1()
 	ReloadUI()
@@ -152,7 +139,7 @@ SetupFrame:SetScript("OnShow", function(self)
 	CancelButton:SetScript("OnLeave", Button_OnLeave)
 	CancelButton:SetScript("OnClick", function(this)
 		PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
-		self.is_complete = nil
+		SetupDone = nil
 		self:Hide()
 	end)
 
@@ -167,7 +154,7 @@ SetupFrame:SetScript("OnShow", function(self)
 end)
 
 SlashCmdList.INSTALL = function()
-	SetupFrame.is_complete = nil
+	SetupDone = nil
 	SetupFrame:Show()
 end
 SLASH_INSTALL1 = "/install"
