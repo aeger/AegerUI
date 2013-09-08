@@ -179,8 +179,7 @@
     -- Core logic
     local function SetBbars1()
             Bbars = 1
-            -- I didnt know the meaning of `Bbars = 1` or what this function really did
-            -- Rewrite it?
+			TopmenuShow = 1
     end
      
     local function SetProfiles()

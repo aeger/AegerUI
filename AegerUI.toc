@@ -10,9 +10,9 @@
 ## Dependencies: Bartender4, Bazooka
 
 setup.lua
-aegerUI.lua
 
 ## Modules
+Modules\Bottombars.lua
 Modules\Sidebars.lua
 Modules\MiniMap.lua
 Modules\eAlign.lua
