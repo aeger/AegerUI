@@ -27,12 +27,82 @@ local ADDON_PROFILE_ASSIGNMENTS = {
 local TEXT = {
 	Install = "Install",
 	Cancel = "Cancel",
+	Intro = "aegerUI",
 }
 
 --Frames---------------------------------------------------------------------
 
 local SetupFrame = CreateFrame("Frame", "SetupFrame", UIParent)
-    self:SetPoint("CENTER", UIParent, "CENTER")
+SetupFrame:Hide()
+
+local FirstRunFrame = CreateFrame("Frame")
+FirstRunFrame:RegisterEvent("PLAYER_LOGIN")
+FirstRunFrame:RegisterEvent("CINEMATIC_START")
+FirstRunFrame:RegisterEvent("CINEMATIC_STOP")
+
+--Events---------------------------------------------------------------------
+
+FirstRunFrame:SetScript("OnEvent", function(self, event_name, ...)
+	if not self[event_name] then
+		if not SetupFrame.is_complete then
+			SetupFrame:Show()
+		end
+		return
+	end
+	return self[event_name](self, event_name, ...)
+end)
+
+function FirstRunFrame:CINEMATIC_START()
+	SetupFrame:Hide()
+end
+
+function FirstRunFrame:CINEMATIC_STOP()
+	if not SetupFrame.is_complete then
+		SetupFrame:Show()
+	end
+end
+
+--Functions------------------------------------------------------------------
+
+local function SetProfiles()
+	for addon_name, profile_func in pairs(ADDON_PROFILE_ASSIGNMENTS) do
+		if IsAddOnLoaded(addon_name) then
+			profile_func(_G[addon_name])
+		end
+	end
+end
+
+local function SetBbars1()
+	Bbars = 1
+	TopmenuShow = 1
+end
+
+local function SetBbars2()
+	Bbars = 2
+	TopmenuShow = 1
+end
+
+local function DoSetup()
+	PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
+	SetupFrame:Hide()
+	SetupFrame.is_complete = nil
+	SetProfiles()
+	SetBbars1()
+	ReloadUI()
+end
+
+local function BigButton_OnEnter(self)
+	self:GetNormalTexture():SetVertexColor(1, 0, 0)
+end
+
+local function Button_OnLeave(self)
+	self:GetNormalTexture():SetVertexColor(1, 1, 1)
+end
+
+--Setup frame----------------------------------------------------------------
+
+SetupFrame:SetScript("OnShow", function(self)
+	self:SetPoint("CENTER", UIParent, "CENTER")
 	self:SetSize(453, 194)
 	self:SetFrameStrata("TOOLTIP")
 	self:SetFrameLevel("18")
@@ -94,62 +164,10 @@ local SetupFrame = CreateFrame("Frame", "SetupFrame", UIParent)
 	CancelText:SetAlpha(0.8)
 	CancelText:SetText(TEXT.Cancel)
 	CancelButton:SetFontString(CancelText)
-    SetupFrame:Hide()
-
-local FirstRunFrame = CreateFrame("Frame")
-FirstRunFrame:RegisterEvent("PLAYER_LOGIN")
-
---Events---------------------------------------------------------------------
-
-FirstRunFrame:SetScript("OnEvent", function(self, event_name, ...)
-	if not self[event_name] then
-		if not SetupDone then
-			SetupFrame:Show()
-		end
-		return
-	end
-	return self[event_name](self, event_name, ...)
 end)
 
---Functions------------------------------------------------------------------
-
-local function SetProfiles()
-	for addon_name, profile_func in pairs(ADDON_PROFILE_ASSIGNMENTS) do
-		if IsAddOnLoaded(addon_name) then
-			profile_func(_G[addon_name])
-		end
-	end
-end
-
-local function SetBbars1()
-	Bbars = 1
-	TopmenuShow = 1
-end
-
-local function SetBbars2()
-	Bbars = 2
-	TopmenuShow = 1
-end
-
-local function DoSetup()
-	PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
-	SetupFrame:Hide()
-	SetupDone = true
-	SetProfiles()
-	SetBbars1()
-	ReloadUI()
-end
-
-local function BigButton_OnEnter(self)
-	self:GetNormalTexture():SetVertexColor(1, 0, 0)
-end
-
-local function Button_OnLeave(self)
-	self:GetNormalTexture():SetVertexColor(1, 1, 1)
-end
-
 SlashCmdList.INSTALL = function()
-	SetupDone = nil
+	SetupFrame.is_complete = nil
 	SetupFrame:Show()
 end
 SLASH_INSTALL1 = "/install"
