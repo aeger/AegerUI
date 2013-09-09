@@ -9,8 +9,6 @@ local FONT = "Fonts\\FRIZQT__.ttf"
 
 --Define locals and local functions
 
-local Bbar1Display
-local Bbar2Display
 local BottomBarFrame1
 local BottomBarFrame2
 
@@ -46,20 +44,20 @@ end
 
 function DisplayBars:UNIT_ENTERED_VEHICLE()
          if UnitHasVehicleUI("player") then
-		 if Bbars ==1 then
-		 Bar1Hide() elseif
+		 if Bbars == 1 then
+		 Bbar1Hide() elseif
 		 Bbars == 2 then
-		 Bar2Hide()
+		 Bbar2Hide()
 		 end
 	end
 end
 
 function DisplayBars:UNIT_EXITED_VEHICLE()
          if not UnitHasVehicleUI("player") then
-		 if Bbars ==1 then
-		 Bar1Display() elseif
+		 if Bbars == 1 then
+		 Bbar1Display() elseif
 		 Bbars == 2 then
-		 Bar2Display()
+		 Bbar2Display()
 		 end
 	end 
 end
@@ -74,7 +72,7 @@ function DisplayBars:PLAYER_REGEN_DISABLED()
 end
 
 function BottomBarFrame1()  
-	     Bar1Frame = CreateFrame('Frame', nil, UIParent)
+	     Bar1Frame = CreateFrame('Frame', "Bar1Frame", UIParent)
 	     Bar1Frame:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -3)
 		 Bar1Frame:SetPoint("CENTER", UIParent, "CENTER")
 		 Bar1Frame:SetSize(947, 50)
@@ -98,7 +96,7 @@ end
 
 
 function BottomBarFrame2()  
-	     Bar2Frame = CreateFrame('Frame', nil, UIParent)
+	     Bar2Frame = CreateFrame('Frame', "Bar2Frame", UIParent)
 	     Bar2Frame:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -3)
 		 Bar2Frame:SetPoint("CENTER", UIParent, "CENTER")
 		 Bar2Frame:SetSize(950, 94)
@@ -139,7 +137,7 @@ function Bbar1Hide()
 	  if not Bar1Frame then
 	    BottomBarFrame1()
 	  end
-	  Bar2Frame:Hide()
+	  Bar1Frame:Hide()
 end
 
 function Bbar2Hide()

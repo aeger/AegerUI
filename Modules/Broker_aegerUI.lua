@@ -25,16 +25,16 @@ LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("aegerUI", {
 				Bartender4.db:SetProfile("aegerUI2bar")
 				Bbars = 2
 				PlaySoundFile(MEDIAPATH .. "Sound\\click.mp3")
-				Bar1Frame:Hide()
-				Bar2Frame2:Show()
+				Bbar2Display()
+				Bbar1Hide()
 				
 			else
 				if Bbars == 2 then
 					Bartender4.db:SetProfile("aegerUI1bar")
 					Bbars = 1
 					PlaySoundFile(MEDIAPATH .. "Sound\\click.mp3")
-					Bar1Frame:Show()
-					Bar2Frame:Hide()
+					Bbar1Display()
+					Bbar2Hide()
 				end
 			end
 		end
