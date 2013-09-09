@@ -177,11 +177,6 @@
      
      
     -- Core logic
-    local function SetBbars1()
-            Bbars = 1
-			TopmenuShow = 1
-    end
-     
     local function SetProfiles()
             for addon_name, profile_func in pairs(ADDON_PROFILE_ASSIGNMENTS) do
                     if IsAddOnLoaded(addon_name) then
@@ -200,7 +195,8 @@
      
     function ApplySetup()  -- the OK button calls this when clicked.
             SetProfiles()
-            SetBbars1()
+            aegerUI_Bbars = 1
+			aegerUI_TMShow = true
 			aegerUI_SetupDone = true  -- Your saved variable. ONLY set this true here, when you KNOW setup has been successfully performed.
             print('Setup complete. Please reload UI to finish via "/rl".')  -- Never force a reload on a user.
     end

@@ -11,6 +11,8 @@ local FONT = "Fonts\\FRIZQT__.ttf"
 
 local BottomBarFrame1
 local BottomBarFrame2
+local CombatColorOn
+local CombatColorOff
 
 --Event logic--------------------------------------------------------------
 local DisplayBars = CreateFrame('Frame')
@@ -34,9 +36,9 @@ DisplayBars:SetScript('OnEvent',function(self, event_name, ...)
 	
 --Events---------------------------------------------------------------------=
 function DisplayBars:PLAYER_LOGIN()
-         if Bbars == 1 then
+         if aegerUI_Bbars == 1 then
 		 Bbar1Display() else
-		 if Bbars == 2 then
+		 if aegerUI_Bbars == 2 then
 		 Bbar2Display()
          end
 	end
@@ -44,9 +46,9 @@ end
 
 function DisplayBars:UNIT_ENTERED_VEHICLE()
          if UnitHasVehicleUI("player") then
-		 if Bbars == 1 then
+		 if aegerUI_Bbars == 1 then
 		 Bbar1Hide() elseif
-		 Bbars == 2 then
+		 aegerUI_Bbars == 2 then
 		 Bbar2Hide()
 		 end
 	end
@@ -54,9 +56,9 @@ end
 
 function DisplayBars:UNIT_EXITED_VEHICLE()
          if not UnitHasVehicleUI("player") then
-		 if Bbars == 1 then
+		 if aegerUI_Bbars == 1 then
 		 Bbar1Display() elseif
-		 Bbars == 2 then
+		 aegerUI_Bbars == 2 then
 		 Bbar2Display()
 		 end
 	end 
@@ -148,20 +150,20 @@ function Bbar2Hide()
 end
 
 function CombatColorOn()
-	     if Bbars == 1 then
+	     if aegerUI_Bbars == 1 then
 		 Bare1Frame.Bar1border:SetVertexColor(1, 0, 0)
 		 else
-		 if Bbars == 2 then
+		 if aegerUI_Bbars == 2 then
 		 Bar2Frame.Bar2border:SetVertexColor(1, 0, 0)
 	     end 
 	end
 end
 
 function CombatColorOff()
-	     if Bbars == 1 then
+	     if aegerUI_Bbars == 1 then
 		 Bare1Frame.Bar1border:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 		 else
-		 if Bbars == 2 then
+		 if aegerUI_Bbars == 2 then
 		 Bar2Frame.Bar2border:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 	     end
 	end 

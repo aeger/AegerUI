@@ -7,31 +7,29 @@ LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("aegerUI", {
 	label = "aegerUI",
 	OnClick = function(_, msg)
 		if msg == "LeftButton" then
-			if topmenu:IsVisible() then
-				topmenu:Hide()
-				topmenuborder:Hide()
-				BazookaBar_1:Hide()
-				TopmenuShow = nil
+			if TMMenuFrame:IsVisible() then
+				TMMenuHide()
+				HideBazookaBar1()
+				aegerUI_TMShow = nil
 				PlaySoundFile(MEDIAPATH .. "Sound\\click.mp3")
 			else
-				topmenu:Show()
-				topmenuborder:Show()
-				BazookaBar_1:Show()
-				TopmenuShow = 1
+				TMMenuDisplay()
+				ShowBazookaBar1()
+				aegerUI_TMShow = true
 				PlaySoundFile(MEDIAPATH .. "Sound\\click.mp3")
 			end
 		elseif msg == "RightButton" then
-			if Bbars == 1 then
+			if aegerUI_Bbars == 1 then
 				Bartender4.db:SetProfile("aegerUI2bar")
-				Bbars = 2
+				aegerUI_Bbars = 2
 				PlaySoundFile(MEDIAPATH .. "Sound\\click.mp3")
 				Bbar2Display()
 				Bbar1Hide()
 				
 			else
-				if Bbars == 2 then
+				if aegerUI_Bbars == 2 then
 					Bartender4.db:SetProfile("aegerUI1bar")
-					Bbars = 1
+					aegerUI_Bbars = 1
 					PlaySoundFile(MEDIAPATH .. "Sound\\click.mp3")
 					Bbar1Display()
 					Bbar2Hide()

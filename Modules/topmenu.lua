@@ -1,47 +1,10 @@
-local aegerUI = ...
-
-local MEDIAPATH = "Interface\\AddOns\\aegerUI\\Media\\"
-local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
-
-
-local topmenu = CreateFrame("Frame", "topmenu", UIParent)
-topmenu:RegisterEvent("ADDON_LOADED")
-topmenu:RegisterEvent("ONUPDATE")
-topmenu:RegisterEvent("ONLOAD")
-topmenu:Hide()
-
-local topmenuborder = CreateFrame("Frame", "topmenuborder", UIParent)
-topmenuborder:RegisterEvent("PLAYER_REGEN_ENABLED")
-topmenuborder:RegisterEvent("PLAYER_REGEN_DISABLED")
-topmenuborder:Hide()
-
-function topmenudisplay()
-
-	if TopmenuShow == 1 then
-		topmenu:Show()
-		topmenuborder:Show()
-		_G["BazookaBar_1"]:Show()
-	else
-		if TopmenuShow == nil then
-			topmenu:Hide()
-			topmenuborder:Hide()
-			_G["BazookaBar_1"]:Hide()
-		end
-	end
-end
-
-topmenu:SetScript("OnEvent", function(self, event, ...)
-	local timeleft = 1 --set the countdown to w/e you want
-	local f = CreateFrame("Frame", nil, UIParent)
-	f:SetScript("OnUpdate", function(_, arg)
-		timeleft = timeleft - arg
-		if timeleft >= 0 then
-			timeleft = nil
-			f:SetScript("OnUpdate", nil)
-			topmenudisplay()
-		end
-	end)
-end)
+--Namespace------------------------------------------------------------------
+local FOLDER_NAME, private_data = ...
+     
+--Constants------------------------------------------------------------------
+local MEDIA_PATH = ([[Interface\AddOns\%s\Media\]]):format(FOLDER_NAME)
+local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]    
+local FONT = "Fonts\\FRIZQT__.ttf"
 
 local function flip(texture, horizontal)
 	local ULx, ULy, LLx, LLy, URx, URy, LRx, LRy = texture:GetTexCoord()
@@ -52,49 +15,107 @@ local function flip(texture, horizontal)
 	end
 end
 
-topmenu:SetScript("OnShow", function(self)
-	self:SetScript("OnShow", nil)
-	PetBattleFrame:HookScript("OnShow", function() self:Hide() end)
-	PetBattleFrame:HookScript("OnHide", function() self:Show() end)
+-- Define locals and local functions up here so they're in scope for the whole file
+local InitTMMenuFrame
+local TMCombatColorOn
+local TMCombatColorOff
 
-	local tmdisplay = self:CreateTexture(nil, "BACKGROUND")
-	tmdisplay:SetSize(500, 36)
-	tmdisplay:SetPoint("TOP", UIParent, "TOP", 0, 10)
-	tmdisplay:SetPoint("CENTER", UIParent, "CENTER")
-	tmdisplay:SetTexture(MEDIAPATH .. "topmenu")
-	tmdisplay:SetVertexColor(0, 0, 0, .5)
-	flip(tmdisplay, false)
-end)
+--Event logic----------------------------------------------------------------
+local TMEventFrame = CreateFrame('Frame')
 
-topmenuborder:SetScript("OnShow", function(self)
+TMEventFrame:RegisterEvent('PLAYER_LOGIN')
+TMEventFrame:RegisterEvent('PLAYER_REGEN_ENABLED')
+TMEventFrame:RegisterEvent('PLAYER_REGEN_DISABLED')
 
-	PetBattleFrame:HookScript("OnShow", function() self:Hide() end)
-	PetBattleFrame:HookScript("OnHide", function() self:Show() end)
+TMEventFrame:SetScript('OnEvent',function(self, event_name, ...)
+            local func = self[event_name]
+            if func then
+                    func(self, ...)  -- I don't think you need the event_name -- you already know what it is -- it's the name of the function!
+            else
+                    -- If you don't have a function EventFrame:EVENT_NAME() then it errors to
+                    -- let you know you forgot to define it (see below, "events").
+                    error(('could not find function for `%s`: forgot to define?'):format(event_name))
+            end
+    end)
 
-	local tmborderdisplay = self:CreateTexture(nil, "BORDER")
-	tmborderdisplay:SetSize(502, 46)
-	tmborderdisplay:SetPoint("TOP", UIParent, "TOP", 0, 17)
-	tmborderdisplay:SetPoint("CENTER", UIParent, "CENTER")
-	tmborderdisplay:SetTexture(MEDIAPATH .. "topmenuborder")
-	tmborderdisplay:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
-	flip(tmborderdisplay, false)
-	topmenuborder:HookScript("OnEvent", function(self, event)
-		if event == "PLAYER_REGEN_DISABLED" then
-			tmborderdisplay:SetVertexColor(1, 0, 0)
-		elseif event == "PLAYER_REGEN_ENABLED" then
-			tmborderdisplay:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
-		end
-	end)
-end)
+-- Events----------------------------------------------------------------------
+    function TMEventFrame:PLAYER_LOGIN()
+             if aegerUI_TMShow then
+			 TMMenuDisplay()
+			 ShowBazookaBar1()
+			 else
+			 TMMenuHide()
+			 HideBazookaBar1()
+			 end
+    end
+	
+	function TMEventFrame:PLAYER_REGEN_ENABLED()
+             TMCombatColorOff()
+    end
+	
+	function TMEventFrame:PLAYER_REGEN_DISABLED()
+             TMCombatColorOn()
+    end
 
-SlashCmdList.TOPMENUSHOW = function()
-	TopmenuShow = 1
-	ReloadUI()
+function InitTMMenuFrame()
+         TMMenuFrame = CreateFrame('Frame', nil, UIParent)
+		 TMMenuFrame:SetPoint("TOP", UIParent, "TOP", 0, 10)
+		 TMMenuFrame:SetPoint("CENTER", UIParent, "CENTER")
+		 TMMenuFrame:SetSize(502, 46)
+		 
+		 local TMMenuTexture = TMMenuFrame:CreateTexture(nil, "BACKGROUND")
+		 TMMenuTexture:SetPoint("TOP", UIParent, "TOP", 0, 10)
+		 TMMenuTexture:SetPoint("CENTER", UIParent, "CENTER")
+		 TMMenuTexture:SetSize(500, 36)
+		 TMMenuTexture:SetTexture(MEDIA_PATH .. "topmenu")
+		 TMMenuTexture:SetVertexColor(0, 0, 0, .5)
+		 TMMenuFrame.TMMenuTexture = TMMenuTexture
+		 flip(TMMenuTexture, false)
+		 
+		 local TMMenuBorder = TMMenuFrame:CreateTexture(nil, "BORDER")
+		 TMMenuBorder:SetPoint("TOP", UIParent, "TOP", 0, 17)
+		 TMMenuBorder:SetPoint("CENTER", UIParent, "CENTER")
+		 TMMenuBorder:SetSize(502, 46)
+		 TMMenuBorder:SetTexture(MEDIA_PATH .. "topmenuborder")
+		 TMMenuBorder:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 TMMenuFrame.TMMenuBorder = TMMenuBorder
+		 flip(TMMenuBorder, false)
 end
-SLASH_TOPMENUSHOW1 = "/tmshow"
 
-SlashCmdList.TOPMENUHIDE = function()
-	TopmenuShow = nil
-	ReloadUI()
+-- Core logic ------------------------------------------------------------------------		 
+function TMMenuDisplay()
+      if not TMMenuFrame then
+	    InitTMMenuFrame()
+	  end
+	  TMMenuFrame:Show()
 end
-SLASH_TOPMENUHIDE1 = "/tmhide"
+
+function TMMenuHide()
+      if not TMMenuFrame then
+	    InitTMMenuFrame()
+	  end
+	  TMMenuFrame:Hide()
+end
+
+function ShowBazookaBar1()
+      BazookaBar_1:Show()
+end
+		 
+function HideBazookaBar1()
+      BazookaBar_1:Hide()
+end
+
+function TMCombatColorOn()
+	  TMMenuFrame.TMMenuBorder:SetVertexColor(1, 0, 0)
+end
+
+function TMCombatColorOff()
+	   TMMenuFrame.TMMenuBorder:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+end 
+
+
+
+
+
+
+
