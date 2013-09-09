@@ -13,6 +13,7 @@ setup.lua
 
 ## Modules
 Modules\Bottombars.lua
+Modules\Chatbuttons.lua
 Modules\Sidebars.lua
 Modules\MiniMap.lua
 Modules\eAlign.lua
