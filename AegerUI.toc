@@ -19,7 +19,6 @@ Modules\MiniMap.lua
 Modules\eAlign.lua
 Modules\MovableFrames.lua
 Modules\topmenu.lua
-Modules\Broker_aegerUI.lua
 
 ## Libraries
 libs\LibStub\LibStub.lua

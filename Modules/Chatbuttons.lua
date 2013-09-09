@@ -61,42 +61,36 @@ function ChatButtonsFrame()
 		 Chat1midtexture:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 	     Chat1midtexture:SetScript("OnEnter", Button_OnEnter)
 		 Chat1midtexture:SetScript("OnLeave", Button_OnLeave)
-		 Chat1midtexture:RegisterForClicks("LeftButton", "RightButton")
+		 Chat1midtexture:RegisterForClicks('AnyUp')
 		 Chat1midtexture:SetScript("OnClick", function(self, button)
-		        if button == "LeftButton" then
-				if TMMenuFrame:IsVisible() then
-				TMMenuHide()
-				HideBazookaBar1()
-				aegerUI_TMShow = nil
-				PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
-			else
-				TMMenuDisplay()
-				ShowBazookaBar1()
-				aegerUI_TMShow = true
-				PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
-			end
-			end
-		 end)
-		 Chat1midtexture:SetScript("OnClick", function(self, button)
-		        if button == "RightButton" then
-		        if aegerUI_Bbars == 1 then
-				Bartender4.db:SetProfile("aegerUI2bar")
-				aegerUI_Bbars = 2
-				PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
-				Bbar2Display()
-				Bbar1Hide()
-				
-			else
-				if aegerUI_Bbars == 2 then
-					Bartender4.db:SetProfile("aegerUI1bar")
-					aegerUI_Bbars = 1
-					PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
-					Bbar1Display()
-					Bbar2Hide()
-				end
-			 end
-			end
-		 end)
+        if button == "LeftButton" then
+                if TMMenuFrame:IsVisible() then
+                        TMMenuHide()
+                        HideBazookaBar1()
+                        aegerUI_TMShow = nil
+                        PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
+                else
+                        TMMenuDisplay()
+                        ShowBazookaBar1()
+                        aegerUI_TMShow = true
+                        PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
+                end
+        elseif button == "RightButton" then
+                if aegerUI_Bbars == 1 then
+                        Bartender4.db:SetProfile("aegerUI2bar")
+                        aegerUI_Bbars = 2
+                        PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
+                        Bbar2Display()
+                        Bbar1Hide()
+                elseif aegerUI_Bbars == 2 then
+                        Bartender4.db:SetProfile("aegerUI1bar")
+                        aegerUI_Bbars = 1
+                        PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
+                        Bbar1Display()
+                        Bbar2Hide()
+                end
+        end
+end)
 		 
 		 Chat1Frame.Chat1midtexture = Chat1midtexture
 		 
