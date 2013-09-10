@@ -10,6 +10,8 @@ local FONT = "Fonts\\FRIZQT__.ttf"
 --Define locals and local functions
 local ChatButtonsFrame
 local Chat1LBtext
+local Chat1MBtext
+local Chat1RBtext
 
 --Event logic--------------------------------------------------------------
 local ChatButtonsEvent = CreateFrame('Frame')
@@ -34,9 +36,9 @@ end
 
 function ChatButtonsFrame()  
 	     Chat1Frame = CreateFrame('Frame', nil, UIParent)
-	     Chat1Frame:SetPoint("BOTTOM", UIParent, "BOTTOM", -4, 3)
-		 Chat1Frame:SetPoint("LEFT", UIParent, "LEFT")
-		 Chat1Frame:SetSize(370, 290)
+	     --Chat1Frame:SetPoint("BOTTOM", UIParent, "BOTTOM", -4, 3)
+		-- Chat1Frame:SetPoint("LEFT", UIParent, "LEFT")
+		 --Chat1Frame:SetSize(370, 290)
 		 
 		 local function Button_OnEnter(self)
            self:GetNormalTexture():SetVertexColor(1, 1, 1)
@@ -53,15 +55,7 @@ function ChatButtonsFrame()
 		  local function Button1_OnLeave(self)
             self:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
 		  end
-		  
-		  local function textDark_OnEnter(self)
-            self:SetTextColor(1,1,1)
-          end
-		
-		local function textCC_OnLeave(self)
-            self:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
-          end
-		
+		  		  		
 		 local Chat1texture = Chat1Frame:CreateTexture(nil, "BACKGROUND")
 		 Chat1texture:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 12)
 	     Chat1texture:SetPoint("LEFT", UIParent, "LEFT", -5, 0)
@@ -158,21 +152,100 @@ end)
 		 end)
 		 Chat1LBbutton:SetFontString(Chat1LBtext)
 		 
-		 local Chat1MBtexture = Chat1Frame:CreateTexture(nil, "BACKGROUND")
-		 Chat1MBtexture:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -5)
-	     Chat1MBtexture:SetPoint("LEFT", Chat1LBbutton, "RIGHT")
-	     Chat1MBtexture:SetSize(130, 26)
-	     Chat1MBtexture:SetTexture(MEDIA_PATH .. "MB")		
-	     Chat1MBtexture:SetVertexColor(0, 0, 0, 0.5)
-		 Chat1Frame.Chat1MBtexture = Chat1MBtexture
+		 local Chat1MBbutton = CreateFrame("Button", nil, Chat1Frame)
+		 Chat1MBbutton:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -5)
+	     Chat1MBbutton:SetPoint("LEFT", Chat1LBbutton, "RIGHT")
+	     Chat1MBbutton:SetSize(130, 26)
+	     Chat1MBbutton:SetNormalTexture(MEDIA_PATH .. "MB-B")		
+	     Chat1MBbutton:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
+		 Chat1MBbutton:RegisterForClicks('AnyUp')
+		 Chat1MBbutton:SetScript("OnClick", function(self, button)
+		   if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
+                ToggleFrame(QuestLogFrame)
+           elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
+                TogglePetJournal()
+           else
+                ToggleFrame(SpellBookFrame)
+            end
+         end)
 		 
-		 local Chat1RBtexture = Chat1Frame:CreateTexture(nil, "BACKGROUND")
-		 Chat1RBtexture:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -5)
-	     Chat1RBtexture:SetPoint("LEFT", Chat1MBtexture, "RIGHT")
-	     Chat1RBtexture:SetSize(130, 26)
-	     Chat1RBtexture:SetTexture(MEDIA_PATH .. "RB-B")		
-	     Chat1RBtexture:SetVertexColor(0, 0, 0, 0.5)
-		 Chat1Frame.Chat1RBtexture = Chat1RBtexture
+		 Chat1Frame.Chat1MBbutton = Chat1MBbutton
+		 
+		 local Chat1MBtext = Chat1MBbutton:CreateFontString(nil, "OVERLAY")
+		 Chat1MBtext:SetPoint("LEFT")
+		 Chat1MBtext:SetPoint("RIGHT")
+		 Chat1MBtext:SetFont(FONT, 10, "OUTLINE")
+		 Chat1MBtext:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 Chat1MBtext:SetText("Spell Book")
+		 Chat1MBbutton:SetScript("OnEnter", function(self, button)
+		 Chat1MBbutton:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 Chat1MBtext:SetTextColor(1,1,1)
+		 end)
+		 Chat1MBbutton:SetScript("OnLeave", function(self, button)
+		 Chat1MBbutton:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
+		 Chat1MBtext:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 end)
+		 
+		 Chat1MBbutton:SetScript("OnUpdate", function(self)
+		  if InCombatLockdown() then return end
+          if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
+          Chat1MBtext:SetText("Quest Log")
+          elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
+          Chat1MBtext:SetText("Mounts and Pets")
+          else
+          Chat1MBtext:SetText("Spell Book")
+          end
+		 end)
+		 Chat1MBbutton:SetFontString(Chat1MBtext)
+		 
+		 local Chat1RBbutton = CreateFrame("Button", nil, Chat1Frame)
+		 Chat1RBbutton:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -5)
+	     Chat1RBbutton:SetPoint("LEFT", Chat1MBbutton, "RIGHT")
+	     Chat1RBbutton:SetSize(130, 26)
+	     Chat1RBbutton:SetNormalTexture(MEDIA_PATH .. "RB-B")		
+	     Chat1RBbutton:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
+		 Chat1RBbutton:RegisterForClicks('AnyUp')
+		 Chat1RBbutton:SetScript("OnClick", function(self, button)
+		 if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
+           ToggleAchievementFrame()
+         elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
+         if not IsAddOnLoaded("Blizzard_PVPUI") then
+           LoadAddOn("Blizzard_PVPUI")
+         end
+           PVPUIFrame_ToggleFrame()
+        else
+           ToggleTalentFrame()
+        end
+		end)
+		 
+		 Chat1Frame.Chat1RBbutton = Chat1RBbutton
+		 
+		 local Chat1RBtext = Chat1RBbutton:CreateFontString(nil, "OVERLAY")
+		 Chat1RBtext:SetPoint("LEFT")
+		 Chat1RBtext:SetPoint("RIGHT")
+		 Chat1RBtext:SetFont(FONT, 10, "OUTLINE")
+		 Chat1RBtext:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 Chat1RBtext:SetText("Talents")
+		 Chat1RBbutton:SetScript("OnEnter", function(self, button)
+		 Chat1RBbutton:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 Chat1RBtext:SetTextColor(1,1,1)
+		 end)
+		 Chat1RBbutton:SetScript("OnLeave", function(self, button)
+		 Chat1RBbutton:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
+		 Chat1RBtext:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 end)
+		 
+		 Chat1RBbutton:SetScript("OnUpdate", function(self)
+		  if InCombatLockdown() then return end
+          if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
+          Chat1RBtext:SetText("Achievements")
+          elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
+          Chat1RBtext:SetText("PVP")
+          else
+          Chat1RBtext:SetText("Talents")
+          end
+		 end)
+		 Chat1RBbutton:SetFontString(Chat1RBtext)
 end
 
 -- Core logic ------------------------------------------------------------------------
