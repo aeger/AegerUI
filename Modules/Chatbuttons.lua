@@ -9,6 +9,7 @@ local FONT = "Fonts\\FRIZQT__.ttf"
 
 --Define locals and local functions
 local ChatButtonsFrame
+local Chat1LBtext
 
 --Event logic--------------------------------------------------------------
 local ChatButtonsEvent = CreateFrame('Frame')
@@ -44,6 +45,22 @@ function ChatButtonsFrame()
           local function Button_OnLeave(self)
             self:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
           end
+		  
+		  local function Button1_OnEnter(self)
+            self:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		  end
+		  
+		  local function Button1_OnLeave(self)
+            self:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
+		  end
+		  
+		  local function textDark_OnEnter(self)
+            self:SetTextColor(1,1,1)
+          end
+		
+		local function textCC_OnLeave(self)
+            self:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+          end
 		
 		 local Chat1texture = Chat1Frame:CreateTexture(nil, "BACKGROUND")
 		 Chat1texture:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 12)
@@ -53,16 +70,16 @@ function ChatButtonsFrame()
 	     Chat1texture:SetVertexColor(0, 0, 0, 0.5)
 		 Chat1Frame.Chat1texture = Chat1texture
 		 
-		 local Chat1midtexture = CreateFrame("Button", nil, Chat1Frame)
-		 Chat1midtexture:SetPoint("CENTER", Chat1texture, "CENTER")
-	     Chat1midtexture:SetPoint("LEFT", Chat1texture, "LEFT")
-	     Chat1midtexture:SetSize(30, 110)
-	     Chat1midtexture:SetNormalTexture(MEDIA_PATH .. "QSB")
-		 Chat1midtexture:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
-	     Chat1midtexture:SetScript("OnEnter", Button_OnEnter)
-		 Chat1midtexture:SetScript("OnLeave", Button_OnLeave)
-		 Chat1midtexture:RegisterForClicks('AnyUp')
-		 Chat1midtexture:SetScript("OnClick", function(self, button)
+		 local Chat1midButton = CreateFrame("Button", nil, Chat1Frame)
+		 Chat1midButton:SetPoint("CENTER", Chat1texture, "CENTER")
+	     Chat1midButton:SetPoint("LEFT", Chat1texture, "LEFT")
+	     Chat1midButton:SetSize(30, 110)
+	     Chat1midButton:SetNormalTexture(MEDIA_PATH .. "QSB")
+		 Chat1midButton:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+	     Chat1midButton:SetScript("OnEnter", Button_OnEnter)
+		 Chat1midButton:SetScript("OnLeave", Button_OnLeave)
+		 Chat1midButton:RegisterForClicks('AnyUp')
+		 Chat1midButton:SetScript("OnClick", function(self, button)
         if button == "LeftButton" then
                 if TMMenuFrame:IsVisible() then
                         TMMenuHide()
@@ -92,19 +109,58 @@ function ChatButtonsFrame()
         end
 end)
 		 
-		 Chat1Frame.Chat1midtexture = Chat1midtexture
+		 Chat1Frame.Chat1midButton = Chat1midButton
 		 
-		 local Chat1LBtexture = Chat1Frame:CreateTexture(nil, "BACKGROUND")
-		 Chat1LBtexture:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -5)
-	     Chat1LBtexture:SetPoint("LEFT", UIParent, "LEFT", 23, 0)
-	     Chat1LBtexture:SetSize(130, 26)
-	     Chat1LBtexture:SetTexture(MEDIA_PATH .. "LB-B")		
-	     Chat1LBtexture:SetVertexColor(0, 0, 0, 0.5)
-		 Chat1Frame.Chat1LBtexture = Chat1LBtexture
+		 local Chat1LBbutton = CreateFrame("Button", nil, Chat1Frame)
+		 Chat1LBbutton:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -5)
+	     Chat1LBbutton:SetPoint("LEFT", UIParent, "LEFT", 23, 0)
+	     Chat1LBbutton:SetSize(130, 26)
+	     Chat1LBbutton:SetNormalTexture(MEDIA_PATH .. "LB-B")
+         Chat1LBbutton:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
+         
+		 Chat1LBbutton:RegisterForClicks('AnyUp')
+		 Chat1LBbutton:SetScript("OnClick", function(self, button)
+		   if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
+             ToggleEncounterJournal()
+           elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
+             PVEFrame_ToggleFrame()
+           else
+             ToggleCharacter("PaperDollFrame")
+           end
+		 end)
+		 
+		 Chat1Frame.Chat1LBbutton = Chat1LBbutton	
+		 		 
+		 local Chat1LBtext = Chat1LBbutton:CreateFontString(nil, "OVERLAY")
+		 Chat1LBtext:SetPoint("LEFT")
+		 Chat1LBtext:SetPoint("RIGHT")
+		 Chat1LBtext:SetFont(FONT, 10, "OUTLINE")
+		 Chat1LBtext:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 Chat1LBtext:SetText("Character")
+		 Chat1LBbutton:SetScript("OnEnter", function(self, button)
+		 Chat1LBbutton:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 Chat1LBtext:SetTextColor(1,1,1)
+		 end)
+		 Chat1LBbutton:SetScript("OnLeave", function(self, button)
+		 Chat1LBbutton:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
+		 Chat1LBtext:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+		 end)
+		 
+		 Chat1LBbutton:SetScript("OnUpdate", function(self)
+		  if InCombatLockdown() then return end
+          if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
+           Chat1LBtext:SetText("Dungeon Journal")
+          elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
+           Chat1LBtext:SetText("LFD")
+          else
+           Chat1LBtext:SetText("Character")
+          end 
+		 end)
+		 Chat1LBbutton:SetFontString(Chat1LBtext)
 		 
 		 local Chat1MBtexture = Chat1Frame:CreateTexture(nil, "BACKGROUND")
 		 Chat1MBtexture:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -5)
-	     Chat1MBtexture:SetPoint("LEFT", Chat1LBtexture, "RIGHT")
+	     Chat1MBtexture:SetPoint("LEFT", Chat1LBbutton, "RIGHT")
 	     Chat1MBtexture:SetSize(130, 26)
 	     Chat1MBtexture:SetTexture(MEDIA_PATH .. "MB")		
 	     Chat1MBtexture:SetVertexColor(0, 0, 0, 0.5)
