@@ -10,7 +10,8 @@
      
     --Constants------------------------------------------------------------------
     local MEDIA_PATH = ([[Interface\AddOns\%s\Media\]]):format(FOLDER_NAME)
-     
+    local MASQUE = LibStub("Masque", true)
+	local buttongroup
     local FONT = "Fonts\\FRIZQT__.ttf"
      
     local ADDON_PROFILE_ASSIGNMENTS = {
@@ -29,6 +30,17 @@
                     registry["3"]:SetVisibilityOption("always", true)
                     registry["4"]:SetVisibilityOption("always", true)
             end,
+			
+			Bagnon = function(addon_obj1)
+			         addon_obj1.SavedFrameSettings:SetItemFrameColumns(10)
+			        --local num_columns = addon_obj1.BagnonFrameSettings
+					--num_columns:itemFrameColumns(10)
+					
+			end,
+			
+			--MASQUE = function(addon_obj1)
+			        --addon_obj1.buttongroup:Group("CleanUI")
+					--end,
     }
      
     local TEXT = {

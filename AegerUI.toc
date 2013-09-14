@@ -1,5 +1,5 @@
-## Interface: 50300
-## Version: 5.3.3
+## Interface: 50400
+## Version: 5.4.1
 
 ## Title: aegerUI
 ## Notes: Aeger's UI Interface
@@ -17,7 +17,6 @@ Modules\Chatbuttons.lua
 Modules\Sidebars.lua
 Modules\MiniMap.lua
 Modules\eAlign.lua
-Modules\MovableFrames.lua
 Modules\topmenu.lua
 
 ## Libraries
