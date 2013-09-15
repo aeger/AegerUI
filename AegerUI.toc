@@ -18,6 +18,7 @@ Modules\Sidebars.lua
 Modules\MiniMap.lua
 Modules\eAlign.lua
 Modules\topmenu.lua
+Modules\FrameMovers.lua
 
 ## Libraries
 libs\LibStub\LibStub.lua
