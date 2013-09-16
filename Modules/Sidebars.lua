@@ -1,6 +1,6 @@
 local aegerUI = ...
-local MEDIAPATH = "Interface\\AddOns\\aegerUI\\Media\\"
-local CLICK = "Interface\\AddOns\\aegerUI\\Media\\Sound\\click.mp3"
+local MEDIAPATH = "Interface\\AddOns\\aegerUI\\media\\"
+local CLICK = "Interface\\AddOns\\aegerUI\\media\\sound\\click.mp3"
 local FONT = "Fonts\\FRIZQT__.ttf"
 local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
 
@@ -85,13 +85,13 @@ MBar3:SetScript("OnShow", function(self)
 	local Right1Bar = self:CreateTexture(nil, "BORDER")
 	Right1Bar:SetPoint("RIGHT", 0, 0)
 	Right1Bar:SetSize(42, 480)
-	Right1Bar:SetTexture(MEDIAPATH .. "Right1Bar")
+	Right1Bar:SetTexture(MEDIAPATH .. "textures\\Right1Bar")
 	self.Right1Bar = Right1Bar
 
 	local Expand_Bar4 = CreateFrame("Button", nil, self)
 	Expand_Bar4:SetPoint("RIGHT", Right1Bar, "LEFT", 0, 100)
 	Expand_Bar4:SetSize(14, 120)
-	Expand_Bar4:SetNormalTexture(MEDIAPATH .. "RightBarButton")
+	Expand_Bar4:SetNormalTexture(MEDIAPATH .. "textures\\RightBarButton")
 	self.Expand_Bar4 = Expand_Bar4
 
 	local OutE4 = Expand_Bar4:CreateFontString(nil, "HIGH")
@@ -116,7 +116,7 @@ MBar3:SetScript("OnShow", function(self)
 	local Retract_Bar3 = CreateFrame("Button", nil, self)
 	Retract_Bar3:SetPoint("RIGHT", Right1Bar, "LEFT", 0, -100)
 	Retract_Bar3:SetSize(14, 120)
-	Retract_Bar3:SetNormalTexture(MEDIAPATH .. "RightBarButton")
+	Retract_Bar3:SetNormalTexture(MEDIAPATH .. "textures\\RightBarButton")
 	self.Retract_Bar3 = Retract_Bar3
 
 	local OutR3 = Retract_Bar3:CreateFontString(nil, "HIGH")
@@ -175,13 +175,13 @@ MBar4:SetScript("OnShow", function(self)
 	local Right2Bars = self:CreateTexture(nil, "BORDER")
 	Right2Bars:SetPoint("RIGHT", 0, 0)
 	Right2Bars:SetSize(76, 480)
-	Right2Bars:SetTexture(MEDIAPATH .. "Right2Bars")
+	Right2Bars:SetTexture(MEDIAPATH .. "textures\\Right2Bars")
 	self.Right2Bars = Right2Bars
 
 	local Retract_Bar4 = CreateFrame("Button", nil, self)
 	Retract_Bar4:SetPoint("RIGHT", Right2Bars, "LEFT", 0, 0)
 	Retract_Bar4:SetSize(14, 120)
-	Retract_Bar4:SetNormalTexture(MEDIAPATH .. "RightBarButton")
+	Retract_Bar4:SetNormalTexture(MEDIAPATH .. "textures\\RightBarButton")
 	self.Retract_Bar4 = Retract_Bar4
 
 	local OutR4 = Retract_Bar4:CreateFontString(nil, "HIGH")
@@ -220,7 +220,7 @@ end)
 Expand_Bar3:SetScript("OnShow", function(self)
 	self:SetPoint("RIGHT", UIParent, 0, 63)
 	self:SetSize(14, 120)
-	self:SetNormalTexture(MEDIAPATH .. "RightBarButton")
+	self:SetNormalTexture(MEDIAPATH .. "textures\\RightBarButton")
 	Bartender4.Bar.barregistry["3"]:SetVisibilityOption("always", true)
 	Bartender4.Bar.barregistry["4"]:SetVisibilityOption("always", true)
 

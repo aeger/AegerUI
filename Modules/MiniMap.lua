@@ -5,9 +5,9 @@ SLASH_RELOAD1 = '/rl'
 
 local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
 local font = "Fonts\\FRIZQT__.ttf"
-local sb = "Interface\\AddOns\\aegerUI\\Media\\Skinner.tga"
-local bg = "Interface\\AddOns\\aegerUI\\Media\\solid.tga"
-local mframe = "Interface\\AddOns\\aegerUI\\Media\\MFrame.tga"
+local sb = "Interface\\AddOns\\aegerUI\\media\\textures\\Skinner.tga"
+local bg = "Interface\\AddOns\\aegerUI\\Media\\textures\\solid.tga"
+local mframe = "Interface\\AddOns\\aegerUI\\Media\\textures\\MFrame.tga"
 
 Minimap:ClearAllPoints()
 Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -18, -18)
@@ -147,7 +147,7 @@ MiniMapMailFrame:ClearAllPoints()
 MiniMapMailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, 4)
 MiniMapMailFrame:SetFrameStrata("LOW")
 MiniMapMailFrame:SetAlpha(0.7)
-MiniMapMailIcon:SetTexture("Interface\\Addons\\aegerUI\\Media\\mail.tga")
+MiniMapMailIcon:SetTexture("Interface\\Addons\\aegerUI\\Media\\textures\\mail.tga")
 MiniMapMailBorder:Hide()
 
 -- Queue Icons

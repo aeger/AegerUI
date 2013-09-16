@@ -1,17 +1,8 @@
-	
-
-    -- WARNING: name your saved variable and slash command something unique. I changed it to MYMOD_SetupDone, and INSTALLMYMOD
-    -- If it's a generic name, another addon could end up overwriting it and breaking things.
-     
-     
-    --Namespace------------------------------------------------------------------
+	--Namespace------------------------------------------------------------------
     local FOLDER_NAME, private_data = ...
-     
-     
+         
     --Constants------------------------------------------------------------------
-    local MEDIA_PATH = ([[Interface\AddOns\%s\Media\]]):format(FOLDER_NAME)
-    local MASQUE = LibStub("Masque", true)
-	local buttongroup
+    local MEDIA_PATH = ([[Interface\AddOns\%s\media\]]):format(FOLDER_NAME)
     local FONT = "Fonts\\FRIZQT__.ttf"
      
     local ADDON_PROFILE_ASSIGNMENTS = {
@@ -30,17 +21,6 @@
                     registry["3"]:SetVisibilityOption("always", true)
                     registry["4"]:SetVisibilityOption("always", true)
             end,
-			
-			Bagnon = function(addon_obj1)
-			         addon_obj1.SavedFrameSettings:SetItemFrameColumns(10)
-			        --local num_columns = addon_obj1.BagnonFrameSettings
-					--num_columns:itemFrameColumns(10)
-					
-			end,
-			
-			--MASQUE = function(addon_obj1)
-			        --addon_obj1.buttongroup:Group("CleanUI")
-					--end,
     }
      
     local TEXT = {
@@ -54,6 +34,7 @@
     local DoSetup
     local SetupFrame
     local ApplySetup
+	local aegerUI_MoveChatFrame1
      
      
     --Event logic-------
@@ -99,7 +80,7 @@
             local aegerLogo = SetupFrame:CreateTexture(nil, "BORDER")
             aegerLogo:SetPoint("CENTER", SetupFrame, "CENTER")
             aegerLogo:SetSize(453, 194)
-            aegerLogo:SetTexture(MEDIA_PATH .. "aegerUIlogo")
+            aegerLogo:SetTexture(MEDIA_PATH .. "textures\\aegerUIlogo")
 			
 			--------------------
             -- RELOAD Button  --
@@ -109,7 +90,7 @@
 			ReloadButton:SetPoint("TOP", SetupFrame, "BOTTOM")
             ReloadButton:SetPoint("LEFT", SetupFrame, "LEFT")
             ReloadButton:SetSize(153, 56)
-            ReloadButton:SetNormalTexture(MEDIA_PATH .. "reloadbtn")
+            ReloadButton:SetNormalTexture(MEDIA_PATH .. "textures\\reloadbtn")
 			ReloadButton:SetScript("OnEnter", BigButton_OnEnter)
             ReloadButton:SetScript("OnLeave", Button_OnLeave)
             ReloadButton:SetScript("OnClick", function(self)
@@ -142,7 +123,7 @@
             SetupButton:SetPoint("TOP", SetupFrame, "BOTTOM")
             SetupButton:SetPoint("LEFT", SetupFrame, "LEFT")
             SetupButton:SetSize(153, 56)
-            SetupButton:SetNormalTexture(MEDIA_PATH .. "setupButton")
+            SetupButton:SetNormalTexture(MEDIA_PATH .. "textures\\setupButton")
             SetupButton:SetScript("OnEnter", BigButton_OnEnter)
             SetupButton:SetScript("OnLeave", Button_OnLeave)
             SetupButton:SetScript("OnClick", function(self)
@@ -168,11 +149,11 @@
             CancelButton:SetPoint("TOP", SetupFrame, "BOTTOM")
             CancelButton:SetPoint("RIGHT", SetupFrame, "RIGHT")
             CancelButton:SetSize(153, 56)
-            CancelButton:SetNormalTexture(MEDIA_PATH .. "setupButton")
+            CancelButton:SetNormalTexture(MEDIA_PATH .. "textures\\setupButton")
             CancelButton:SetScript("OnEnter", BigButton_OnEnter)
             CancelButton:SetScript("OnLeave", Button_OnLeave)
             CancelButton:SetScript("OnClick", function(this)
-                    PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
+                    PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                     SetupFrame:Hide()
             end)
      
@@ -198,23 +179,33 @@
     end
      
     function DoSetup()
-            PlaySoundFile(MEDIA_PATH .. "Sound\\click.mp3")
+            PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
             if not SetupFrame then  -- the SetupFrame hasnt been created
                     InitSetupFrame()
             end
             SetupFrame:Show()
     end
-     
-    function ApplySetup()  -- the OK button calls this when clicked.
+	
+    function aegerUI_MoveChatFrame1()
+            FCF_SetLocked(ChatFrame1, 1)
+		    ChatFrame1:ClearAllPoints()
+            ChatFrame1:SetHeight(215)	
+            ChatFrame1:SetWidth(380)
+            ChatFrame1:SetPoint('BOTTOMLEFT',UIParent,'BOTTOMLEFT',30,37)
+            ChatFrame1:SetUserPlaced(true);
+		    FCF_SavePositionAndDimensions(ChatFrame1)
+    end
+	
+	function ApplySetup()  -- the Install button calls this when clicked.
             SetProfiles()
-            aegerUI_Bbars = 1
+			aegerUI_MoveChatFrame1()
+			aegerUI_Bbars = 1
 			aegerUI_TMShow = true
-			aegerUI_SetupDone = true  -- Your saved variable. ONLY set this true here, when you KNOW setup has been successfully performed.
-            print('Setup complete. Please reload UI to finish via "/rl".')  -- Never force a reload on a user.
+			aegerUI_SetupDone = true  
+            print('Setup complete. Please reload UI to finish via "/rl".')
     end
      
     SlashCmdList.INSTALLAEGERUI = function()
             DoSetup()
     end
     SLASH_INSTALLAEGERUI1 = '/install'
-

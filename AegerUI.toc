@@ -5,25 +5,25 @@
 ## Notes: Aeger's UI Interface
 ## Author: Aeger
 
-## SavedVariablesPerCharacter: aegerUI_SetupDone, aegerUI_TMShow, aegerUI_Bbars, MoveableFramesSaved
+## SavedVariablesPerCharacter: aegerUI_SetupDone, aegerUI_TMShow, aegerUI_Bbars
 
 ## Dependencies: Bartender4, Bazooka
 
 setup.lua
 
 ## Modules
-Modules\Bottombars.lua
-Modules\Chatbuttons.lua
-Modules\Sidebars.lua
-Modules\MiniMap.lua
-Modules\eAlign.lua
-Modules\topmenu.lua
-Modules\FrameMovers.lua
+modules\Bottombars.lua
+modules\Chatbuttons.lua
+modules\Sidebars.lua
+modules\MiniMap.lua
+modules\eAlign.lua
+modules\topmenu.lua
+modules\FrameMovers.lua
 
 ## Libraries
 libs\LibStub\LibStub.lua
 libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
 libs\LibDataBroker-1.1.lua
 
-## Credit for setup, core and Map to Mayron, Moveableframes by Azilroka
+## Credit for Minimap, Sidebars, and Chat buttons Mayron
 
