@@ -34,7 +34,7 @@
 	-- Core logic -----------------------------------------------------------------
 	function aegerUI_MoveQuestWatchFrame()
 	  WatchFrame:ClearAllPoints()
-      WatchFrame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", 17, -222)
+      WatchFrame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", 17, -230)
 	-- Stop the default UI from moving it back
       local noop = function() end
       WatchFrame.ClearAllPoints = noop

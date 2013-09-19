@@ -1,8 +1,3 @@
-local Reload = (...)
-SlashCmdList['RELOAD'] = ReloadUI
-SLASH_RELOAD1 = '/rl'
-
-
 local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
 local font = "Fonts\\FRIZQT__.ttf"
 local sb = "Interface\\AddOns\\aegerUI\\media\\textures\\Skinner.tga"
@@ -183,7 +178,7 @@ border:SetPoint("CENTER", 0, 0)
 border:SetSize(206, 206)
 border:SetFrameLevel(1)
 border:SetBackdrop(backdrop1)
-border:SetBackdropColor(1, 1, 1, .5)
+--border:SetBackdropColor(1, 1, 1, 1)
 
 -- Right Click Menu
 local menuFrame = CreateFrame("Frame", "MinimapRightClickMenu", UIParent, "UIDropDownMenuTemplate")

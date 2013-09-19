@@ -1,0 +1,37 @@
+<Bindings>
+	<Binding name="Toggle TopMenu" header="aegerUI" >
+		if InCombatLockdown() then
+			print("Cannot toggle TopMenu during combat.")
+			return
+		end
+		if TMMenuFrame:IsVisible() then
+                        TMMenuHide()
+                        HideBazookaBar1()
+                        aegerUI_TMShow = nil
+                        PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
+                else
+                        TMMenuDisplay()
+                        ShowBazookaBar1()
+                        aegerUI_TMShow = true
+                        PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
+                end
+	</Binding>
+	<Binding name="Toggle Bottom Bars" >
+		if aegerUI_Bbars == 1 then
+                        Bartender4.db:SetProfile("aegerUI2bar")
+                        aegerUI_Bbars = 2
+                        PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
+                        Bbar2Display()
+                        Bbar1Hide()
+                elseif aegerUI_Bbars == 2 then
+                        Bartender4.db:SetProfile("aegerUI1bar")
+                        aegerUI_Bbars = 1
+                        PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
+                        Bbar1Display()
+                        Bbar2Hide()
+                end
+                
+		
+	</Binding>
+	
+</Bindings>

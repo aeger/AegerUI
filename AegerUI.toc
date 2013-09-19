@@ -9,21 +9,7 @@
 
 ## Dependencies: Bartender4, Bazooka
 
-setup.lua
-
-## Modules
-modules\Bottombars.lua
-modules\Chatbuttons.lua
-modules\Sidebars.lua
-modules\MiniMap.lua
-modules\eAlign.lua
-modules\topmenu.lua
-modules\FrameMovers.lua
-
-## Libraries
-libs\LibStub\LibStub.lua
-libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
-libs\LibDataBroker-1.1.lua
+libs\libs.xml
+aegerUI.xml
 
 ## Credit for Minimap, Sidebars, and Chat buttons Mayron
-
