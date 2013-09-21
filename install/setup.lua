@@ -1,21 +1,28 @@
-	--Namespace------------------------------------------------------------------
-    local addonname, aegerUI = ...
+-------------------------------------------------------------------------------
+--  aegerUI 5.4.2 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+-------------------------------------------------------------------------------
 	
-	local AceAddon = LibStub("AceAddon-3.0")
-		
-	_G.aegerUI = aegerUI
-         
-    --Constants------------------------------------------------------------------
+--  Namespace -----------------------------------------------------------------	
+	local addonname, aegerUI = ...
+	local L = aegerUI.L
+	_G.aegerUIdb = aegerUIdb
+	
+--  Create global table  ------------------------------------------------------	
+	aegerUIdb = {}
+	aegerUIdb["InterfaceVersion"] = "50400"
+	aegerUIdb["AddonVersion"] = "5.4.2"
+	         
+--  Constants  ----------------------------------------------------------------
     local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
     local FONT = "Fonts\\FRIZQT__.ttf"
 	     
     local TEXT = {
-            Install = "Install",
-            Cancel = "Cancel",
-			Reload = "Reload",
+            Install = L["Install"],
+            Cancel = L["Cancel"],
+			Reload = L["Reload"],
     }
      
-    -- Define locals and local functions up here so they're in scope for the whole file
+-- Define locals and local functions up here so they're in scope for the whole file
     local InitSetupFrame
     local DoSetup
     local SetupFrame
@@ -23,7 +30,7 @@
 	local aegerUI_MoveChatFrame1
      
      
-    --Event logic-------
+--  Event logic  --------------------------------------------------------------
     local EventFrame = CreateFrame('Frame')
      
     EventFrame:RegisterEvent('PLAYER_LOGIN')
@@ -40,15 +47,15 @@
     end)
      
      
-    -- Events---------
+--  Events  ---------------------------------------------------------------------
     function EventFrame:PLAYER_LOGIN()
-            if not aegerUI_SetupDone then
+            if not aegerUIdb.SetupDone then
                     DoSetup()
             end
     end
      
      
-    -- Setup frame
+--  Setup frame  ----------------------------------------------------------------
     function InitSetupFrame()  -- This is local. See "constants".
             -- The SetupFrame isn't created at all until it's needed.
             -- This function is called elsewhere to initiate the setup process.
@@ -153,7 +160,7 @@
             CancelButton:SetFontString(CancelText)
 	end
          
-    -- Core logic
+--  Core logic  ---------------------------------------------------------------
     function DoSetup()
             PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
             if not SetupFrame then  -- the SetupFrame hasnt been created
@@ -182,23 +189,22 @@
 			aegerUI:InstallBrokerDurability()
 			aegerUI:InstallBrokerMicroMenu()
 			aegerUI:InstallBrokerMoneyFu()
-			aegerUI:InstallCloudyTooltip()
 			aegerUI:InstallExtSocialUI()
 			aegerUI:InstallExtVendor()
 			aegerUI:InstallFarmhand()
 			aegerUI:InstallGatherMate2()
-			aegerUI:InstallLeatrix_Plus()
 			aegerUI:InstallMasque()
 			aegerUI:InstallParrot()
 			aegerUI:InstallPhanxBuffs()
 			aegerUI:InstallPrat()
+			aegerUI:InstallQuestUnTracker()
 			aegerUI:InstallSocialState()
 			aegerUI:InstallTinyDPS()
 			aegerUI:InstallTotemTimers()
 			aegerUI:ZygorsGuideViewer()
-			aegerUI_Bbars = 1
-			aegerUI_TMShow = true
-			aegerUI_SetupDone = true  
+			aegerUIdb.BottomBars = 1
+			aegerUIdb.TMShow = true
+			aegerUIdb.SetupDone = true  
             print('Setup complete. Please reload UI to finish via "/rl".')
     end
      

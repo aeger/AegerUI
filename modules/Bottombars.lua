@@ -1,19 +1,22 @@
-    --Namespace--------------------------------------------------------------
-    local FOLDER_NAME, private_data = ...
+-------------------------------------------------------------------------------
+--  aegerUI 5.4.2 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+-------------------------------------------------------------------------------
 
-    --Constants
-    local MEDIA_PATH = ([[Interface\AddOns\%s\Media\]]):format(FOLDER_NAME)
+--  Namespace -----------------------------------------------------------------	
+    local addonname, aegerUI = ...
+
+--  Constants  ----------------------------------------------------------------
+    local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
     local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
     local FONT = "Fonts\\FRIZQT__.ttf"
 
-    --Define locals and local functions
-
-    local BottomBarFrame1
+-- Define locals and local functions up here so they're in scope for the whole file
+	local BottomBarFrame1
     local BottomBarFrame2
     local CombatColorOn
     local CombatColorOff
 
-    --Event logic--------------------------------------------------------------
+--  Event logic  ---------------------------------------------------------------
     local DisplayBars = CreateFrame('Frame')
 
     DisplayBars:RegisterEvent('PLAYER_LOGIN')
@@ -33,11 +36,11 @@
             end
     end)
 	
-    --Events---------------------------------------------------------------------=
+--  Events  ---------------------------------------------------------------------
     function DisplayBars:PLAYER_LOGIN()
-            if aegerUI_Bbars == 1 then
+            if aegerUIdb.BottomBars == 1 then
 		      Bbar1Display() else
-		    if aegerUI_Bbars == 2 then
+		    if aegerUIdb.BottomBars == 2 then
 		      Bbar2Display()
             end
 	    end
@@ -45,9 +48,9 @@
 
     function DisplayBars:UNIT_ENTERED_VEHICLE()
             if UnitHasVehicleUI("player") then
-		    if aegerUI_Bbars == 1 then
+		    if aegerUIdb.BottomBars == 1 then
 		      Bbar1Hide() elseif
-		    aegerUI_Bbars == 2 then
+		    aegerUIdb.BottomBars == 2 then
 		      Bbar2Hide()
 		    end
 	    end
@@ -55,9 +58,9 @@
 
     function DisplayBars:UNIT_EXITED_VEHICLE()
             if not UnitHasVehicleUI("player") then
-		    if aegerUI_Bbars == 1 then
+		    if aegerUIdb.BottomBars == 1 then
 		      Bbar1Display() elseif
-		    aegerUI_Bbars == 2 then
+		    aegerUIdb.BottomBars == 2 then
 		      Bbar2Display()
 		    end
 	    end 
@@ -71,6 +74,8 @@
     function DisplayBars:PLAYER_REGEN_DISABLED()
             CombatColorOn()
     end
+	
+--  Bottom bar frames  ---------------------------------------------------------
 
     function BottomBarFrame1()  
 	     Bar1Frame = CreateFrame('Frame', "Bar1Frame", UIParent)
@@ -119,7 +124,7 @@
 		 Bar2Frame.Bar2border = Bar2border
     end
 
-    -- Core logic ------------------------------------------------------------------------
+--  Core logic  ---------------------------------------------------------------
     function Bbar1Display()
 	  if not Bar1Frame then
 	    BottomBarFrame1()
@@ -149,20 +154,20 @@
     end
 
     function CombatColorOn()
-	       if aegerUI_Bbars == 1 then
-		     Bare1Frame.Bar1border:SetVertexColor(1, 0, 0)
+	       if aegerUIdb.BottomBars == 1 then
+		     Bar1Frame.Bar1border:SetVertexColor(1, 0, 0)
 		   else
-		   if aegerUI_Bbars == 2 then
+		   if aegerUIdb.BottomBars == 2 then
 		     Bar2Frame.Bar2border:SetVertexColor(1, 0, 0)
 	       end 
 	    end
     end
 
     function CombatColorOff()
-	       if aegerUI_Bbars == 1 then
-		     Bare1Frame.Bar1border:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
+	       if aegerUIdb.BottomBars == 1 then
+		     Bar1Frame.Bar1border:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 		   else
-		   if aegerUI_Bbars == 2 then
+		   if aegerUIdb.BottomBars == 2 then
 		     Bar2Frame.Bar2border:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 	       end
 	    end 

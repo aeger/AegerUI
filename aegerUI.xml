@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<!-- Initialize aegerUI -->
+	<Include file="locale\locale.xml"/>
 	<Script file="init.lua"/>
 		
 	<!-- Modules -->
@@ -20,16 +21,15 @@
 	<Script file="install\addons\Broker_DurabilityInfo.lua"/>
 	<Script file="install\addons\Broker_MicroMenu.lua"/>
 	<Script file="install\addons\Broker_MoneyFu.lua"/>
-	<Script file="install\addons\CloudyTooltipMod.lua"/>
 	<Script file="install\addons\ExtSocialUI.lua"/>
 	<Script file="install\addons\ExtVendor.lua"/>
 	<Script file="install\addons\Farmhand.lua"/>
 	<Script file="install\addons\GatherMate2.lua"/>
-	<Script file="install\addons\Leatrix_Plus.lua"/>
 	<Script file="install\addons\Masque.lua"/>
 	<Script file="install\addons\Parrot.lua"/>
 	<Script file="install\addons\PhanxBuffs.lua"/>
 	<Script file="install\addons\Prat.lua"/>
+	<Script file="install\addons\QuestUnTracker.lua"/>
 	<Script file="install\addons\SocialState.lua"/>
 	<Script file="install\addons\TinyDPS.lua"/>
 	<Script file="install\addons\TotemTimers.lua"/>

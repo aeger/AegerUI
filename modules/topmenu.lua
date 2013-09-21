@@ -1,26 +1,22 @@
-	--Namespace------------------------------------------------------------------
-	local FOLDER_NAME, private_data = ...
+-------------------------------------------------------------------------------
+--  aegerUI 5.4.2 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+-------------------------------------------------------------------------------
+
+--  Namespace -----------------------------------------------------------------	
+	local addonname, aegerUI = ...
      
-	--Constants------------------------------------------------------------------
-	local MEDIA_PATH = ([[Interface\AddOns\%s\media\]]):format(FOLDER_NAME)
+--  Constants  ----------------------------------------------------------------
+	local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
 	local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]    
 	local FONT = "Fonts\\FRIZQT__.ttf"
 
-	local function flip(texture, horizontal)
-	  local ULx, ULy, LLx, LLy, URx, URy, LRx, LRy = texture:GetTexCoord()
-	    if horizontal then
-		  texture:SetTexCoord(URx, URy, LRx, LRy, ULx, ULy, LLx, LLy)
-	    else
-		  texture:SetTexCoord(LLx, LLy, ULx, ULy, LRx, LRy, URx, URy)
-	   end
-	end
-
-	-- Define locals and local functions up here so they're in scope for the whole file
+-- Define locals and local functions up here so they're in scope for the whole file
 	local InitTMMenuFrame
 	local TMCombatColorOn
 	local TMCombatColorOff
+	local flip
 
-	--Event logic----------------------------------------------------------------
+--  Event logic  --------------------------------------------------------------
 	local TMEventFrame = CreateFrame('Frame')
 
 	TMEventFrame:RegisterEvent('PLAYER_LOGIN')
@@ -38,9 +34,9 @@
             end
     end)
 
-	-- Events----------------------------------------------------------------------
+--  Events  ---------------------------------------------------------------------
     function TMEventFrame:PLAYER_LOGIN()
-             if aegerUI_TMShow then
+             if aegerUIdb.TMShow then
 			 TMMenuDisplay()
 			 ShowBazookaBar1()
 			 else
@@ -56,6 +52,8 @@
 	function TMEventFrame:PLAYER_REGEN_DISABLED()
              TMCombatColorOn()
     end
+	
+--  Top Menu frame  --------------------------------------------------------------
 
 	function InitTMMenuFrame()
          TMMenuFrame = CreateFrame('Frame', nil, UIParent)
@@ -82,7 +80,16 @@
 		 flip(TMMenuBorder, false)
 	end
 
-	-- Core logic ------------------------------------------------------------------------		 
+--  Core logic  ---------------------------------------------------------------		 
+	function flip(texture, horizontal)
+	  local ULx, ULy, LLx, LLy, URx, URy, LRx, LRy = texture:GetTexCoord()
+	    if horizontal then
+		  texture:SetTexCoord(URx, URy, LRx, LRy, ULx, ULy, LLx, LLy)
+	    else
+		  texture:SetTexCoord(LLx, LLy, ULx, ULy, LRx, LRy, URx, URy)
+	   end
+	end
+	
 	function TMMenuDisplay()
       if not TMMenuFrame then
 	    InitTMMenuFrame()

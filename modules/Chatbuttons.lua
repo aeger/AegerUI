@@ -1,18 +1,22 @@
-    --Namespace------------------------------------------------------------------
-    local FOLDER_NAME, private_data = ...
+-------------------------------------------------------------------------------
+--  aegerUI 5.4.2 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+-------------------------------------------------------------------------------
 
-    --Constants------------------------------------------------------------------
-    local MEDIA_PATH = ([[Interface\AddOns\%s\Media\]]):format(FOLDER_NAME)
+--  Namespace -----------------------------------------------------------------	
+    local addonname, aegerUI = ...
+
+--  Constants  ----------------------------------------------------------------
+    local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
     local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
     local FONT = "Fonts\\FRIZQT__.ttf"
 
-    --Define locals and local functions------------------------------------------
+-- Define locals and local functions up here so they're in scope for the whole file
     local ChatButtonsFrame
 	local Chat1LBtext
 	local Chat1MBtext
 	local Chat1RBtext
 
-	--Event logic----------------------------------------------------------------
+--  Event logic  --------------------------------------------------------------
 	local ChatButtonsEvent = CreateFrame('Frame')
 
 	ChatButtonsEvent:RegisterEvent('PLAYER_LOGIN')
@@ -28,10 +32,12 @@
             end
     end)
 	
-	--Events----------------------------------------------------------------------
+--  Events  ---------------------------------------------------------------------
 	function ChatButtonsEvent:PLAYER_LOGIN()
 	  Chat1Display()       
 	end
+	
+--  Chat buttons frame  ----------------------------------------------------------------
 
 	function ChatButtonsFrame()  
 	     Chat1Frame = CreateFrame('Frame', nil, UIParent)
@@ -74,24 +80,24 @@
                 if TMMenuFrame:IsVisible() then
                         TMMenuHide()
                         HideBazookaBar1()
-                        aegerUI_TMShow = nil
+                        aegerUIdb.TMShow = nil
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 else
                         TMMenuDisplay()
                         ShowBazookaBar1()
-                        aegerUI_TMShow = true
+                        aegerUIdb.TMShow = true
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 end
             elseif button == "RightButton" then
-                if aegerUI_Bbars == 1 then
+                if aegerUIdb.BottomBars == 1 then
                         Bartender4.db:SetProfile("aegerUI2bar")
-                        aegerUI_Bbars = 2
+                        aegerUIdb.BottomBars = 2
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar2Display()
                         Bbar1Hide()
-                elseif aegerUI_Bbars == 2 then
+                elseif aegerUIdb.BottomBars == 2 then
                         Bartender4.db:SetProfile("aegerUI1bar")
-                        aegerUI_Bbars = 1
+                        aegerUIdb.BottomBars = 1
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar1Display()
                         Bbar2Hide()
@@ -242,7 +248,7 @@
 		 Chat1RBbutton:SetFontString(Chat1RBtext)
          end
 
-    -- Core logic ------------------------------------------------------------------------
+--  Core logic  ---------------------------------------------------------------
     function Chat1Display()
 	  if not Chat1Frame then
 	    ChatButtonsFrame() 

@@ -1,12 +1,8 @@
-    --Namespace------------------------------------------------------------------
-    local addonname, aegerUI = ...
-
-	--aegerUI.Version.bartender4 = 5400
+local addonname, aegerUI = ...
 
 function aegerUI:InstallBartender1()
 	if not IsAddOnLoaded("Bartender4") then return end
-	--if LUICONFIG.Versions.bartender == LUI.Versions.bartender then return end
-
+	
 	local CharName = UnitName("player")
 	local ServerName = GetRealmName()
 	local ProfileName = CharName.." - "..ServerName
@@ -75,6 +71,7 @@ function aegerUI:InstallBartender1()
 							["hidemacrotext"] = true,
 							["padding"] = 3,
 							["visibility"] = {
+								["vehicle"] = false,
 								["vehicleui"] = true,
 							},
 						}, -- [1]
@@ -187,6 +184,9 @@ function aegerUI:InstallBartender1()
 				["x"] = 420.9888916015625,
 				["point"] = "BOTTOM",
 			},
+			["visibility"] = {
+				["vehicleui"] = true,
+			},
 		},
 	}
 
@@ -250,6 +250,7 @@ function aegerUI:InstallBartender1()
 				["hide"] = true,
 			},
 			["buttonlock"] = true,
+			["blizzardVehicle"] = true,
 		},
 	}
 
@@ -263,14 +264,11 @@ function aegerUI:InstallBartender1()
 	elseif Bartender4DB.profileKeys[ProfileName] ~= aUI1bar then
 		Bartender4DB.profileKeys[ProfileName] = aUI1bar
 	end
-
-	--LUICONFIG.Versions.bartender = LUI.Versions.bartender
 end
 
 function aegerUI:InstallBartender2()
 	if not IsAddOnLoaded("Bartender4") then return end
-	--if LUICONFIG.Versions.bartender == LUI.Versions.bartender then return end
-
+	
 	local CharName = UnitName("player")
 	local ServerName = GetRealmName()
 	local ProfileName = CharName.." - "..ServerName
@@ -447,6 +445,9 @@ function aegerUI:InstallBartender2()
 
 	_G.VehicleDefaults = {
 		[aUI2bar] = {
+			["visibility"] = {
+				["vehicleui"] = true,
+			},
 			["version"] = 3,
 			["position"] = {
 				["y"] = 144.0444183349609,
@@ -516,6 +517,7 @@ function aegerUI:InstallBartender2()
 				["radius"] = 80,
 				["hide"] = true,
 			},
+			["blizzardVehicle"] = true,
 			["buttonlock"] = true,
 		},
 	}
@@ -523,6 +525,4 @@ function aegerUI:InstallBartender2()
 	for k,v in pairs(BTProfilesDefaults) do
 		Bartender4DB.profiles[k] = v
 	end
-	
-	--LUICONFIG.Versions.bartender = LUI.Versions.bartender
 end

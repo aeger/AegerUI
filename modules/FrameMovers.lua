@@ -1,16 +1,20 @@
-	--Namespace------------------------------------------------------------------
-	local FOLDER_NAME, private_data = ...
+-------------------------------------------------------------------------------
+--  aegerUI 5.4.2 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+-------------------------------------------------------------------------------
 
-	--Constants------------------------------------------------------------------
-	local MEDIA_PATH = ([[Interface\AddOns\%s\Media\]]):format(FOLDER_NAME)
+--  Namespace -----------------------------------------------------------------	
+	local addonname, aegerUI = ...
+
+--  Constants  ----------------------------------------------------------------
+	local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
 	local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
 	local FONT = "Fonts\\FRIZQT__.ttf"
 
-	--Define locals and local functions up here so they're in scope for the whole file
+-- Define locals and local functions up here so they're in scope for the whole file
 	local aegerUI_MoveQuestWatchFrame
 	local HookWatchFrame_Update = WatchFrame_Update
 
-	--Event logic----------------------------------------------------------------
+--  Event logic  --------------------------------------------------------------
 	local aegerUI_FrameMover = CreateFrame('Frame')
 
 	aegerUI_FrameMover:RegisterEvent('PLAYER_LOGIN')
@@ -26,12 +30,12 @@
             end
     end)
 	
-	--Events----------------------------------------------------------------------
+--  Events  ---------------------------------------------------------------------
 	function aegerUI_FrameMover:PLAYER_LOGIN()
       aegerUI_MoveQuestWatchFrame()
 	end
 
-	-- Core logic -----------------------------------------------------------------
+--  Core logic  ---------------------------------------------------------------
 	function aegerUI_MoveQuestWatchFrame()
 	  WatchFrame:ClearAllPoints()
       WatchFrame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", 17, -230)
