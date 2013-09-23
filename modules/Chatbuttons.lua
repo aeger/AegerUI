@@ -4,11 +4,25 @@
 
 --  Namespace -----------------------------------------------------------------	
     local addonname, aegerUI = ...
+	
+	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 --  Constants  ----------------------------------------------------------------
     local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
     local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
     local FONT = "Fonts\\FRIZQT__.ttf"
+	
+	local TEXT = {
+			Character = L["Character"],
+			DungeonJournal = L["Dungeon Journal"],
+			LFD = L["LFD"],
+			SpellBook = L["Spell Book"],
+			QuestLog = L["Quest Log"],
+			MountsPets = L["Mounts and Pets"],
+			Talents = L["Talents"],
+			Achievements = L["Achievements"],
+			PVP = L["PVP"],
+	}
 
 -- Define locals and local functions up here so they're in scope for the whole file
     local ChatButtonsFrame
@@ -144,7 +158,7 @@
 		  Chat1LBtext:SetPoint("RIGHT")
 		  Chat1LBtext:SetFont(FONT, 10, "OUTLINE")
 		  Chat1LBtext:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
-		  Chat1LBtext:SetText("Character")
+		  Chat1LBtext:SetText(TEXT.Character)
 		  Chat1LBbutton:SetScript("OnEnter", function(self, button)
 		  Chat1LBbutton:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 		  Chat1LBtext:SetTextColor(1,1,1)
@@ -157,11 +171,11 @@
 		  Chat1LBbutton:SetScript("OnUpdate", function(self)
 		   if InCombatLockdown() then return end
            if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
-             Chat1LBtext:SetText("Dungeon Journal")
+             Chat1LBtext:SetText(TEXT.DungeonJournal)
            elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
-             Chat1LBtext:SetText("LFD")
+             Chat1LBtext:SetText(TEXT.LFD)
            else
-             Chat1LBtext:SetText("Character")
+             Chat1LBtext:SetText(TEXT.Character)
             end 
 		  end)
 		  Chat1LBbutton:SetFontString(Chat1LBtext)
@@ -194,7 +208,7 @@
 		  Chat1MBtext:SetPoint("RIGHT")
 		  Chat1MBtext:SetFont(FONT, 10, "OUTLINE")
 		  Chat1MBtext:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
-		  Chat1MBtext:SetText("Spell Book")
+		  Chat1MBtext:SetText(TEXT.SpellBook)
 		  Chat1MBbutton:SetScript("OnEnter", function(self, button)
 		  Chat1MBbutton:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 		  Chat1MBtext:SetTextColor(1,1,1)
@@ -207,11 +221,11 @@
 		  Chat1MBbutton:SetScript("OnUpdate", function(self)
 		    if InCombatLockdown() then return end
             if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
-              Chat1MBtext:SetText("Quest Log")
+              Chat1MBtext:SetText(TEXT.QuestLog)
             elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
-              Chat1MBtext:SetText("Mounts and Pets")
+              Chat1MBtext:SetText(TEXT.MountsPets)
             else
-              Chat1MBtext:SetText("Spell Book")
+              Chat1MBtext:SetText(TEXT.SpellBook)
             end
 		  end)
 		  Chat1MBbutton:SetFontString(Chat1MBtext)
@@ -246,7 +260,7 @@
 		  Chat1RBtext:SetPoint("RIGHT")
 		  Chat1RBtext:SetFont(FONT, 10, "OUTLINE")
 		  Chat1RBtext:SetTextColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
-		  Chat1RBtext:SetText("Talents")
+		  Chat1RBtext:SetText(TEXT.Talents)
 		  Chat1RBbutton:SetScript("OnEnter", function(self, button)
 		  Chat1RBbutton:GetNormalTexture():SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 		  Chat1RBtext:SetTextColor(1,1,1)
@@ -258,11 +272,11 @@
 		  Chat1RBbutton:SetScript("OnUpdate", function(self)
 		    if InCombatLockdown() then return end
             if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
-              Chat1RBtext:SetText("Achievements")
+              Chat1RBtext:SetText(TEXT.Achievements)
             elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
-              Chat1RBtext:SetText("PVP")
+              Chat1RBtext:SetText(TEXT.PVP)
             else
-              Chat1RBtext:SetText("Talents")
+              Chat1RBtext:SetText(TEXT.Talents)
             end
 		  end)
 		 Chat1RBbutton:SetFontString(Chat1RBtext)

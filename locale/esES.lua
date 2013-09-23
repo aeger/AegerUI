@@ -11,3 +11,14 @@
 	L["Install"] = "instalar"
 	L["Cancel"] = "cancelar"
 	L["Reload"] = "recargar"
+	
+-- Chat buttons  ----------------------------------------------------------------
+	L["Character"] = "carácter"
+	L["Dungeon Journal"] = "Dungeon Diario"
+	L["LFD"] = "LFD"
+	L["Spell Book"] = "hechizos libro"
+	L["Quest Log"] = "registro de misiones"
+	L["Mounts and Pets"] = "Reittiere und Haustiere"
+	L["Talents"] = "Talentos"
+	L["Achievements"] = "Logros"
+	L["PVP"] = "PVP"

@@ -11,3 +11,14 @@
 	L["Install"] = "安装"
 	L["Cancel"] = "取消"
 	L["Reload"] = "刷新"
+	
+-- Chat buttons  ----------------------------------------------------------------
+	L["Character"] = "字符"
+	L["Dungeon Journal"] = "地牢杂志 журнале"
+	L["LFD"] = "利丰经销"
+	L["Spell Book"] = "魔法书 заклинаний libro"
+	L["Quest Log"] = "任务日志 квестов de misiones"
+	L["Mounts and Pets"] = "坐骑和宠物"
+	L["Talents"] = "人才"
+	L["Achievements"] = "成就"
+	L["PVP"] = "PVP"

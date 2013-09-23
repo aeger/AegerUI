@@ -11,3 +11,14 @@
 	L["Install"] = true
 	L["Cancel"] = true
 	L["Reload"] = true
+	
+-- Chat buttons  ----------------------------------------------------------------
+	L["Character"] = true
+	L["Dungeon Journal"] = true
+	L["LFD"] = true
+	L["Spell Book"] = true
+	L["Quest Log"] = true
+	L["Mounts and Pets"] = true
+	L["Talents"] = true
+	L["Achievements"] = true
+	L["PVP"] = true

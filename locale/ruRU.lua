@@ -11,3 +11,14 @@
 	L["Install"] = "устанавливать"
 	L["Cancel"] = "отменить"
 	L["Reload"] = "перезагружать neu laden"
+	
+-- Chat buttons  ----------------------------------------------------------------
+	L["Character"] = "персонаж"
+	L["Dungeon Journal"] = "Подземелья журнале"
+	L["LFD"] = "LFD"
+	L["Spell Book"] = "книгу заклинаний libro"
+	L["Quest Log"] = "журнал квестов de misiones"
+	L["Mounts and Pets"] = "Кронштейны и домашних животных und Haustiere"
+	L["Talents"] = "Таланты"
+	L["Achievements"] = "Достижения"
+	L["PVP"] = "PVP"
