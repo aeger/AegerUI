@@ -7,12 +7,12 @@
 		if TMMenuFrame:IsVisible() then
                         TMMenuHide()
                         HideBazookaBar1()
-                        aegerUIdb.TMShow = nil
+                        aegerUI.db.profile.TopMenuShow = false
                         PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
                 else
                         TMMenuDisplay()
                         ShowBazookaBar1()
-                        aegerUIdb.TMShow = true
+                        aegerUI.db.profile.TopMenuShow = true
                         PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
                 end
 	</Binding>
@@ -21,15 +21,15 @@
 			print("Cannot toggle Bottom Bars during combat.")
 			return
 		end
-		if aegerUIdb.BottomBars == 1 then
+		if aegerUI.db.profile[ProfileName].NumBottomBars == 1 then
                         Bartender4.db:SetProfile("aegerUI2bar")
-                        aegerUIdb.BottomBars = 2
+                        aegerUI.db.profile.NumBottomBars = 2
                         PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
                         Bbar2Display()
                         Bbar1Hide()
-                elseif aegerUIdb.BottomBars == 2 then
+                elseif aegerUI.db.profile.NumBottomBars == 2 then
                         Bartender4.db:SetProfile("aegerUI1bar")
-                        aegerUIdb.BottomBars = 1
+                        aegerUI.db.profile.NumBottomBars = 1
                         PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
                         Bbar1Display()
                         Bbar2Hide()

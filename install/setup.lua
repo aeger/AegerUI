@@ -3,15 +3,12 @@
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
-	local addonname, aegerUI = ...
-	local L = aegerUI.L
-	_G.aegerUIdb = aegerUIdb
+	local _, aegerUI = ...
+	aegerUI = LibStub("AceAddon-3.0"):NewAddon(aegerUI, "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0")
+	_G.aegerUI = aegerUI
 	
---  Create global table  ------------------------------------------------------	
-	aegerUIdb = {}
-	aegerUIdb["InterfaceVersion"] = "50400"
-	aegerUIdb["AddonVersion"] = "5.4.2"
-	         
+	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
+		
 --  Constants  ----------------------------------------------------------------
     local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
     local FONT = "Fonts\\FRIZQT__.ttf"
@@ -21,15 +18,39 @@
             Cancel = L["Cancel"],
 			Reload = L["Reload"],
     }
-     
+
 -- Define locals and local functions up here so they're in scope for the whole file
     local InitSetupFrame
     local DoSetup
     local SetupFrame
     local ApplySetup
 	local aegerUI_MoveChatFrame1
-     
-     
+	local aegerUI_InstallAddonOptions
+    local CharName = UnitName("player")
+	local ServerName = GetRealmName()
+	local ProfileName = CharName.." - "..ServerName
+		
+--  Default DB data  -----------------------------------------------------------	
+	local defaults = {
+		global = {
+          Placeholder = true,
+		},
+		profile = {
+          Placeholder = true,        
+		},
+	}
+	
+	function aegerUI:OnInitialize()
+	  self.db = LibStub("AceDB-3.0"):New("aegerUIdb", defaults)
+	  self.db.RegisterCallback(self, "OnNewProfile", "InitializeProfile")
+    end
+	
+	function aegerUI:InitializeProfile()
+	aegerUI.db.profile.SetUpDone = false
+	aegerUI.db.profile.TopMenuShow = true
+	aegerUI.db.profile.NumBottomBars = 1
+	end
+		
 --  Event logic  --------------------------------------------------------------
     local EventFrame = CreateFrame('Frame')
      
@@ -49,13 +70,12 @@
      
 --  Events  ---------------------------------------------------------------------
     function EventFrame:PLAYER_LOGIN()
-            if not aegerUIdb.SetupDone then
+            if not aegerUI.db.profile.SetUpDone then
                     DoSetup()
             end
     end
-     
-     
---  Setup frame  ----------------------------------------------------------------
+		
+--  Setup frame  ------------------------------------------------------------------
     function InitSetupFrame()  -- This is local. See "constants".
             -- The SetupFrame isn't created at all until it's needed.
             -- This function is called elsewhere to initiate the setup process.
@@ -179,8 +199,8 @@
 		    FCF_SavePositionAndDimensions(ChatFrame1)
     end
 	
-	function ApplySetup()  -- the Install button calls this when clicked.
-            aegerUI_MoveChatFrame1()
+	function aegerUI_InstallAddonOptions()
+			aegerUI_MoveChatFrame1()
 			aegerUI:InstallAanye_XP()
 			aegerUI:InstallBartender1()
 			aegerUI:InstallBartender2()
@@ -202,12 +222,17 @@
 			aegerUI:InstallTinyDPS()
 			aegerUI:InstallTotemTimers()
 			aegerUI:ZygorsGuideViewer()
-			aegerUIdb.BottomBars = 1
-			aegerUIdb.TMShow = true
-			aegerUIdb.SetupDone = true  
-            print('Setup complete. Please reload UI to finish via "/rl".')
+	end
+	
+	function ApplySetup()  -- the Install button calls this when clicked.
+            aegerUI_InstallAddonOptions()
+			aegerUI.db.profile.SetUpDone = true
+			aegerUI.db.profile.TopMenuShow = true
+			aegerUI.db.profile.NumBottomBars = 1
+			print('Setup complete. Please reload UI to finish via "/rl".')
     end
-     
+		
+--  Slash Commands  -----------------------------------------------------------	
     SlashCmdList.INSTALLAEGERUI = function()
             DoSetup()
     end

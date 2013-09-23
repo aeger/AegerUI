@@ -15,7 +15,7 @@
 	local Chat1LBtext
 	local Chat1MBtext
 	local Chat1RBtext
-
+		
 --  Event logic  --------------------------------------------------------------
 	local ChatButtonsEvent = CreateFrame('Frame')
 
@@ -77,27 +77,35 @@
 		  Chat1midButton:RegisterForClicks('AnyUp')
 		  Chat1midButton:SetScript("OnClick", function(self, button)
             if button == "LeftButton" then
-                if TMMenuFrame:IsVisible() then
+                if InCombatLockdown() then
+					print("Cannot toggle TopMenu during combat.")
+					return
+				end
+				if TMMenuFrame:IsVisible() then
                         TMMenuHide()
                         HideBazookaBar1()
-                        aegerUIdb.TMShow = nil
+                        aegerUI.db.profile.TopMenuShow = false
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 else
                         TMMenuDisplay()
                         ShowBazookaBar1()
-                        aegerUIdb.TMShow = true
+                        aegerUI.db.profile.TopMenuShow = true
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 end
             elseif button == "RightButton" then
-                if aegerUIdb.BottomBars == 1 then
+                if InCombatLockdown() then
+					print("Cannot toggle Bottom Bars during combat.")
+					return
+				end
+				if aegerUI.db.profile.NumBottomBars == 1 then
                         Bartender4.db:SetProfile("aegerUI2bar")
-                        aegerUIdb.BottomBars = 2
+                        aegerUI.db.profile.NumBottomBars = 2
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar2Display()
                         Bbar1Hide()
-                elseif aegerUIdb.BottomBars == 2 then
+                elseif aegerUI.db.profile.NumBottomBars == 2 then
                         Bartender4.db:SetProfile("aegerUI1bar")
-                        aegerUIdb.BottomBars = 1
+                        aegerUI.db.profile.NumBottomBars = 1
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar1Display()
                         Bbar2Hide()
@@ -116,7 +124,11 @@
          
 		  Chat1LBbutton:RegisterForClicks('AnyUp')
 		  Chat1LBbutton:SetScript("OnClick", function(self, button)
-		    if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
+		    if InCombatLockdown() then
+				print("Cannot toggle Menu's during combat.")
+				return
+			end
+			if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
               ToggleEncounterJournal()
             elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
               PVEFrame_ToggleFrame()
@@ -162,7 +174,11 @@
 	      Chat1MBbutton:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
 		  Chat1MBbutton:RegisterForClicks('AnyUp')
 		  Chat1MBbutton:SetScript("OnClick", function(self, button)
-		    if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
+		    if InCombatLockdown() then
+				print("Cannot toggle Menu's during combat.")
+				return
+			end
+			if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
                 ToggleFrame(QuestLogFrame)
             elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
                 TogglePetJournal()
@@ -208,7 +224,11 @@
 	      Chat1RBbutton:GetNormalTexture():SetVertexColor(0, 0, 0, 0.5)
 		  Chat1RBbutton:RegisterForClicks('AnyUp')
 		  Chat1RBbutton:SetScript("OnClick", function(self, button)
-		    if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
+		    if InCombatLockdown() then
+				print("Cannot toggle Menu's during combat.")
+				return
+			end
+			if IsControlKeyDown() and not IsShiftKeyDown() and not IsAltKeyDown() then
               ToggleAchievementFrame()
             elseif IsShiftKeyDown() and not IsControlKeyDown() and not IsAltKeyDown() then
             if not IsAddOnLoaded("Blizzard_PVPUI") then

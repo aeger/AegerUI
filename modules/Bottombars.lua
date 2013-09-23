@@ -4,7 +4,7 @@
 
 --  Namespace -----------------------------------------------------------------	
     local addonname, aegerUI = ...
-
+		
 --  Constants  ----------------------------------------------------------------
     local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
     local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
@@ -15,7 +15,7 @@
     local BottomBarFrame2
     local CombatColorOn
     local CombatColorOff
-
+		
 --  Event logic  ---------------------------------------------------------------
     local DisplayBars = CreateFrame('Frame')
 
@@ -38,9 +38,9 @@
 	
 --  Events  ---------------------------------------------------------------------
     function DisplayBars:PLAYER_LOGIN()
-            if aegerUIdb.BottomBars == 1 then
+            if aegerUI.db.profile.NumBottomBars == 1 then
 		      Bbar1Display() else
-		    if aegerUIdb.BottomBars == 2 then
+		    if aegerUI.db.profile.NumBottomBars == 2 then
 		      Bbar2Display()
             end
 	    end
@@ -48,9 +48,9 @@
 
     function DisplayBars:UNIT_ENTERED_VEHICLE()
             if UnitHasVehicleUI("player") then
-		    if aegerUIdb.BottomBars == 1 then
+		    if aegerUI.db.profile.NumBottomBars == 1 then
 		      Bbar1Hide() elseif
-		    aegerUIdb.BottomBars == 2 then
+		    aegerUI.db.profile.NumBottomBars == 2 then
 		      Bbar2Hide()
 		    end
 	    end
@@ -58,9 +58,9 @@
 
     function DisplayBars:UNIT_EXITED_VEHICLE()
             if not UnitHasVehicleUI("player") then
-		    if aegerUIdb.BottomBars == 1 then
+		    if aegerUI.db.profile.NumBottomBars == 1 then
 		      Bbar1Display() elseif
-		    aegerUIdb.BottomBars == 2 then
+		    aegerUI.db.profile.NumBottomBars == 2 then
 		      Bbar2Display()
 		    end
 	    end 
@@ -154,20 +154,20 @@
     end
 
     function CombatColorOn()
-	       if aegerUIdb.BottomBars == 1 then
+	       if aegerUI.db.profile.NumBottomBars == 1 then
 		     Bar1Frame.Bar1border:SetVertexColor(1, 0, 0)
 		   else
-		   if aegerUIdb.BottomBars == 2 then
+		   if aegerUI.db.profile.NumBottomBars == 2 then
 		     Bar2Frame.Bar2border:SetVertexColor(1, 0, 0)
 	       end 
 	    end
     end
 
     function CombatColorOff()
-	       if aegerUIdb.BottomBars == 1 then
+	       if aegerUI.db.profile.NumBottomBars == 1 then
 		     Bar1Frame.Bar1border:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 		   else
-		   if aegerUIdb.BottomBars == 2 then
+		   if aegerUI.db.profile.NumBottomBars == 2 then
 		     Bar2Frame.Bar2border:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 	       end
 	    end 

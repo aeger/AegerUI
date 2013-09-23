@@ -5,7 +5,7 @@
 ## Notes: Aeger's UI Interface
 ## Author: Aeger
 
-## SavedVariablesPerCharacter: aegerUIdb
+## SavedVariables: aegerUIdb
 
 ## Dependencies: Bartender4, Bazooka
 
