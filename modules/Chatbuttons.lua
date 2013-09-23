@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.2 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.3 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 
 --  Namespace -----------------------------------------------------------------	
@@ -97,12 +97,20 @@
 				end
 				if TMMenuFrame:IsVisible() then
                         TMMenuHide()
-                        HideBazookaBar1()
+                        HideBazookaBars()
                         aegerUI.db.profile.TopMenuShow = false
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 else
                         TMMenuDisplay()
-                        ShowBazookaBar1()
+                        if aegerUI.db.profile.ShowBazBar == 1 then
+							ShowBazookaBar1()
+						elseif
+						aegerUI.db.profile.ShowBazBar == 3 then
+							ShowBazookaBar3()
+						elseif
+						aegerUI.db.profile.ShowBazBar == 4 then
+							ShowBazookaBar4()
+						end
                         aegerUI.db.profile.TopMenuShow = true
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 end

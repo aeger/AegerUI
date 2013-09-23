@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.2 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.3 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
@@ -26,9 +26,6 @@
     local ApplySetup
 	local aegerUI_MoveChatFrame1
 	local aegerUI_InstallAddonOptions
-    local CharName = UnitName("player")
-	local ServerName = GetRealmName()
-	local ProfileName = CharName.." - "..ServerName
 		
 --  Default DB data  -----------------------------------------------------------	
 	local defaults = {
@@ -49,6 +46,7 @@
 	aegerUI.db.profile.SetUpDone = false
 	aegerUI.db.profile.TopMenuShow = true
 	aegerUI.db.profile.NumBottomBars = 1
+	aegerUI.db.profile.ShowBazBar = 1
 	end
 		
 --  Event logic  --------------------------------------------------------------
@@ -65,8 +63,7 @@
                     -- let you know you forgot to define it (see below, "events").
                     error(('could not find function for `%s`: forgot to define?'):format(event_name))
             end
-    end)
-     
+    end)     
      
 --  Events  ---------------------------------------------------------------------
     function EventFrame:PLAYER_LOGIN()
@@ -229,6 +226,7 @@
 			aegerUI.db.profile.SetUpDone = true
 			aegerUI.db.profile.TopMenuShow = true
 			aegerUI.db.profile.NumBottomBars = 1
+			aegerUI.db.profile.ShowBazBar = 1
 			print('Setup complete. Please reload UI to finish via "/rl".')
     end
 		

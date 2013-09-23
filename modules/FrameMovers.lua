@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.2 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.3 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 
 --  Namespace -----------------------------------------------------------------	
@@ -80,4 +80,3 @@
 	end
 
 	WatchFrame_Update = SmartFrameMover_WatchFrame_Update;
-

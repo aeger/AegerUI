@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.2 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.3 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 
 --  Namespace -----------------------------------------------------------------	
@@ -37,13 +37,23 @@
 --  Events  ---------------------------------------------------------------------
     function TMEventFrame:PLAYER_LOGIN()
              if aegerUI.db.profile.TopMenuShow then
-			 TMMenuDisplay()
-			 ShowBazookaBar1()
-			 else
-			 TMMenuHide()
-			 HideBazookaBar1()
+			 if aegerUI.db.profile.ShowBazBar == 1 then
+					TMMenuDisplay()
+					ShowBazookaBar1()
+			 elseif
+			    aegerUI.db.profile.ShowBazBar == 3 then
+					TMMenuDisplay()
+					ShowBazookaBar3()
+			 elseif
+				aegerUI.db.profile.ShowBazBar == 4 then
+					TMMenuDisplay()
+					ShowBazookaBar4()
 			 end
-    end
+			 else
+				TMMenuHide()
+				HideBazookaBars()
+			 end
+	end	
 	
 	function TMEventFrame:PLAYER_REGEN_ENABLED()
              TMCombatColorOff()
@@ -78,8 +88,88 @@
 		 TMMenuBorder:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 		 TMMenuFrame.TMMenuBorder = TMMenuBorder
 		 flip(TMMenuBorder, false)
+	
+		 local TMMenuPageR = CreateFrame("Button", nil, TMMenuFrame)
+		 TMMenuPageR:SetPoint("TOP", UIParent, "TOP", 2, -1)
+	     TMMenuPageR:SetPoint("LEFT", TMMenuTexture, "RIGHT")
+		 TMMenuPageR:SetSize(22, 22)
+		 TMMenuPageR:SetNormalTexture(MEDIA_PATH .. "textures\\arrow")
+		 TMMenuPageR:GetNormalTexture():SetVertexColor(0, 0, 0, 0)
+		 TMMenuPageR:RegisterForClicks('AnyUp')
+		 TMMenuPageR:SetScript("OnEnter", function(self)
+			if InCombatLockdown() then return end
+				TMMenuPageR:GetNormalTexture():SetVertexColor(0, 1, 0, 1)
+			end)
+		TMMenuPageR:SetScript("OnLeave", function(self)
+			if InCombatLockdown() then return end
+				TMMenuPageR:GetNormalTexture():SetVertexColor(0, 0, 0, 0)
+		end)
+		TMMenuPageR:SetScript("OnClick", function(self, button)
+			if button == "LeftButton" then
+			if InCombatLockdown() then
+				print("Cannot toggle TopMenu during combat.")
+				return
+			end
+			if aegerUI.db.profile.ShowBazBar == 1 then
+				ShowBazookaBar3()
+				aegerUI.db.profile.ShowBazBar = 3
+				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
+			elseif
+				aegerUI.db.profile.ShowBazBar == 3 then
+				ShowBazookaBar4()
+				aegerUI.db.profile.ShowBazBar = 4
+				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
+			elseif
+				aegerUI.db.profile.ShowBazBar == 4 then
+				ShowBazookaBar1()
+				aegerUI.db.profile.ShowBazBar = 1
+				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
+				end
+			end
+		end)		  
+		TMMenuFrame.TMMenuPageR = TMMenuPageR
+		
+		 local TMMenuPageL = CreateFrame("Button", nil, TMMenuFrame)
+		 TMMenuPageL:SetPoint("TOP", UIParent, "TOP", -2, -1)
+	     TMMenuPageL:SetPoint("RIGHT", TMMenuTexture, "LEFT")
+		 TMMenuPageL:SetSize(22, 22)
+		 TMMenuPageL:SetNormalTexture(MEDIA_PATH .. "textures\\arrowf")
+		 TMMenuPageL:GetNormalTexture():SetVertexColor(0, 0, 0, 0)
+		 TMMenuPageL:RegisterForClicks('AnyUp')
+		 TMMenuPageL:SetScript("OnEnter", function(self)
+			if InCombatLockdown() then return end
+				TMMenuPageL:GetNormalTexture():SetVertexColor(0, 1, 0, 1)
+			end)
+		TMMenuPageL:SetScript("OnLeave", function(self)
+			if InCombatLockdown() then return end
+				TMMenuPageL:GetNormalTexture():SetVertexColor(0, 0, 0, 0)
+		end)
+		TMMenuPageL:SetScript("OnClick", function(self, button)
+			if button == "LeftButton" then
+			if InCombatLockdown() then
+				print("Cannot toggle TopMenu during combat.")
+				return
+			end
+			if aegerUI.db.profile.ShowBazBar == 1 then
+				ShowBazookaBar4()
+				aegerUI.db.profile.ShowBazBar = 4
+				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
+			elseif
+				aegerUI.db.profile.ShowBazBar == 4 then
+				ShowBazookaBar3()
+				aegerUI.db.profile.ShowBazBar = 3
+				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
+			elseif
+				aegerUI.db.profile.ShowBazBar == 3 then
+				ShowBazookaBar1()
+				aegerUI.db.profile.ShowBazBar = 1
+				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
+				end
+			end
+		end)		  
+		TMMenuFrame.TMMenuPageL = TMMenuPageL
 	end
-
+	
 --  Core logic  ---------------------------------------------------------------		 
 	function flip(texture, horizontal)
 	  local ULx, ULy, LLx, LLy, URx, URy, LRx, LRy = texture:GetTexCoord()
@@ -106,10 +196,29 @@
 
 	function ShowBazookaBar1()
       BazookaBar_1:Show()
+	  if aegerUI.db.profile.SetUpDone
+	  then
+	  BazookaBar_3:Hide()
+	  BazookaBar_4:Hide()
+	end
+	end
+	
+	function ShowBazookaBar3()
+      BazookaBar_3:Show()
+	  BazookaBar_1:Hide()
+	  BazookaBar_4:Hide()
+	end
+	
+	function ShowBazookaBar4()
+      BazookaBar_4:Show()
+	  BazookaBar_1:Hide()
+	  BazookaBar_3:Hide()
 	end
 		 
-	function HideBazookaBar1()
+	function HideBazookaBars()
       BazookaBar_1:Hide()
+	  BazookaBar_3:Hide()
+	  BazookaBar_4:Hide()
 	end
 
 	function TMCombatColorOn()
@@ -118,4 +227,4 @@
 
 	function TMCombatColorOff()
 	   TMMenuFrame.TMMenuBorder:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
-	end 
+	end

@@ -7,107 +7,116 @@ function aegerUI:InstallBazooka()
 		
 	_G.aegerUI_Bazooka_Install = {
 		[Bazprofile] = {
-			["numBars"] = 2,
+			["numBars"] = 4,
 			["plugins"] = {
-				["data source"] = {
-					["BugSack"] = {
-						["pos"] = 5,
-					},
-					["SocialState"] = {
-						["showIcon"] = false,
-						["area"] = "left",
+				["launcher"] = {
+					["TinyDPS"] = {
+						["area"] = "right",
 						["pos"] = 7,
+					},
+					["AutoLootToggle"] = {
+						["pos"] = 6,
+						["bar"] = 4,
+					},
+					["Bartender4"] = {
+						["bar"] = 4,
+						["pos"] = 4,
+					},
+					["GatherMate2"] = {
+						["bar"] = 3,
+						["pos"] = 13,
+					},
+					["Breakables"] = {
+						["bar"] = 3,
+						["pos"] = 14,
+					},
+					["Bazooka"] = {
+						["area"] = "right",
+						["bar"] = 3,
+						["pos"] = 13,
+					},
+					["AtlasLoot"] = {
+						["bar"] = 3,
+						["pos"] = 9,
+					},
+					["AskMrRobot"] = {
+						["area"] = "right",
+						["bar"] = 3,
+						["pos"] = 12,
+					},
+					["Zygors"] = {
+						["area"] = "right",
+						["pos"] = 11,
+					},
+					["Parrot"] = {
+						["bar"] = 4,
+						["pos"] = 7,
+					},
+					["Prat"] = {
+						["bar"] = 3,
+						["pos"] = 12,
+					},
+					["Masque"] = {
+						["bar"] = 4,
+						["pos"] = 3,
+					},
+				},
+				["data source"] = {
+					["|cFFFFB366Ara|r Tradeskills"] = {
+						["showText"] = false,
+						["pos"] = 13,
+					},
+					["BugSack"] = {
+						["bar"] = 4,
+						["pos"] = 5,
 					},
 					["SOCD - Daily Reset"] = {
 						["enabled"] = false,
 						["pos"] = 12,
 					},
-					["SOCD-AltTrack"] = {
-						["enabled"] = false,
-						["pos"] = 11,
-					},
-					["|cFFFFB366Ara|r Tradeskills"] = {
-						["showText"] = false,
-						["pos"] = 10,
-					},
 					["Broker_DurabilityInfo"] = {
 						["showIcon"] = false,
 						["area"] = "left",
-						["pos"] = 10,
+						["pos"] = 12,
 					},
 					["Aanye_XP"] = {
 						["showIcon"] = false,
 						["area"] = "center",
 						["pos"] = 1,
 					},
-					["BagSyncLDB"] = {
-						["enabled"] = false,
-						["pos"] = 2,
+					["SocialState"] = {
+						["showIcon"] = false,
+						["area"] = "left",
+						["pos"] = 8,
 					},
 					["Broker_MoneyFu"] = {
 						["showIcon"] = false,
 						["area"] = "left",
-						["pos"] = 9,
+						["pos"] = 10,
 					},
 					["Broker_MicroMenu"] = {
 						["showIcon"] = false,
 						["area"] = "center",
-						["pos"] = 1,
 						["bar"] = 2,
+						["pos"] = 1,
 					},
-				},
-				["launcher"] = {
-					["Bazooka"] = {
-						["area"] = "right",
-						["enabled"] = false,
+					["BagSyncLDB"] = {
+						["area"] = "left",
+						["bar"] = 4,
+						["showText"] = false,
 						["pos"] = 2,
 					},
-					["AtlasLoot"] = {
-						["area"] = "right",
-						["pos"] = 8,
-					},
-					["Prat"] = {
+					["SOCD-AltTrack"] = {
 						["enabled"] = false,
 						["pos"] = 11,
 					},
-					["Parrot"] = {
-						["enabled"] = false,
-						["pos"] = 7,
+					["Memory"] = {
+						["bar"] = 4,
+						["pos"] = 12,
 					},
-					["TinyDPS"] = {
-						["area"] = "right",
-						["pos"] = 6,
-					},
-					["Bartender4"] = {
-						["area"] = "right",
-						["enabled"] = false,
-						["pos"] = 4,
-					},
-					["GatherMate2"] = {
-						["enabled"] = false,
-						["pos"] = 6,
-					},
-					["Breakables"] = {
-						["enabled"] = false,
-						["pos"] = 8,
-					},
-					["Zygors"] = {
-						["area"] = "right",
-						["pos"] = 9,
-					},
-					["AskMrRobot"] = {
-						["area"] = "right",
-						["pos"] = 7,
-					},
-					["AutoLootToggle"] = {
-						["area"] = "right",
-						["enabled"] = false,
-						["pos"] = 6,
-					},
-					["Masque"] = {
-						["area"] = "right",
-						["enabled"] = false,
-						["pos"] = 3,
+					["DualSpeccer"] = {
+						["pos"] = 5,
+						["bar"] = 3,
 					},
 				},
 			},
@@ -128,15 +137,33 @@ function aegerUI:InstallBazooka()
 					["fadeAlpha"] = 0.22,
 					["fadeOutOfCombat"] = true,
 					["y"] = -206.9999084472656,
-					["x"] = -61.99810028076172,
+					["fadeInCombat"] = true,
 					["frameWidth"] = 90.00001525878906,
 					["pos"] = 0,
 					["point"] = "TOPRIGHT",
-					["fadeInCombat"] = true,
+					["x"] = -61.99810028076172,
 					["frameHeight"] = 20.0000171661377,
 					["attach"] = "none",
 					["relPoint"] = "TOPRIGHT",
 				}, -- [2]
+				{
+					["bgEnabled"] = false,
+					["y"] = -1.000007510185242,
+					["frameWidth"] = 497.0000305175781,
+					["pos"] = 0,
+					["x"] = 1.000335693359375,
+					["frameHeight"] = 20.0000171661377,
+					["fadeAlpha"] = 0,
+				}, -- [3]
+				{
+					["bgEnabled"] = false,
+					["y"] = -1.000007510185242,
+					["frameWidth"] = 497.0000305175781,
+					["pos"] = 0,
+					["x"] = 1.000335693359375,
+					["frameHeight"] = 20.0000171661377,
+					["fadeAlpha"] = 0,
+				}, -- [4]
 			},
 		},
 	}

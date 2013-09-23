@@ -6,12 +6,20 @@
 		end
 		if TMMenuFrame:IsVisible() then
                         TMMenuHide()
-                        HideBazookaBar1()
+                        HideBazookaBars()
                         aegerUI.db.profile.TopMenuShow = false
                         PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
                 else
                         TMMenuDisplay()
-                        ShowBazookaBar1()
+                        if aegerUI.db.profile.ShowBazBar == 1 then
+							ShowBazookaBar1()
+						elseif
+						aegerUI.db.profile.ShowBazBar == 3 then
+							ShowBazookaBar3()
+						elseif
+						aegerUI.db.profile.ShowBazBar == 4 then
+							ShowBazookaBar4()
+						end
                         aegerUI.db.profile.TopMenuShow = true
                         PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
                 end

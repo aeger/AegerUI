@@ -6,9 +6,69 @@ function aegerUI:InstallParrot()
 	_G.aegerUI_Parrot_Install = {
 		["CombatEvents"] = {
 			["CombatEvents"] = {
+				["profiles"] = {
+					["Default"] = {
+						["dbver"] = 5,
+					},
+				},
+			},
 			["profiles"] = {
 				["Default"] = {
 					["dbver"] = 5,
+				},
+			},
+			["Suppressions"] = {
+			},
+			["ScrollAreas"] = {
+				["profiles"] = {
+					["Default"] = {
+						["areas"] = {
+							["Notification"] = {
+								["stickyDirection"] = "UP;CENTER",
+								["direction"] = "UP;CENTER",
+								["stickyAnimationStyle"] = "Pow",
+								["xOffset"] = 0,
+								["size"] = 150,
+								["animationStyle"] = "Straight",
+								["yOffset"] = 249.0000610351563,
+							},
+							["Incoming"] = {
+								["stickyDirection"] = "DOWN;RIGHT",
+								["direction"] = "DOWN;LEFT",
+								["stickyAnimationStyle"] = "Pow",
+								["iconSide"] = "RIGHT",
+								["xOffset"] = -275.9993286132813,
+								["size"] = 260,
+								["animationStyle"] = "Parabola",
+								["yOffset"] = 40.00018310546875,
+							},
+							["Outgoing"] = {
+								["stickyDirection"] = "DOWN;LEFT",
+								["direction"] = "DOWN;RIGHT",
+								["stickyAnimationStyle"] = "Pow",
+								["xOffset"] = 270.99951171875,
+								["size"] = 260,
+								["animationStyle"] = "Parabola",
+								["yOffset"] = 41.0001220703125,
+							},
+						},
+					},
+				},
+			},
+			["Cooldowns"] = {
+				["profiles"] = {
+					["Default"] = {
+						["threshold"] = 20,
+					},
+				},
+			},
+			["Display"] = {
+			},
+			["Triggers"] = {
+				["profiles"] = {
+					["Default"] = {
+						["dbver"] = 9,
+					},
 				},
 			},
 		},
@@ -21,30 +81,30 @@ function aegerUI:InstallParrot()
 						["Notification"] = {
 							["stickyDirection"] = "UP;CENTER",
 							["direction"] = "UP;CENTER",
-							["stickyAnimationStyle"] = "Pow",
+							["yOffset"] = 175,
 							["xOffset"] = 0,
 							["size"] = 150,
 							["animationStyle"] = "Straight",
-							["yOffset"] = 249.0000610351563,
-						},
-						["Incoming"] = {
-							["stickyDirection"] = "DOWN;RIGHT",
-							["direction"] = "DOWN;LEFT",
 							["stickyAnimationStyle"] = "Pow",
-							["iconSide"] = "RIGHT",
-							["xOffset"] = -275.9993286132813,
-							["size"] = 260,
-							["animationStyle"] = "Parabola",
-							["yOffset"] = 40.00018310546875,
 						},
 						["Outgoing"] = {
 							["stickyDirection"] = "DOWN;LEFT",
 							["direction"] = "DOWN;RIGHT",
-							["stickyAnimationStyle"] = "Pow",
-							["xOffset"] = 270.99951171875,
+							["yOffset"] = 7.0001220703125,
+							["xOffset"] = 362.0003662109375,
 							["size"] = 260,
 							["animationStyle"] = "Parabola",
-							["yOffset"] = 41.0001220703125,
+							["stickyAnimationStyle"] = "Pow",
+						},
+						["Incoming"] = {
+							["stickyDirection"] = "DOWN;RIGHT",
+							["direction"] = "DOWN;LEFT",
+							["yOffset"] = 10.0001220703125,
+							["iconSide"] = "RIGHT",
+							["xOffset"] = -362,
+							["size"] = 260,
+							["animationStyle"] = "Parabola",
+							["stickyAnimationStyle"] = "Pow",
 						},
 					},
 				},
@@ -53,7 +113,7 @@ function aegerUI:InstallParrot()
 		["Cooldowns"] = {
 			["profiles"] = {
 				["Default"] = {
-					["threshold"] = 20,
+					["threshold"] = 30,
 				},
 			},
 		},
@@ -66,8 +126,8 @@ function aegerUI:InstallParrot()
 				},
 			},
 		},
-	},
-}
+	}
+
 
 	for k,v in pairs(aegerUI_Parrot_Install) do
 		ParrotDB.namespaces[k] = v
