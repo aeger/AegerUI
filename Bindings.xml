@@ -14,6 +14,9 @@
                         if aegerUI.db.profile.ShowBazBar == 1 then
 							ShowBazookaBar1()
 						elseif
+						aegerUI.db.profile.ShowBazBar == 2 then
+							ShowBazookaBar2()
+						elseif
 						aegerUI.db.profile.ShowBazBar == 3 then
 							ShowBazookaBar3()
 						elseif

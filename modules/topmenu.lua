@@ -41,10 +41,14 @@
 					TMMenuDisplay()
 					ShowBazookaBar1()
 			 elseif
-			    aegerUI.db.profile.ShowBazBar == 3 then
+			    aegerUI.db.profile.ShowBazBar == 2 then
+					TMMenuDisplay()
+					ShowBazookaBar2()
+			 elseif
+				aegerUI.db.profile.ShowBazBar == 3 then
 					TMMenuDisplay()
 					ShowBazookaBar3()
-			 elseif
+			elseif
 				aegerUI.db.profile.ShowBazBar == 4 then
 					TMMenuDisplay()
 					ShowBazookaBar4()
@@ -111,6 +115,11 @@
 				return
 			end
 			if aegerUI.db.profile.ShowBazBar == 1 then
+				ShowBazookaBar2()
+				aegerUI.db.profile.ShowBazBar = 2
+				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
+			elseif
+				aegerUI.db.profile.ShowBazBar == 2 then
 				ShowBazookaBar3()
 				aegerUI.db.profile.ShowBazBar = 3
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
@@ -161,6 +170,11 @@
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
 			elseif
 				aegerUI.db.profile.ShowBazBar == 3 then
+				ShowBazookaBar2()
+				aegerUI.db.profile.ShowBazBar = 2
+				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
+			elseif
+				aegerUI.db.profile.ShowBazBar == 2 then
 				ShowBazookaBar1()
 				aegerUI.db.profile.ShowBazBar = 1
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
@@ -195,30 +209,27 @@
 	end
 
 	function ShowBazookaBar1()
-      BazookaBar_1:Show()
-	  if aegerUI.db.profile.SetUpDone
-	  then
-	  BazookaBar_3:Hide()
-	  BazookaBar_4:Hide()
+      Bazooka.db:SetProfile("BazBar1")
+	  BazookaBar_1:Show()
 	end
+	
+	function ShowBazookaBar2()
+      Bazooka.db:SetProfile("BazBar2")
+	  BazookaBar_1:Show()
 	end
 	
 	function ShowBazookaBar3()
-      BazookaBar_3:Show()
-	  BazookaBar_1:Hide()
-	  BazookaBar_4:Hide()
+      Bazooka.db:SetProfile("BazBar3")
+	  BazookaBar_1:Show()
 	end
 	
 	function ShowBazookaBar4()
-      BazookaBar_4:Show()
-	  BazookaBar_1:Hide()
-	  BazookaBar_3:Hide()
+      Bazooka.db:SetProfile("BazBar4")
+	  BazookaBar_1:Show()
 	end
 		 
 	function HideBazookaBars()
       BazookaBar_1:Hide()
-	  BazookaBar_3:Hide()
-	  BazookaBar_4:Hide()
 	end
 
 	function TMCombatColorOn()
