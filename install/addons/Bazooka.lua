@@ -84,7 +84,6 @@ function aegerUI:InstallBazooka()
 					["Broker_MicroMenu"] = {
 						["showIcon"] = false,
 						["area"] = "center",
-						["enabled"] = false,
 						["pos"] = 1,
 						["bar"] = 2,
 					},
@@ -399,7 +398,6 @@ function aegerUI:InstallBazooka()
 					["Broker_MicroMenu"] = {
 						["showIcon"] = false,
 						["area"] = "center",
-						["enabled"] = false,
 						["pos"] = 1,
 						["bar"] = 2,
 					},
@@ -684,7 +682,6 @@ function aegerUI:InstallBazooka()
 					["Broker_MicroMenu"] = {
 						["showIcon"] = false,
 						["area"] = "center",
-						["enabled"] = false,
 						["pos"] = 1,
 						["bar"] = 2,
 					},

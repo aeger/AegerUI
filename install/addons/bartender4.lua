@@ -258,12 +258,12 @@ function aegerUI:InstallBartender1()
 		Bartender4DB.profiles[k] = v
 	end
 
-	if Bartender4DB.profileKeys[ProfileName] == nil then
-		tinsert(Bartender4DB.profileKeys,ProfileName)
-		Bartender4DB.profileKeys[ProfileName] = aUI1bar
-	elseif Bartender4DB.profileKeys[ProfileName] ~= aUI1bar then
-		Bartender4DB.profileKeys[ProfileName] = aUI1bar
-	end
+	--if Bartender4DB.profileKeys[ProfileName] == nil then
+		--tinsert(Bartender4DB.profileKeys,ProfileName)
+		--Bartender4DB.profileKeys[ProfileName] = aUI1bar
+	--elseif Bartender4DB.profileKeys[ProfileName] ~= aUI1bar then
+		--Bartender4DB.profileKeys[ProfileName] = aUI1bar
+	--end
 end
 
 function aegerUI:InstallBartender2()

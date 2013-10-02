@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.3 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.4 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
@@ -8,6 +8,10 @@
 	_G.aegerUI = aegerUI
 	
 	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
+	
+	local versionNumber  = "5.4.4";
+	AUI_Beta = false;
+	
 		
 --  Constants  ----------------------------------------------------------------
     local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
@@ -67,9 +71,13 @@
      
 --  Events  ---------------------------------------------------------------------
     function EventFrame:PLAYER_LOGIN()
-            if not aegerUI.db.profile.SetUpDone then
+			
+			if not aegerUI.db.profile.Version then
                     DoSetup()
             end
+			if aegerUI.db.profile.Version ~= aegerUI_Version then
+					DoSetup()
+			end
     end
 		
 --  Setup frame  ------------------------------------------------------------------
@@ -221,12 +229,89 @@
 			aegerUI:ZygorsGuideViewer()
 	end
 	
-	function ApplySetup()  -- the Install button calls this when clicked.
-            aegerUI_InstallAddonOptions()
-			aegerUI.db.profile.SetUpDone = true
-			aegerUI.db.profile.TopMenuShow = true
+	function aegerUI_SetScaleSmallOnInstall()
+		local index = GetCurrentResolution();
+		local resolution = select(index, GetScreenResolutions());
+		if resolution ~= "1920x1080" then
+		UIParent:SetScale(0.64);
+		SetCVar("uiscale", "0.64");
+		SetCVar("useUiScale", 1)
+		end
+	end
+	
+	function aegerUI_SetScaleSmall()
+		UIParent:SetScale(0.64);
+		SetCVar("uiscale", "0.64");
+		SetCVar("useUiScale", 1);
+	end
+	
+	function aegerUI_SetScaleNormal()
+		UIParent:SetScale(1.0);
+		SetCVar("uiscale", "1.0");
+		SetCVar("useUiScale", 0);
+	end
+	
+	function aegerUI_SetVersion( version )
+		if AUI_Beta then return version.." (Beta)";
+			else
+		return version.." (Release)";
+		end
+	end
+	
+	function aegerUI_SetNumBottomBars()
+		if not aegerUI.db.profile.NumBottomBars then
 			aegerUI.db.profile.NumBottomBars = 1
+			Bartender4.db:SetProfile("aegerUI1bar")
+		end
+		if aegerUI.db.profile.NumBottomBars == 1 then
+			aegerUI.db.profile.NumBottomBars = 1
+			Bartender4.db:SetProfile("aegerUI1bar")
+		elseif aegerUI.db.profile.NumBottomBars == 2 then
+			aegerUI.db.profile.NumBottomBars = 2
+			Bartender4.db:SetProfile("aegerUI2bar")
+		end
+	end
+	
+	function aegerUI_SetTopMenuVisible()
+		if not aegerUI.db.profile.TopMenuShow and aegerUI.db.profile.TopMenuShow ~= false then
+			aegerUI.db.profile.TopMenuShow = true
+		end
+		if aegerUI.db.profile.TopMenuShow == false then
+				TMMenuHide()
+				HideBazookaBars()
+		end
+	end
+	
+	function aegerUI_SetBazBarDisplayNum()
+		if not aegerUI.db.profile.ShowBazBar then
 			aegerUI.db.profile.ShowBazBar = 1
+			Bazooka.db:SetProfile("BazBar1")
+		end
+		if aegerUI.db.profile.ShowBazBar == 1 then
+			aegerUI.db.profile.ShowBazBar = 1
+			Bazooka.db:SetProfile("BazBar1")
+		elseif aegerUI.db.profile.ShowBazBar == 2 then
+			aegerUI.db.profile.ShowBazBar = 2
+			Bazooka.db:SetProfile("BazBar2")
+		elseif aegerUI.db.profile.ShowBazBar == 3 then
+			aegerUI.db.profile.ShowBazBar = 3
+			Bazooka.db:SetProfile("BazBar3")
+		elseif aegerUI.db.profile.ShowBazBar == 4 then
+			aegerUI.db.profile.ShowBazBar = 4
+			Bazooka.db:SetProfile("BazBar4")
+		end
+	end
+	
+	aegerUI_Version = aegerUI_SetVersion( versionNumber );
+	
+	function ApplySetup()  -- the Install button calls this when clicked.
+            aegerUI_SetScaleSmallOnInstall()
+			aegerUI_InstallAddonOptions()
+			aegerUI.db.profile.SetUpDone = true
+			aegerUI_SetTopMenuVisible()
+			aegerUI_SetNumBottomBars()
+			aegerUI_SetBazBarDisplayNum()
+			aegerUI.db.profile.Version = aegerUI_Version
 			print('Setup complete. Please reload UI to finish via "/rl".')
     end
 		
@@ -235,3 +320,13 @@
             DoSetup()
     end
     SLASH_INSTALLAEGERUI1 = '/install'
+	
+	SlashCmdList.AEGERUISETSMALLSCALE = function()
+            aegerUI_SetScaleSmall()
+    end
+    SLASH_AEGERUISETSMALLSCALE1 = '/auiscale1'
+	
+	SlashCmdList.AEGERUISETLARGESCALE = function()
+            aegerUI_SetScaleNormal()
+    end
+    SLASH_AEGERUISETLARGESCALE1 = '/auiscale2'
