@@ -94,7 +94,7 @@
 		 local Bar1border = Bar1Frame:CreateTexture(nil, "BORDER")
 		 Bar1border:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -6)
 	     Bar1border:SetPoint("CENTER", UIParent, "CENTER")
-		 Bar1border:SetSize(947, 50)
+		 Bar1border:SetSize(950, 50)
 		 Bar1border:SetTexture(MEDIA_PATH .. "textures\\btroundedborder")
 		 Bar1border:SetVertexColor(classcolor.r, classcolor.g, classcolor.b, 1.0)
 		 Bar1Frame.Bar1border = Bar1border
@@ -116,7 +116,7 @@
 		 Bar2Frame.Bar2texture = Bar2texture
 		
 		 local Bar2border = Bar2Frame:CreateTexture(nil, "BORDER")
-		 Bar2border:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -6)
+		 Bar2border:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -8)
 	     Bar2border:SetPoint("CENTER", UIParent, "CENTER")
 		 Bar2border:SetSize(950, 94)
 		 Bar2border:SetTexture(MEDIA_PATH .. "textures\\btroundedborder")

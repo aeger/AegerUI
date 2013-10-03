@@ -51,6 +51,7 @@
 	aegerUI.db.profile.TopMenuShow = true
 	aegerUI.db.profile.NumBottomBars = 1
 	aegerUI.db.profile.ShowBazBar = 1
+	aegerUI.db.profile.SideBars = 1
 	end
 		
 --  Event logic  --------------------------------------------------------------
@@ -207,8 +208,7 @@
 	function aegerUI_InstallAddonOptions()
 			aegerUI_MoveChatFrame1()
 			aegerUI:InstallAanye_XP()
-			aegerUI:InstallBartender1()
-			aegerUI:InstallBartender2()
+			aegerUI:InstallBartender()
 			aegerUI:BagSyncOptions()
 			aegerUI:InstallBazooka()
 			aegerUI:InstallBrokerDurability()
@@ -259,18 +259,18 @@
 	end
 	
 	function aegerUI_SetNumBottomBars()
-		if not aegerUI.db.profile.NumBottomBars then
-			aegerUI.db.profile.NumBottomBars = 1
-			Bartender4.db:SetProfile("aegerUI1bar")
-		end
+		Bartender4.db:SetProfile("aegerUI")
+		--if not aegerUI.db.profile.NumBottomBars then
+			--aegerUI.db.profile.NumBottomBars = 1
+			--Bartender4.Bar.barregistry["6"]:SetVisibilityOption("always",true)
+           -- Bartender4.Bar.barregistry["5"]:SetVisibilityOption("always",true)
+		--end
 		if aegerUI.db.profile.NumBottomBars == 1 then
 			aegerUI.db.profile.NumBottomBars = 1
-			Bartender4.db:SetProfile("aegerUI1bar")
 		elseif aegerUI.db.profile.NumBottomBars == 2 then
 			aegerUI.db.profile.NumBottomBars = 2
-			Bartender4.db:SetProfile("aegerUI2bar")
-		end
-	end
+		end	
+	end 
 	
 	function aegerUI_SetTopMenuVisible()
 		if not aegerUI.db.profile.TopMenuShow and aegerUI.db.profile.TopMenuShow ~= false then
@@ -302,6 +302,19 @@
 		end
 	end
 	
+	function aegerUI_SetSideBars()
+		if not aegerUI.db.profile.SideBars then
+			aegerUI.db.profile.SideBars = 1
+		end
+		if aegerUI.db.profile.SideBars == 1 then
+			aegerUI.db.profile.SideBars = 1
+		elseif aegerUI.db.profile.SideBars == 2 then
+			aegerUI.db.profile.SideBars = 2
+		elseif aegerUI.db.profile.SideBars ==3 then
+			aegerUI.db.profile.SideBars = 3
+		end
+	end	
+				
 	aegerUI_Version = aegerUI_SetVersion( versionNumber );
 	
 	function ApplySetup()  -- the Install button calls this when clicked.
@@ -311,6 +324,7 @@
 			aegerUI_SetTopMenuVisible()
 			aegerUI_SetNumBottomBars()
 			aegerUI_SetBazBarDisplayNum()
+			aegerUI_SetSideBars()
 			aegerUI.db.profile.Version = aegerUI_Version
 			print('Setup complete. Please reload UI to finish via "/rl".')
     end

@@ -109,7 +109,6 @@ function aegerUI:InstallBazooka()
 					},
 					["DualSpeccer"] = {
 						["area"] = "left",
-						["enabled"] = false,
 					},
 					["Aanye_XP"] = {
 						["showIcon"] = false,

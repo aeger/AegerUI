@@ -32,14 +32,14 @@
 			print("Cannot toggle Bottom Bars during combat.")
 			return
 		end
-		if aegerUI.db.profile[ProfileName].NumBottomBars == 1 then
-                        Bartender4.db:SetProfile("aegerUI2bar")
+		if aegerUI.db.profile.NumBottomBars == 1 then
+                        aegerUI_2Bar()
                         aegerUI.db.profile.NumBottomBars = 2
                         PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
                         Bbar2Display()
                         Bbar1Hide()
                 elseif aegerUI.db.profile.NumBottomBars == 2 then
-                        Bartender4.db:SetProfile("aegerUI1bar")
+                        aegerUI_1Bar()
                         aegerUI.db.profile.NumBottomBars = 1
                         PlaySoundFile("Interface\\AddOns\\aegerUI\\Media\\sound\\click.mp3")
                         Bbar1Display()

@@ -57,7 +57,13 @@
 	     Chat1Frame = CreateFrame('Frame', nil, UIParent)
 	     		 
 		 local function Button_OnEnter(self)
-           self:GetNormalTexture():SetVertexColor(1, 1, 1)
+			local _, class = UnitClass("player");
+				if class == "PRIEST" then
+					self:GetNormalTexture():SetVertexColor(0, 1, 0)
+				else
+					self:GetNormalTexture():SetVertexColor(1, 1, 1)
+				end
+		   
          end
      
           local function Button_OnLeave(self)
@@ -105,6 +111,9 @@
                         if aegerUI.db.profile.ShowBazBar == 1 then
 							ShowBazookaBar1()
 						elseif
+						aegerUI.db.profile.ShowBazBar == 2 then
+							ShowBazookaBar2()
+						elseif
 						aegerUI.db.profile.ShowBazBar == 3 then
 							ShowBazookaBar3()
 						elseif
@@ -120,13 +129,13 @@
 					return
 				end
 				if aegerUI.db.profile.NumBottomBars == 1 then
-                        Bartender4.db:SetProfile("aegerUI2bar")
+                        aegerUI_2Bar()
                         aegerUI.db.profile.NumBottomBars = 2
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar2Display()
                         Bbar1Hide()
                 elseif aegerUI.db.profile.NumBottomBars == 2 then
-                        Bartender4.db:SetProfile("aegerUI1bar")
+                        aegerUI_1Bar()
                         aegerUI.db.profile.NumBottomBars = 1
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar1Display()
@@ -297,3 +306,21 @@
 	  end
 	    Chat1Frame:Show()
     end
+	
+	function aegerUI_1Bar()
+		if Bartender4.db:GetCurrentProfile() == "aegerUI" then
+                Bartender4.Bar.barregistry["6"]:SetVisibilityOption("always",true)
+                Bartender4.Bar.barregistry["5"]:SetVisibilityOption("always",true)
+            else
+                print("|cff00ccffaegerUI: |cffff0000Bartender Action Bars will not expand while there is a custom profile in use!")
+            end
+	end
+	
+	function aegerUI_2Bar()
+		if Bartender4.db:GetCurrentProfile() == "aegerUI" then
+                Bartender4.Bar.barregistry["6"]:SetVisibilityOption("always",false)
+                Bartender4.Bar.barregistry["5"]:SetVisibilityOption("always",false)
+            else
+                print("|cff00ccffaegerUI: |cffff0000Bartender Action Bars will not expand while there is a custom profile in use!")
+            end
+	end
