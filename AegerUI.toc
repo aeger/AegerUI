@@ -1,5 +1,5 @@
 ## Interface: 50400
-## Version: 5.4.4
+## Version: 5.4.5
 
 ## Title: aegerUI
 ## Notes: Aeger's UI Interface

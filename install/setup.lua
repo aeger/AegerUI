@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.4 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.5 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
@@ -9,7 +9,7 @@
 	
 	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 	
-	local versionNumber  = "5.4.4";
+	local versionNumber  = "5.4.5";
 	AUI_Beta = false;
 	
 		
