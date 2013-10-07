@@ -24,6 +24,8 @@
     DisplayBars:RegisterEvent('UNIT_EXITED_VEHICLE')
     DisplayBars:RegisterEvent('PLAYER_REGEN_ENABLED')
     DisplayBars:RegisterEvent('PLAYER_REGEN_DISABLED')
+	DisplayBars:RegisterEvent('PET_BATTLE_OPENING_START')
+	DisplayBars:RegisterEvent('PET_BATTLE_CLOSE')
 
     DisplayBars:SetScript('OnEvent',function(self, event_name, ...)
             local func = self[event_name]
@@ -39,9 +41,11 @@
 --  Events  ---------------------------------------------------------------------
     function DisplayBars:PLAYER_LOGIN()
             if aegerUI.db.profile.NumBottomBars == 1 then
-		      Bbar1Display() else
+		      Bbar1Display()
+			  aegerUI_1Bar() else
 		    if aegerUI.db.profile.NumBottomBars == 2 then
 		      Bbar2Display()
+			  aegerUI_2Bar()
             end
 	    end
     end
@@ -73,6 +77,22 @@
 
     function DisplayBars:PLAYER_REGEN_DISABLED()
             CombatColorOn()
+    end
+	
+	function DisplayBars:PET_BATTLE_OPENING_START()
+            if aegerUI.db.profile.NumBottomBars == 1 then
+		      Bbar1Hide() elseif
+		    aegerUI.db.profile.NumBottomBars == 2 then
+		      Bbar2Hide()
+		    end
+    end
+	
+	function DisplayBars:PET_BATTLE_CLOSE()
+            if aegerUI.db.profile.NumBottomBars == 1 then
+		      Bbar1Display() elseif
+		    aegerUI.db.profile.NumBottomBars == 2 then
+		      Bbar2Display()
+		    end
     end
 	
 --  Bottom bar frames  ---------------------------------------------------------

@@ -22,6 +22,8 @@
 	TMEventFrame:RegisterEvent('PLAYER_LOGIN')
 	TMEventFrame:RegisterEvent('PLAYER_REGEN_ENABLED')
 	TMEventFrame:RegisterEvent('PLAYER_REGEN_DISABLED')
+	TMEventFrame:RegisterEvent('PET_BATTLE_OPENING_START')
+	TMEventFrame:RegisterEvent('PET_BATTLE_CLOSE')
 
 	TMEventFrame:SetScript('OnEvent',function(self, event_name, ...)
             local func = self[event_name]
@@ -67,6 +69,14 @@
              TMCombatColorOn()
     end
 	
+	function TMEventFrame:PET_BATTLE_OPENING_START()
+             TMMenuHide()
+    end
+	
+	function TMEventFrame:PET_BATTLE_CLOSE()
+             TMMenuDisplay()
+    end
+		
 --  Top Menu frame  --------------------------------------------------------------
 
 	function InitTMMenuFrame()

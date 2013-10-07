@@ -22,6 +22,8 @@
     local EventFrame = CreateFrame('Frame')
      
     EventFrame:RegisterEvent('PLAYER_LOGIN')
+	EventFrame:RegisterEvent('PET_BATTLE_OPENING_START')
+	EventFrame:RegisterEvent('PET_BATTLE_CLOSE')
      
     EventFrame:SetScript('OnEvent',function(self, event_name, ...)
             local func = self[event_name]
@@ -38,6 +40,38 @@
 	function EventFrame:PLAYER_LOGIN()
 		SideBarLoad()
 	end
+	
+	function EventFrame:PET_BATTLE_OPENING_START()
+            if aegerUI.db.profile.SideBars == 1 then
+			Expand_Bar3:Hide()
+		elseif aegerUI.db.profile.SideBars == 2 then
+			MBar3:Hide()
+			Retract_Bar3:Hide()
+			Expand_Bar4:Hide()
+		elseif aegerUI.db.profile.SideBars == 3 then
+			MBar4:Hide()
+			Retract_Bar4:Hide()
+		else
+			aegerUI.db.profile.SideBars = 1
+			Expand_Bar3:Hide()
+		end
+    end
+	
+	function EventFrame:PET_BATTLE_CLOSE()
+            if aegerUI.db.profile.SideBars == 1 then
+			Expand_Bar3:Show()
+		elseif aegerUI.db.profile.SideBars == 2 then
+			MBar3:Show()
+			Retract_Bar3:Show()
+			Expand_Bar4:Show()
+		elseif aegerUI.db.profile.SideBars == 3 then
+			MBar4:Show()
+			Retract_Bar4:Show()
+		else
+			aegerUI.db.profile.SideBars = 1
+			Expand_Bar3:Show()
+		end
+    end
 
 --  Frames  ---------------------------------------------------------------------
 	local MBar3 = CreateFrame("Frame", "MBar3", UIParent)

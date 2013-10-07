@@ -101,6 +101,7 @@ function aegerUI:InstallBartender()
 							["padding"] = 3,
 							["visibility"] = {
 								["always"] = true,
+								["vehicleui"] = false,
 							},
 						}, -- [3]
 						{
@@ -118,6 +119,7 @@ function aegerUI:InstallBartender()
 							["padding"] = 3,
 							["visibility"] = {
 								["always"] = true,
+								["vehicleui"] = false,
 							},
 						}, -- [4]
 						{
@@ -210,6 +212,7 @@ function aegerUI:InstallBartender()
 							["hidemacrotext"] = true,
 							["visibility"] = {
 								["always"] = true,
+								["vehicleui"] = false,
 							},
 						}, -- [3]
 						{
@@ -227,6 +230,7 @@ function aegerUI:InstallBartender()
 							["hidemacrotext"] = true,
 							["visibility"] = {
 								["always"] = true,
+								["vehicleui"] = false,
 							},
 						}, -- [4]
 						{

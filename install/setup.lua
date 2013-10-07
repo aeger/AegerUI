@@ -214,6 +214,7 @@
 			aegerUI:InstallBrokerDurability()
 			aegerUI:InstallBrokerMicroMenu()
 			aegerUI:InstallBrokerMoneyFu()
+			aegerUI:InstallCombuctor()
 			aegerUI:InstallExtSocialUI()
 			aegerUI:InstallExtVendor()
 			aegerUI:InstallFarmhand()
@@ -225,6 +226,7 @@
 			aegerUI:InstallQuestUnTracker()
 			aegerUI:InstallSocialState()
 			aegerUI:InstallTinyDPS()
+			aegerUI:InstallTipTac()
 			aegerUI:InstallTotemTimers()
 			aegerUI:ZygorsGuideViewer()
 	end

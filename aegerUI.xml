@@ -21,6 +21,7 @@
 	<Script file="install\addons\Broker_DurabilityInfo.lua"/>
 	<Script file="install\addons\Broker_MicroMenu.lua"/>
 	<Script file="install\addons\Broker_MoneyFu.lua"/>
+	<Script file="install\addons\Combuctor.lua"/>
 	<Script file="install\addons\ExtSocialUI.lua"/>
 	<Script file="install\addons\ExtVendor.lua"/>
 	<Script file="install\addons\Farmhand.lua"/>
@@ -32,6 +33,7 @@
 	<Script file="install\addons\QuestUnTracker.lua"/>
 	<Script file="install\addons\SocialState.lua"/>
 	<Script file="install\addons\TinyDPS.lua"/>
+	<Script file="install\addons\TipTac.lua"/>
 	<Script file="install\addons\TotemTimers.lua"/>
 	<Script file="install\addons\ZygorsGuideViewer.lua"/>
 </Ui>

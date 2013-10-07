@@ -7,381 +7,352 @@ function aegerUI:InstallBazooka()
 		
 	_G.aegerUI_Bazooka_Install = {
 		["BazBar2"] = {
-			["numBars"] = 2,
 			["locked"] = true,
+			["bars"] = {
+				{
+					["y"] = -1.000007510185242,
+					["x"] = 1.000335693359375,
+					["frameHeight"] = 20.0000171661377,
+					["fadeAlpha"] = 0,
+					["bgEnabled"] = false,
+					["attach"] = "none",
+					["frameWidth"] = 497.0000305175781,
+					["pos"] = 0,
+				}, -- [1]
+				{
+					["point"] = "TOPRIGHT",
+					["bgEnabled"] = false,
+					["fadeOutOfCombat"] = true,
+					["fadeInCombat"] = true,
+					["y"] = -206.9999084472656,
+					["fadeAlpha"] = 0.22,
+					["attach"] = "none",
+					["frameHeight"] = 20.0000171661377,
+					["relPoint"] = "TOPRIGHT",
+					["x"] = -61.99810028076172,
+					["frameWidth"] = 90.00001525878906,
+					["pos"] = 0,
+				}, -- [2]
+			},
 			["plugins"] = {
+				["data source"] = {
+					["DailyGlobalCheck_broker"] = {
+						["pos"] = 2,
+						["area"] = "left",
+					},
+					["|cFFFFB366Ara|r Tradeskills"] = {
+						["showText"] = false,
+						["pos"] = 13,
+					},
+					["BugSack"] = {
+						["enabled"] = false,
+						["area"] = "left",
+					},
+					["Broker_TimelessIsleChests"] = {
+						["pos"] = 3,
+						["area"] = "left",
+					},
+					["Broker_DurabilityInfo"] = {
+						["enabled"] = false,
+						["pos"] = 12,
+						["showIcon"] = false,
+						["area"] = "left",
+					},
+					["SOCD - Daily Reset"] = {
+						["enabled"] = false,
+						["pos"] = 12,
+					},
+					["TimelessDailyCheck"] = {
+						["pos"] = 3,
+						["area"] = "left",
+					},
+					["Broker_MicroMenu"] = {
+						["bar"] = 2,
+						["pos"] = 1,
+						["showIcon"] = false,
+						["area"] = "center",
+					},
+					["BagSyncLDB"] = {
+						["enabled"] = false,
+						["pos"] = 6,
+						["showText"] = false,
+						["area"] = "left",
+					},
+					["Broker_MoneyFu"] = {
+						["enabled"] = false,
+						["pos"] = 10,
+						["showIcon"] = false,
+						["area"] = "left",
+					},
+					["SOCD-AltTrack"] = {
+						["enabled"] = false,
+						["pos"] = 11,
+					},
+					["Memory"] = {
+						["enabled"] = false,
+						["area"] = "left",
+					},
+					["DualSpeccer"] = {
+						["pos"] = 4,
+						["showText"] = false,
+						["area"] = "left",
+					},
+					["SocialState"] = {
+						["enabled"] = false,
+						["pos"] = 8,
+						["showIcon"] = false,
+						["area"] = "left",
+					},
+					["Aanye_XP"] = {
+						["pos"] = 1,
+						["showIcon"] = false,
+						["area"] = "center",
+					},
+				},
 				["launcher"] = {
-					["TradeSkillInfo"] = {
+					["Bartender4"] = {
 						["enabled"] = false,
 					},
 					["TinyDPS"] = {
-						["area"] = "right",
 						["pos"] = 7,
+						["area"] = "right",
 					},
 					["AutoLootToggle"] = {
 						["enabled"] = false,
 					},
-					["Bartender4"] = {
+					["TradeSkillInfo"] = {
 						["enabled"] = false,
 					},
 					["GatherMate2"] = {
-						["enabled"] = false,
+						["pos"] = 5,
 					},
-					["Breakables"] = {
+					["AskMrRobot"] = {
 						["enabled"] = false,
 					},
 					["Bazooka"] = {
 						["enabled"] = false,
 					},
-					["Zygors"] = {
-						["area"] = "right",
-						["pos"] = 11,
-					},
-					["Prat"] = {
-						["enabled"] = false,
-					},
-					["AtlasLoot"] = {
-						["enabled"] = false,
-					},
 					["Parrot"] = {
 						["enabled"] = false,
-					},
-					["AskMrRobot"] = {
-						["enabled"] = false,
-					},
-					["Masque"] = {
-						["enabled"] = false,
-					},
-				},
-				["data source"] = {
-					["|cFFFFB366Ara|r Tradeskills"] = {
-						["pos"] = 13,
-						["showText"] = false,
-					},
-					["BugSack"] = {
-						["area"] = "left",
-						["enabled"] = false,
-					},
-					["Broker_TimelessIsleChests"] = {
-						["area"] = "left",
-						["pos"] = 2,
-					},
-					["Broker_DurabilityInfo"] = {
-						["showIcon"] = false,
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 12,
-					},
-					["TimelessDailyCheck"] = {
-						["area"] = "left",
-						["pos"] = 3,
-					},
-					["BagSyncLDB"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["showText"] = false,
-					},
-					["Broker_MicroMenu"] = {
-						["showIcon"] = false,
-						["area"] = "center",
-						["pos"] = 1,
-						["bar"] = 2,
-					},
-					["SocialState"] = {
-						["showIcon"] = false,
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 8,
-					},
-					["Broker_MoneyFu"] = {
-						["showIcon"] = false,
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 10,
-					},
-					["SOCD-AltTrack"] = {
-						["enabled"] = false,
-						["pos"] = 11,
-					},
-					["Memory"] = {
-						["area"] = "left",
-						["enabled"] = false,
-					},
-					["DualSpeccer"] = {
-						["area"] = "left",
-					},
-					["Aanye_XP"] = {
-						["showIcon"] = false,
-						["area"] = "center",
-						["enabled"] = false,
-						["pos"] = 1,
-					},
-					["SOCD - Daily Reset"] = {
-						["enabled"] = false,
-						["pos"] = 12,
-					},
-				},
-			},
-			["bars"] = {
-				{
-					["bgEnabled"] = false,
-					["fadeAlpha"] = 0,
-					["y"] = -1.000007510185242,
-					["x"] = 1.000335693359375,
-					["frameWidth"] = 497.0000305175781,
-					["pos"] = 0,
-					["frameHeight"] = 20.0000171661377,
-					["attach"] = "none",
-				}, -- [1]
-				{
-					["bgEnabled"] = false,
-					["fadeOutOfCombat"] = true,
-					["y"] = -206.9999084472656,
-					["fadeInCombat"] = true,
-					["frameWidth"] = 90.00001525878906,
-					["point"] = "TOPRIGHT",
-					["pos"] = 0,
-					["x"] = -61.99810028076172,
-					["frameHeight"] = 20.0000171661377,
-					["attach"] = "none",
-					["relPoint"] = "TOPRIGHT",
-					["fadeAlpha"] = 0.22,
-				}, -- [2]
-			},
-		},
-		["Default"] = {
-			["numBars"] = 4,
-			["plugins"] = {
-				["data source"] = {
-					["|cFFFFB366Ara|r Tradeskills"] = {
-						["showText"] = false,
-						["pos"] = 13,
-					},
-					["BugSack"] = {
-						["pos"] = 5,
-						["bar"] = 4,
-					},
-					["SOCD - Daily Reset"] = {
-						["enabled"] = false,
-						["pos"] = 12,
-					},
-					["Broker_DurabilityInfo"] = {
-						["showIcon"] = false,
-						["area"] = "left",
-						["pos"] = 12,
-					},
-					["Broker_TimelessIsleChests"] = {
-						["pos"] = 14,
-					},
-					["Aanye_XP"] = {
-						["showIcon"] = false,
-						["area"] = "center",
-						["pos"] = 1,
-					},
-					["Broker_MicroMenu"] = {
-						["showIcon"] = false,
-						["area"] = "center",
-						["pos"] = 1,
-						["bar"] = 2,
-					},
-					["SocialState"] = {
-						["showIcon"] = false,
-						["area"] = "left",
-						["pos"] = 8,
-					},
-					["Broker_MoneyFu"] = {
-						["showIcon"] = false,
-						["area"] = "left",
-						["pos"] = 10,
-					},
-					["SOCD-AltTrack"] = {
-						["enabled"] = false,
-						["pos"] = 11,
-					},
-					["Memory"] = {
-						["pos"] = 12,
-						["bar"] = 4,
-					},
-					["DualSpeccer"] = {
-						["bar"] = 3,
-						["pos"] = 5,
-					},
-					["BagSyncLDB"] = {
-						["area"] = "left",
-						["showText"] = false,
-						["pos"] = 2,
-						["bar"] = 4,
-					},
-					["TimelessDailyCheck"] = {
-						["pos"] = 1,
-					},
-				},
-				["launcher"] = {
-					["Bartender4"] = {
-						["pos"] = 4,
-						["bar"] = 4,
-					},
-					["TinyDPS"] = {
-						["area"] = "right",
-						["pos"] = 7,
-					},
-					["AutoLootToggle"] = {
-						["bar"] = 4,
 						["pos"] = 6,
 					},
-					["TradeSkillInfo"] = {
-						["bar"] = 3,
-						["pos"] = 1,
-					},
-					["GatherMate2"] = {
-						["pos"] = 13,
-						["bar"] = 3,
-					},
 					["Prat"] = {
-						["pos"] = 12,
-						["bar"] = 3,
-					},
-					["Bazooka"] = {
-						["area"] = "right",
-						["pos"] = 13,
-						["bar"] = 3,
-					},
-					["Parrot"] = {
-						["pos"] = 7,
-						["bar"] = 4,
-					},
-					["AskMrRobot"] = {
-						["area"] = "right",
-						["pos"] = 12,
-						["bar"] = 3,
+						["enabled"] = false,
 					},
 					["AtlasLoot"] = {
-						["pos"] = 9,
-						["bar"] = 3,
+						["enabled"] = false,
 					},
 					["Zygors"] = {
-						["area"] = "right",
 						["pos"] = 11,
+						["area"] = "right",
 					},
 					["Breakables"] = {
-						["pos"] = 14,
-						["bar"] = 3,
+						["enabled"] = false,
+						["pos"] = 6,
 					},
 					["Masque"] = {
-						["pos"] = 3,
-						["bar"] = 4,
+						["enabled"] = false,
 					},
 				},
 			},
-			["locked"] = true,
-			["bars"] = {
-				{
-					["bgEnabled"] = false,
-					["y"] = -1.000007510185242,
-					["x"] = 1.000335693359375,
-					["frameWidth"] = 497.0000305175781,
-					["pos"] = 0,
-					["frameHeight"] = 20.0000171661377,
-					["attach"] = "none",
-					["fadeAlpha"] = 0,
-				}, -- [1]
-				{
-					["bgEnabled"] = false,
-					["fadeAlpha"] = 0.22,
-					["fadeOutOfCombat"] = true,
-					["y"] = -206.9999084472656,
-					["fadeInCombat"] = true,
-					["frameWidth"] = 90.00001525878906,
-					["pos"] = 0,
-					["point"] = "TOPRIGHT",
-					["relPoint"] = "TOPRIGHT",
-					["frameHeight"] = 20.0000171661377,
-					["attach"] = "none",
-					["x"] = -61.99810028076172,
-				}, -- [2]
-				{
-					["bgEnabled"] = false,
-					["y"] = -1.000007510185242,
-					["frameWidth"] = 497.0000305175781,
-					["pos"] = 0,
-					["x"] = 1.000335693359375,
-					["frameHeight"] = 20.0000171661377,
-					["fadeAlpha"] = 0,
-				}, -- [3]
-				{
-					["bgEnabled"] = false,
-					["y"] = -1.000007510185242,
-					["frameWidth"] = 497.0000305175781,
-					["pos"] = 0,
-					["x"] = 1.000335693359375,
-					["frameHeight"] = 20.0000171661377,
-					["fadeAlpha"] = 0,
-				}, -- [4]
-			},
-		},
-		["BazBar3"] = {
 			["numBars"] = 2,
-			["locked"] = true,
+		},
+		["Default"] = {
 			["plugins"] = {
 				["launcher"] = {
 					["TradeSkillInfo"] = {
 						["pos"] = 1,
+						["bar"] = 3,
 					},
 					["TinyDPS"] = {
-						["area"] = "right",
 						["pos"] = 7,
+						["area"] = "right",
 					},
 					["AutoLootToggle"] = {
-						["enabled"] = false,
+						["pos"] = 6,
+						["bar"] = 4,
 					},
 					["Bartender4"] = {
-						["enabled"] = false,
+						["bar"] = 4,
+						["pos"] = 4,
 					},
 					["GatherMate2"] = {
-						["enabled"] = false,
+						["bar"] = 3,
+						["pos"] = 13,
 					},
 					["Breakables"] = {
-						["enabled"] = false,
+						["bar"] = 3,
+						["pos"] = 14,
 					},
 					["Bazooka"] = {
-						["enabled"] = false,
+						["bar"] = 3,
+						["pos"] = 13,
+						["area"] = "right",
 					},
 					["Zygors"] = {
-						["area"] = "right",
 						["pos"] = 11,
+						["area"] = "right",
 					},
 					["Prat"] = {
-						["enabled"] = false,
+						["bar"] = 3,
+						["pos"] = 12,
 					},
 					["AtlasLoot"] = {
-						["enabled"] = false,
+						["bar"] = 3,
+						["pos"] = 9,
 					},
 					["Parrot"] = {
-						["enabled"] = false,
+						["bar"] = 4,
+						["pos"] = 7,
 					},
 					["AskMrRobot"] = {
-						["enabled"] = false,
+						["bar"] = 3,
+						["pos"] = 12,
+						["area"] = "right",
 					},
 					["Masque"] = {
-						["enabled"] = false,
+						["bar"] = 4,
+						["pos"] = 3,
 					},
 				},
 				["data source"] = {
 					["|cFFFFB366Ara|r Tradeskills"] = {
-						["pos"] = 13,
 						["showText"] = false,
+						["pos"] = 13,
 					},
 					["BugSack"] = {
-						["area"] = "left",
+						["bar"] = 4,
+						["pos"] = 5,
+					},
+					["SOCD - Daily Reset"] = {
 						["enabled"] = false,
+						["pos"] = 12,
+					},
+					["Broker_DurabilityInfo"] = {
+						["pos"] = 12,
+						["showIcon"] = false,
+						["area"] = "left",
+					},
+					["Aanye_XP"] = {
+						["pos"] = 1,
+						["showIcon"] = false,
+						["area"] = "center",
+					},
+					["BagSyncLDB"] = {
+						["bar"] = 4,
+						["pos"] = 2,
+						["showText"] = false,
+						["area"] = "left",
+					},
+					["Broker_MicroMenu"] = {
+						["bar"] = 2,
+						["pos"] = 1,
+						["showIcon"] = false,
+						["area"] = "center",
+					},
+					["SocialState"] = {
+						["pos"] = 8,
+						["showIcon"] = false,
+						["area"] = "left",
+					},
+					["Broker_MoneyFu"] = {
+						["pos"] = 10,
+						["showIcon"] = false,
+						["area"] = "left",
+					},
+					["SOCD-AltTrack"] = {
+						["enabled"] = false,
+						["pos"] = 11,
+					},
+					["Memory"] = {
+						["bar"] = 4,
+						["pos"] = 12,
+					},
+					["DualSpeccer"] = {
+						["pos"] = 5,
+						["bar"] = 3,
+					},
+					["TimelessDailyCheck"] = {
+						["pos"] = 1,
+					},
+					["Broker_TimelessIsleChests"] = {
+						["pos"] = 14,
+					},
+				},
+			},
+			["bars"] = {
+				{
+					["y"] = -1.000007510185242,
+					["x"] = 1.000335693359375,
+					["frameHeight"] = 20.0000171661377,
+					["fadeAlpha"] = 0,
+					["bgEnabled"] = false,
+					["attach"] = "none",
+					["frameWidth"] = 497.0000305175781,
+					["pos"] = 0,
+				}, -- [1]
+				{
+					["point"] = "TOPRIGHT",
+					["bgEnabled"] = false,
+					["fadeOutOfCombat"] = true,
+					["x"] = -61.99810028076172,
+					["y"] = -206.9999084472656,
+					["fadeAlpha"] = 0.22,
+					["attach"] = "none",
+					["frameHeight"] = 20.0000171661377,
+					["relPoint"] = "TOPRIGHT",
+					["fadeInCombat"] = true,
+					["frameWidth"] = 90.00001525878906,
+					["pos"] = 0,
+				}, -- [2]
+				{
+					["y"] = -1.000007510185242,
+					["x"] = 1.000335693359375,
+					["frameHeight"] = 20.0000171661377,
+					["bgEnabled"] = false,
+					["fadeAlpha"] = 0,
+					["frameWidth"] = 497.0000305175781,
+					["pos"] = 0,
+				}, -- [3]
+				{
+					["y"] = -1.000007510185242,
+					["x"] = 1.000335693359375,
+					["frameHeight"] = 20.0000171661377,
+					["bgEnabled"] = false,
+					["fadeAlpha"] = 0,
+					["frameWidth"] = 497.0000305175781,
+					["pos"] = 0,
+				}, -- [4]
+			},
+			["locked"] = true,
+			["numBars"] = 4,
+		},
+		["BazBar3"] = {
+			["plugins"] = {
+				["data source"] = {
+					["DailyGlobalCheck_broker"] = {
+						["enabled"] = false,
+						["pos"] = 12,
+					},
+					["|cFFFFB366Ara|r Tradeskills"] = {
+						["showText"] = false,
+						["pos"] = 13,
+					},
+					["BugSack"] = {
+						["pos"] = 3,
+						["area"] = "left",
 					},
 					["Broker_TimelessIsleChests"] = {
 						["enabled"] = false,
 						["pos"] = 14,
 					},
 					["Broker_DurabilityInfo"] = {
+						["enabled"] = false,
+						["pos"] = 12,
 						["showIcon"] = false,
 						["area"] = "left",
+					},
+					["SOCD - Daily Reset"] = {
 						["enabled"] = false,
 						["pos"] = 12,
 					},
@@ -389,131 +360,132 @@ function aegerUI:InstallBazooka()
 						["enabled"] = false,
 						["pos"] = 1,
 					},
-					["BagSyncLDB"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["showText"] = false,
-					},
 					["Broker_MicroMenu"] = {
+						["bar"] = 2,
+						["pos"] = 1,
 						["showIcon"] = false,
 						["area"] = "center",
-						["pos"] = 1,
-						["bar"] = 2,
 					},
-					["SocialState"] = {
-						["showIcon"] = false,
-						["area"] = "left",
+					["BagSyncLDB"] = {
 						["enabled"] = false,
-						["pos"] = 8,
+						["showText"] = false,
+						["area"] = "left",
 					},
 					["Broker_MoneyFu"] = {
-						["showIcon"] = false,
-						["area"] = "left",
 						["enabled"] = false,
 						["pos"] = 10,
+						["showIcon"] = false,
+						["area"] = "left",
 					},
 					["SOCD-AltTrack"] = {
 						["enabled"] = false,
 						["pos"] = 11,
 					},
 					["Memory"] = {
+						["pos"] = 1,
 						["area"] = "left",
-						["enabled"] = false,
 					},
 					["DualSpeccer"] = {
-						["area"] = "left",
 						["enabled"] = false,
+						["area"] = "left",
+					},
+					["SocialState"] = {
+						["enabled"] = false,
+						["pos"] = 8,
+						["showIcon"] = false,
+						["area"] = "left",
 					},
 					["Aanye_XP"] = {
+						["pos"] = 1,
 						["showIcon"] = false,
 						["area"] = "center",
+					},
+				},
+				["launcher"] = {
+					["Bartender4"] = {
 						["enabled"] = false,
+					},
+					["TinyDPS"] = {
+						["pos"] = 7,
+						["area"] = "right",
+					},
+					["AutoLootToggle"] = {
+						["enabled"] = false,
+					},
+					["TradeSkillInfo"] = {
 						["pos"] = 1,
 					},
-					["SOCD - Daily Reset"] = {
+					["GatherMate2"] = {
 						["enabled"] = false,
-						["pos"] = 12,
+					},
+					["AskMrRobot"] = {
+						["enabled"] = false,
+						["pos"] = 2,
+					},
+					["Bazooka"] = {
+						["enabled"] = false,
+					},
+					["Parrot"] = {
+						["enabled"] = false,
+					},
+					["Prat"] = {
+						["enabled"] = false,
+					},
+					["AtlasLoot"] = {
+						["enabled"] = false,
+					},
+					["Zygors"] = {
+						["pos"] = 11,
+						["area"] = "right",
+					},
+					["Breakables"] = {
+						["enabled"] = false,
+					},
+					["Masque"] = {
+						["enabled"] = false,
 					},
 				},
 			},
 			["bars"] = {
 				{
-					["bgEnabled"] = false,
-					["fadeAlpha"] = 0,
 					["y"] = -1.000007510185242,
+					["fadeAlpha"] = 0,
+					["frameHeight"] = 20.0000171661377,
+					["attach"] = "none",
+					["bgEnabled"] = false,
 					["x"] = 1.000335693359375,
 					["frameWidth"] = 497.0000305175781,
 					["pos"] = 0,
-					["frameHeight"] = 20.0000171661377,
-					["attach"] = "none",
 				}, -- [1]
 				{
+					["point"] = "TOPRIGHT",
 					["bgEnabled"] = false,
 					["fadeOutOfCombat"] = true,
-					["y"] = -206.9999084472656,
 					["fadeInCombat"] = true,
-					["frameWidth"] = 90.00001525878906,
-					["point"] = "TOPRIGHT",
-					["pos"] = 0,
-					["x"] = -61.99810028076172,
-					["frameHeight"] = 20.0000171661377,
-					["attach"] = "none",
-					["relPoint"] = "TOPRIGHT",
+					["y"] = -206.9999084472656,
 					["fadeAlpha"] = 0.22,
+					["attach"] = "none",
+					["frameHeight"] = 20.0000171661377,
+					["x"] = -61.99810028076172,
+					["relPoint"] = "TOPRIGHT",
+					["frameWidth"] = 90.00001525878906,
+					["pos"] = 0,
 				}, -- [2]
 			},
+			["locked"] = true,
+			["numBars"] = 2,
 		},
 		["BazBar1"] = {
 			["numBars"] = 2,
-			["locked"] = true,
 			["plugins"] = {
-				["launcher"] = {
-					["TradeSkillInfo"] = {
-						["enabled"] = false,
-					},
-					["TinyDPS"] = {
-						["area"] = "right",
-						["pos"] = 7,
-					},
-					["AutoLootToggle"] = {
-						["enabled"] = false,
-					},
-					["Bartender4"] = {
-						["enabled"] = false,
-					},
-					["GatherMate2"] = {
-						["enabled"] = false,
-					},
-					["Breakables"] = {
-						["enabled"] = false,
-					},
-					["Bazooka"] = {
-						["enabled"] = false,
-					},
-					["Zygors"] = {
-						["area"] = "right",
-						["pos"] = 11,
-					},
-					["Prat"] = {
-						["enabled"] = false,
-					},
-					["AtlasLoot"] = {
-						["enabled"] = false,
-					},
-					["Parrot"] = {
-						["enabled"] = false,
-					},
-					["AskMrRobot"] = {
-						["enabled"] = false,
-					},
-					["Masque"] = {
-						["enabled"] = false,
-					},
-				},
 				["data source"] = {
+					["DailyGlobalCheck_broker"] = {
+						["enabled"] = false,
+						["pos"] = 14,
+					},
 					["|cFFFFB366Ara|r Tradeskills"] = {
-						["pos"] = 13,
 						["showText"] = false,
+						["pos"] = 13,
 					},
 					["BugSack"] = {
 						["area"] = "left",
@@ -528,25 +500,24 @@ function aegerUI:InstallBazooka()
 						["area"] = "left",
 						["pos"] = 12,
 					},
+					["SOCD - Daily Reset"] = {
+						["enabled"] = false,
+						["pos"] = 12,
+					},
 					["TimelessDailyCheck"] = {
 						["enabled"] = false,
+						["pos"] = 1,
+					},
+					["Broker_MicroMenu"] = {
+						["showIcon"] = false,
+						["area"] = "center",
+						["bar"] = 2,
 						["pos"] = 1,
 					},
 					["BagSyncLDB"] = {
 						["area"] = "left",
 						["enabled"] = false,
 						["showText"] = false,
-					},
-					["Broker_MicroMenu"] = {
-						["showIcon"] = false,
-						["area"] = "center",
-						["pos"] = 1,
-						["bar"] = 2,
-					},
-					["SocialState"] = {
-						["showIcon"] = false,
-						["area"] = "left",
-						["pos"] = 8,
 					},
 					["Broker_MoneyFu"] = {
 						["showIcon"] = false,
@@ -565,107 +536,115 @@ function aegerUI:InstallBazooka()
 						["area"] = "left",
 						["enabled"] = false,
 					},
+					["SocialState"] = {
+						["showIcon"] = false,
+						["area"] = "left",
+						["pos"] = 8,
+					},
 					["Aanye_XP"] = {
 						["showIcon"] = false,
 						["area"] = "center",
 						["pos"] = 1,
 					},
-					["SOCD - Daily Reset"] = {
+				},
+				["launcher"] = {
+					["Bartender4"] = {
 						["enabled"] = false,
-						["pos"] = 12,
+					},
+					["TinyDPS"] = {
+						["area"] = "right",
+						["pos"] = 7,
+					},
+					["AutoLootToggle"] = {
+						["enabled"] = false,
+					},
+					["TradeSkillInfo"] = {
+						["enabled"] = false,
+					},
+					["GatherMate2"] = {
+						["enabled"] = false,
+					},
+					["AskMrRobot"] = {
+						["enabled"] = false,
+					},
+					["Bazooka"] = {
+						["enabled"] = false,
+					},
+					["Parrot"] = {
+						["enabled"] = false,
+					},
+					["Prat"] = {
+						["enabled"] = false,
+					},
+					["AtlasLoot"] = {
+						["enabled"] = false,
+					},
+					["Zygors"] = {
+						["area"] = "right",
+						["pos"] = 11,
+					},
+					["Breakables"] = {
+						["enabled"] = false,
+					},
+					["Masque"] = {
+						["enabled"] = false,
 					},
 				},
 			},
+			["locked"] = true,
 			["bars"] = {
 				{
 					["bgEnabled"] = false,
-					["fadeAlpha"] = 0,
 					["y"] = -1.000007510185242,
 					["x"] = 1.000335693359375,
 					["frameWidth"] = 497.0000305175781,
 					["pos"] = 0,
 					["frameHeight"] = 20.0000171661377,
 					["attach"] = "none",
+					["fadeAlpha"] = 0,
 				}, -- [1]
 				{
 					["bgEnabled"] = false,
+					["fadeAlpha"] = 0.22,
 					["fadeOutOfCombat"] = true,
 					["y"] = -206.9999084472656,
-					["fadeInCombat"] = true,
-					["frameWidth"] = 90.00001525878906,
-					["point"] = "TOPRIGHT",
-					["pos"] = 0,
 					["x"] = -61.99810028076172,
+					["frameWidth"] = 90.00001525878906,
+					["pos"] = 0,
+					["point"] = "TOPRIGHT",
+					["fadeInCombat"] = true,
 					["frameHeight"] = 20.0000171661377,
 					["attach"] = "none",
 					["relPoint"] = "TOPRIGHT",
-					["fadeAlpha"] = 0.22,
 				}, -- [2]
 			},
 		},
 		["BazBar4"] = {
-			["numBars"] = 2,
-			["locked"] = true,
 			["plugins"] = {
-				["launcher"] = {
-					["TradeSkillInfo"] = {
-						["enabled"] = false,
-					},
-					["TinyDPS"] = {
-						["area"] = "right",
-						["pos"] = 7,
-					},
-					["AutoLootToggle"] = {
-						["enabled"] = false,
-					},
-					["Bartender4"] = {
-						["pos"] = 2,
-					},
-					["GatherMate2"] = {
-						["enabled"] = false,
-					},
-					["Breakables"] = {
-						["enabled"] = false,
-					},
-					["Bazooka"] = {
-						["enabled"] = false,
-					},
-					["Zygors"] = {
-						["area"] = "right",
-						["pos"] = 11,
-					},
-					["Prat"] = {
-						["pos"] = 5,
-					},
-					["AtlasLoot"] = {
-						["enabled"] = false,
-					},
-					["Parrot"] = {
-						["pos"] = 4,
-					},
-					["AskMrRobot"] = {
-						["enabled"] = false,
-					},
-					["Masque"] = {
-						["pos"] = 3,
-					},
-				},
 				["data source"] = {
+					["DailyGlobalCheck_broker"] = {
+						["enabled"] = false,
+						["pos"] = 12,
+					},
 					["|cFFFFB366Ara|r Tradeskills"] = {
-						["pos"] = 13,
 						["showText"] = false,
+						["pos"] = 13,
 					},
 					["BugSack"] = {
-						["area"] = "left",
 						["enabled"] = false,
+						["area"] = "left",
 					},
 					["Broker_TimelessIsleChests"] = {
 						["enabled"] = false,
 						["pos"] = 14,
 					},
 					["Broker_DurabilityInfo"] = {
+						["enabled"] = false,
+						["pos"] = 12,
 						["showIcon"] = false,
 						["area"] = "left",
+					},
+					["SOCD - Daily Reset"] = {
 						["enabled"] = false,
 						["pos"] = 12,
 					},
@@ -673,81 +652,123 @@ function aegerUI:InstallBazooka()
 						["enabled"] = false,
 						["pos"] = 1,
 					},
-					["BagSyncLDB"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["showText"] = false,
-					},
 					["Broker_MicroMenu"] = {
+						["bar"] = 2,
+						["pos"] = 1,
 						["showIcon"] = false,
 						["area"] = "center",
-						["pos"] = 1,
-						["bar"] = 2,
 					},
-					["SocialState"] = {
-						["showIcon"] = false,
-						["area"] = "left",
+					["BagSyncLDB"] = {
 						["enabled"] = false,
-						["pos"] = 8,
+						["showText"] = false,
+						["area"] = "left",
 					},
 					["Broker_MoneyFu"] = {
-						["showIcon"] = false,
-						["area"] = "left",
 						["enabled"] = false,
 						["pos"] = 10,
+						["showIcon"] = false,
+						["area"] = "left",
 					},
 					["SOCD-AltTrack"] = {
 						["enabled"] = false,
 						["pos"] = 11,
 					},
 					["Memory"] = {
-						["area"] = "left",
+						["enabled"] = false,
 						["pos"] = 6,
+						["area"] = "left",
 					},
 					["DualSpeccer"] = {
-						["area"] = "left",
 						["enabled"] = false,
+						["area"] = "left",
+					},
+					["SocialState"] = {
+						["enabled"] = false,
+						["pos"] = 8,
+						["showIcon"] = false,
+						["area"] = "left",
 					},
 					["Aanye_XP"] = {
+						["pos"] = 1,
 						["showIcon"] = false,
 						["area"] = "center",
-						["enabled"] = false,
-						["pos"] = 1,
 					},
-					["SOCD - Daily Reset"] = {
+				},
+				["launcher"] = {
+					["Bartender4"] = {
+						["pos"] = 2,
+					},
+					["TinyDPS"] = {
+						["pos"] = 7,
+						["area"] = "right",
+					},
+					["AutoLootToggle"] = {
 						["enabled"] = false,
-						["pos"] = 12,
+					},
+					["TradeSkillInfo"] = {
+						["enabled"] = false,
+					},
+					["GatherMate2"] = {
+						["enabled"] = false,
+					},
+					["AskMrRobot"] = {
+						["enabled"] = false,
+					},
+					["Bazooka"] = {
+						["enabled"] = false,
+					},
+					["Parrot"] = {
+						["pos"] = 4,
+					},
+					["Prat"] = {
+						["pos"] = 5,
+					},
+					["AtlasLoot"] = {
+						["enabled"] = false,
+					},
+					["Zygors"] = {
+						["pos"] = 11,
+						["area"] = "right",
+					},
+					["Breakables"] = {
+						["enabled"] = false,
+					},
+					["Masque"] = {
+						["pos"] = 3,
 					},
 				},
 			},
 			["bars"] = {
 				{
-					["bgEnabled"] = false,
 					["y"] = -1.000007510185242,
-					["frameWidth"] = 497.0000305175781,
-					["pos"] = 0,
 					["x"] = 1.000335693359375,
 					["frameHeight"] = 20.0000171661377,
-					["attach"] = "none",
 					["fadeAlpha"] = 0,
+					["bgEnabled"] = false,
+					["attach"] = "none",
+					["frameWidth"] = 497.0000305175781,
+					["pos"] = 0,
 				}, -- [1]
 				{
+					["point"] = "TOPRIGHT",
 					["bgEnabled"] = false,
 					["fadeOutOfCombat"] = true,
-					["y"] = -206.9999084472656,
 					["fadeInCombat"] = true,
-					["frameWidth"] = 90.00001525878906,
-					["point"] = "TOPRIGHT",
-					["pos"] = 0,
-					["x"] = -61.99810028076172,
-					["frameHeight"] = 20.0000171661377,
-					["attach"] = "none",
-					["relPoint"] = "TOPRIGHT",
+					["y"] = -206.9999084472656,
 					["fadeAlpha"] = 0.22,
+					["attach"] = "none",
+					["frameHeight"] = 20.0000171661377,
+					["x"] = -61.99810028076172,
+					["relPoint"] = "TOPRIGHT",
+					["frameWidth"] = 90.00001525878906,
+					["pos"] = 0,
 				}, -- [2]
 			},
+			["locked"] = true,
+			["numBars"] = 2,
 		},
 	}
+	
 
 			
 	
