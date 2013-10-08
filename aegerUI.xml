@@ -26,6 +26,7 @@
 	<Script file="install\addons\ExtVendor.lua"/>
 	<Script file="install\addons\Farmhand.lua"/>
 	<Script file="install\addons\GatherMate2.lua"/>
+	<Script file="install\addons\HandyNotes.lua"/>
 	<Script file="install\addons\Masque.lua"/>
 	<Script file="install\addons\Parrot.lua"/>
 	<Script file="install\addons\PhanxBuffs.lua"/>

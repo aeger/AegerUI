@@ -219,6 +219,7 @@
 			aegerUI:InstallExtVendor()
 			aegerUI:InstallFarmhand()
 			aegerUI:InstallGatherMate2()
+			aegerUI:InstallHandyNotes()
 			aegerUI:InstallMasque()
 			aegerUI:InstallParrot()
 			aegerUI:InstallPhanxBuffs()
