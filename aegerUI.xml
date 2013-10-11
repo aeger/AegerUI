@@ -27,11 +27,14 @@
 	<Script file="install\addons\Farmhand.lua"/>
 	<Script file="install\addons\GatherMate2.lua"/>
 	<Script file="install\addons\HandyNotes.lua"/>
+	<Script file="install\addons\Mapster.lua"/>
 	<Script file="install\addons\Masque.lua"/>
+	<Script file="install\addons\Mounty.lua"/>
+	<Script file="install\addons\oUF_MovableFrames.lua"/>
 	<Script file="install\addons\Parrot.lua"/>
-	<Script file="install\addons\PhanxBuffs.lua"/>
 	<Script file="install\addons\Prat.lua"/>
 	<Script file="install\addons\QuestUnTracker.lua"/>
+	<Script file="install\addons\Raven.lua"/>
 	<Script file="install\addons\SocialState.lua"/>
 	<Script file="install\addons\TinyDPS.lua"/>
 	<Script file="install\addons\TipTac.lua"/>

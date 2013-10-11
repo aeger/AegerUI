@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.5 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.6 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
@@ -9,7 +9,7 @@
 	
 	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 	
-	local versionNumber  = "5.4.5";
+	local versionNumber  = "5.4.6";
 	AUI_Beta = false;
 	
 		
@@ -30,7 +30,8 @@
     local ApplySetup
 	local aegerUI_MoveChatFrame1
 	local aegerUI_InstallAddonOptions
-		
+	local aegerUI_PersonalProfiles = false
+	
 --  Default DB data  -----------------------------------------------------------	
 	local defaults = {
 		global = {
@@ -220,11 +221,13 @@
 			aegerUI:InstallFarmhand()
 			aegerUI:InstallGatherMate2()
 			aegerUI:InstallHandyNotes()
+			aegerUI:InstallMapster()
 			aegerUI:InstallMasque()
+			aegerUI:InstalloUF_MovableFrames()
 			aegerUI:InstallParrot()
-			aegerUI:InstallPhanxBuffs()
 			aegerUI:InstallPrat()
 			aegerUI:InstallQuestUnTracker()
+			aegerUI:InstallRaven()
 			aegerUI:InstallSocialState()
 			aegerUI:InstallTinyDPS()
 			aegerUI:InstallTipTac()
@@ -316,18 +319,31 @@
 		elseif aegerUI.db.profile.SideBars ==3 then
 			aegerUI.db.profile.SideBars = 3
 		end
-	end	
+	end
+
+	function aegerUI_SetCVARSINSTALL()
+		SetCVar("enableCombatText", 0)
+		SetCVar("CombatDamage", 0)
+		SetCVar("CombatHealing", 0)
+	end
+	
+	function aegerUI_LoadPersonalAddonProfiles()
+		if not aegerUI_PersonalProfiles then end
+			aegerUI:InstallMounty()
+	end
 				
 	aegerUI_Version = aegerUI_SetVersion( versionNumber );
 	
 	function ApplySetup()  -- the Install button calls this when clicked.
             aegerUI_SetScaleSmallOnInstall()
 			aegerUI_InstallAddonOptions()
+			aegerUI_LoadPersonalAddonProfiles()
 			aegerUI.db.profile.SetUpDone = true
 			aegerUI_SetTopMenuVisible()
 			aegerUI_SetNumBottomBars()
 			aegerUI_SetBazBarDisplayNum()
 			aegerUI_SetSideBars()
+			aegerUI_SetCVARSINSTALL()
 			aegerUI.db.profile.Version = aegerUI_Version
 			print('Setup complete. Please reload UI to finish via "/rl".')
     end

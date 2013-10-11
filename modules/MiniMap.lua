@@ -201,3 +201,21 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 		Minimap_OnClick(self)
 	end
 end)
+
+function aegerUI_LargeMiniMap()
+	MinimapCluster:SetScale(1.5);
+end
+
+function aegerUI_NormalMiniMap()
+	MinimapCluster:SetScale(1);
+end
+
+SlashCmdList.AEGERUILARGEMINIMAP = function()
+            aegerUI_LargeMiniMap()
+    end
+    SLASH_AEGERUILARGEMINIMAP1 = '/auilarge'
+	
+	SlashCmdList.AEGERUINORMALMINIMAP = function()
+            aegerUI_NormalMiniMap()
+    end
+    SLASH_AEGERUINORMALMINIMAP1 = '/auismall'
