@@ -11,6 +11,7 @@
 	L["Install"] = "instalar"
 	L["Cancel"] = "cancelar"
 	L["Reload"] = "recargar"
+	L["Watchframe Position"] = "Watchframe Posición"
 	
 -- Chat buttons  ----------------------------------------------------------------
 	L["Character"] = "carácter"

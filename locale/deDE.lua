@@ -11,6 +11,7 @@
 	L["Install"] = "Installieren"
 	L["Cancel"] = "stornieren"
 	L["Reload"] = "Seite neu laden"
+	L["Watchframe Position"] = "Watchframe Position"
 	
 -- Chat buttons  ----------------------------------------------------------------
 	L["Character"] = "Zeichen"

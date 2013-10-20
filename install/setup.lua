@@ -4,15 +4,17 @@
 	
 --  Namespace -----------------------------------------------------------------	
 	local _, aegerUI = ...
-	aegerUI = LibStub("AceAddon-3.0"):NewAddon(aegerUI, "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0")
-	_G.aegerUI = aegerUI
 	
+	aegerUI = LibStub("AceAddon-3.0"):NewAddon(aegerUI, "aegerUI", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0")
+		
 	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 	
 	local versionNumber  = "5.4.6A";
-	AUI_Beta = false;
 	
-		
+	local aegerUI_PersonalProfiles = true
+	
+	AUI_Beta = false;
+			
 --  Constants  ----------------------------------------------------------------
     local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
     local FONT = "Fonts\\FRIZQT__.ttf"
@@ -30,31 +32,110 @@
     local ApplySetup
 	local aegerUI_MoveChatFrame1
 	local aegerUI_InstallAddonOptions
-	local aegerUI_PersonalProfiles = true
+	local GetAddOnMetadata = GetAddOnMetadata
+	local db
 	
 --  Default DB data  -----------------------------------------------------------	
 	local defaults = {
 		global = {
-          Placeholder = true,
+          WatchFrame_Position = "RIGHT",
 		},
 		profile = {
-          Placeholder = true,        
+          SetUpDone = false,
+		  TopMenuShow = true,
+		  NumBottomBars = 1,
+		  ShowBazBar = 1,
+		  SideBars = 1,
 		},
 	}
 	
+	local function GetOptions(uiTypes, uiName, appName)
+		if appName == "aegerUI" then
+			local options = {
+				type = "group",
+				name = GetAddOnMetadata("aegerUI", "Title"),
+				get = function(info) return db[info[#info]] end,
+				set = function(info, value)
+					db[info[#info]] = value
+				end,
+				args = {
+					auidesc = {
+						type = "description",
+						order = 0,
+						name = GetAddOnMetadata("aegerUI", "Notes"),
+					},
+					framePosHeader = {
+						order = 10,
+						type = "header",
+						name = L["Frame Positions"],
+					},
+					WatchFrame_Position = {
+						order = 11,
+						name = L["Watchframe Position"],
+						type = "select",
+						confirm = true,
+						confirmText = L["Changes to Watchframe position will reload your UI, are you sure?"],
+						get = function()
+							return aegerUI.db.global.WatchFrame_Position
+						end,
+						set = function(info, value)
+							aegerUI.db.global.WatchFrame_Position = value
+							ReloadUI()
+						end,
+						values = { 
+							RIGHT = L["Right"],
+							LEFT = L["Left"],
+						},
+						style = "dropdown",
+					},
+					spacer1 = {
+						order = 20,
+						type = "description",
+						width = "full",
+						name = "\n\n",
+					},
+					resetHeader = {
+						order = 30,
+						type = "header",
+						name = L["Profile Options"],
+					},
+					install = {
+						type = "execute",
+						name = L["Reinstall aegerUI"],
+						order = 31,
+						func = function()
+							DoSetup()
+						end,
+					},
+				}
+			}
+			return options
+		end
+	end
+	
+	function aegerUI:ChatCommands(input)
+		if InCombatLockdown() then
+		self:Print(L["Cannot access options during combat."])
+		return
+	end
+	if not input or input:trim() == "" then
+		LibStub("AceConfigDialog-3.0"):Open("aegerUI")
+	else
+		 LibStub("AceConfigCmd-3.0").HandleCommand(aegerUI, "aui", "aegerUI", input)
+	end
+	end
+	
+		
 	function aegerUI:OnInitialize()
 	  self.db = LibStub("AceDB-3.0"):New("aegerUIdb", defaults)
-	  self.db.RegisterCallback(self, "OnNewProfile", "InitializeProfile")
-    end
-	
-	function aegerUI:InitializeProfile()
-	aegerUI.db.profile.SetUpDone = false
-	aegerUI.db.profile.TopMenuShow = true
-	aegerUI.db.profile.NumBottomBars = 1
-	aegerUI.db.profile.ShowBazBar = 1
-	aegerUI.db.profile.SideBars = 1
-	end
-		
+	  db = self.db.profile
+	  -- Options
+	  LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("aegerUI", GetOptions)
+	  LibStub("AceConfigDialog-3.0"):AddToBlizOptions("aegerUI", GetAddOnMetadata("aegerUI", "Title"))
+	  aegerUI:RegisterChatCommand( "aui", "ChatCommands")
+	  aegerUI:RegisterChatCommand( "aegerUI", "ChatCommands")
+	 end		
+			
 --  Event logic  --------------------------------------------------------------
     local EventFrame = CreateFrame('Frame')
      
@@ -73,7 +154,6 @@
      
 --  Events  ---------------------------------------------------------------------
     function EventFrame:PLAYER_LOGIN()
-			
 			if not aegerUI.db.profile.Version then
                     DoSetup()
             end
@@ -237,11 +317,11 @@
 	function aegerUI_SetScaleSmallOnInstall()
 		local index = GetCurrentResolution();
 		local resolution = select(index, GetScreenResolutions());
-		if resolution ~= "1920x1080" then
-		UIParent:SetScale(0.64);
-		SetCVar("uiscale", "0.64");
-		SetCVar("useUiScale", 1)
-		end
+			if resolution ~= "1920x1080" then
+				UIParent:SetScale(0.64);
+				SetCVar("uiscale", "0.64");
+				SetCVar("useUiScale", 1)
+			end
 	end
 	
 	function aegerUI_SetScaleSmall()
@@ -262,62 +342,7 @@
 		return version.." (Release)";
 		end
 	end
-	
-	function aegerUI_SetNumBottomBars()
-		Bartender4.db:SetProfile("aegerUI")
-			if not aegerUI.db.profile.NumBottomBars then
-				aegerUI.db.profile.NumBottomBars = 1
-			end
-			if aegerUI.db.profile.NumBottomBars == 1 then
-				aegerUI.db.profile.NumBottomBars = 1
-			elseif aegerUI.db.profile.NumBottomBars == 2 then
-				aegerUI.db.profile.NumBottomBars = 2
-			end	
-	end 
-	
-	function aegerUI_SetTopMenuVisible()
-		if not aegerUI.db.profile.TopMenuShow and aegerUI.db.profile.TopMenuShow ~= false then
-			aegerUI.db.profile.TopMenuShow = true
-		end
-		if aegerUI.db.profile.TopMenuShow == false then
-				TMMenuHide()
-				HideBazookaBars()
-		end
-	end
-	
-	function aegerUI_SetBazBarDisplayNum()
-		if not aegerUI.db.profile.ShowBazBar then
-			aegerUI.db.profile.ShowBazBar = 1
-			Bazooka.db:SetProfile("BazBar1")
-		end
-		if aegerUI.db.profile.ShowBazBar == 1 then
-			aegerUI.db.profile.ShowBazBar = 1
-			Bazooka.db:SetProfile("BazBar1")
-		elseif aegerUI.db.profile.ShowBazBar == 2 then
-			aegerUI.db.profile.ShowBazBar = 2
-			Bazooka.db:SetProfile("BazBar2")
-		elseif aegerUI.db.profile.ShowBazBar == 3 then
-			aegerUI.db.profile.ShowBazBar = 3
-			Bazooka.db:SetProfile("BazBar3")
-		elseif aegerUI.db.profile.ShowBazBar == 4 then
-			aegerUI.db.profile.ShowBazBar = 4
-			Bazooka.db:SetProfile("BazBar4")
-		end
-	end
-	
-	function aegerUI_SetSideBars()
-		if not aegerUI.db.profile.SideBars then
-			aegerUI.db.profile.SideBars = 1
-		end
-		if aegerUI.db.profile.SideBars == 1 then
-			aegerUI.db.profile.SideBars = 1
-		elseif aegerUI.db.profile.SideBars == 2 then
-			aegerUI.db.profile.SideBars = 2
-		elseif aegerUI.db.profile.SideBars ==3 then
-			aegerUI.db.profile.SideBars = 3
-		end
-	end
-
+			
 	function aegerUI_SetCVARSINSTALL()
 		SetCVar("enableCombatText", 0)
 		SetCVar("CombatDamage", 0)
@@ -332,24 +357,21 @@
 	aegerUI_Version = aegerUI_SetVersion( versionNumber );
 	
 	function ApplySetup()  -- the Install button calls this when clicked.
-            aegerUI_SetNumBottomBars()
-			aegerUI_SetScaleSmallOnInstall()
+            aegerUI_SetScaleSmallOnInstall()
 			aegerUI_InstallAddonOptions()
 			aegerUI_LoadPersonalAddonProfiles()
 			aegerUI.db.profile.SetUpDone = true
-			aegerUI_SetTopMenuVisible()
-			aegerUI_SetBazBarDisplayNum()
-			aegerUI_SetSideBars()
 			aegerUI_SetCVARSINSTALL()
 			aegerUI.db.profile.Version = aegerUI_Version
 			print('Setup complete. Please reload UI to finish via "/rl".')
     end
 		
 --  Slash Commands  -----------------------------------------------------------	
-    SlashCmdList.INSTALLAEGERUI = function()
-            DoSetup()
-    end
-    SLASH_INSTALLAEGERUI1 = '/install'
+    	
+	--SlashCmdList.INSTALLAEGERUI = function()
+            --aegerUI:DoSetup()
+    --end
+    --SLASH_INSTALLAEGERUI1 = '/install'
 	
 	SlashCmdList.AEGERUISETSMALLSCALE = function()
             aegerUI_SetScaleSmall()

@@ -11,6 +11,13 @@
 	L["Install"] = true
 	L["Cancel"] = true
 	L["Reload"] = true
+	L["Watchframe Position"] = true
+	L["Right"] = true 
+	L["Left"] = true
+	L["Changes to Watchframe position will reload your UI, are you sure?"] = true
+	L["Reinstall aegerUI"] = true
+	L["Frame Positions"] = true
+	L["Profile Options"] = true
 	
 -- Chat buttons  ----------------------------------------------------------------
 	L["Character"] = true

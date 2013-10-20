@@ -12,7 +12,6 @@
 	local CLICK = "Interface\\AddOns\\aegerUI\\media\\sound\\click.mp3"
 	
 	-- Options:
-	WatchFrame_Position = "RIGHT" -- Lets you move the Quest Tracker to the LEFT/RIGHT of the screen
 	local WFItemButton = "LEFT" -- Moves Watchframe quest item button to left side
 	
 -- Define locals and local functions up here so they're in scope for the whole file
@@ -312,7 +311,7 @@
 		aegerUI.db.profile.SideBars = 2
 		Expand_Bar3:Hide()
 		MBar3:Show()
-		if WatchFrame_Position == "RIGHT" then
+		if aegerUI.db.global.WatchFrame_Position == "RIGHT" then
 			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 140, -20)
 		end
 	end
@@ -321,7 +320,7 @@
 		aegerUI.db.profile.SideBars = 3
 		MBar3:Hide()
 		MBar4:Show()
-		if WatchFrame_Position == "RIGHT" then
+		if aegerUI.db.global.WatchFrame_Position == "RIGHT" then
 			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 100, -20)
 		end
 	end
@@ -330,7 +329,7 @@
 		aegerUI.db.profile.SideBars = 2
 		MBar4:Hide()
 		MBar3:Show()
-		if WatchFrame_Position == "RIGHT" then
+		if aegerUI.db.global.WatchFrame_Position == "RIGHT" then
 			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 140, -20)
 		end
 	end
@@ -339,7 +338,7 @@
 		aegerUI.db.profile.SideBars = 1
 		Expand_Bar3:Show()
 		MBar3:Hide()
-		if WatchFrame_Position == "RIGHT" then
+		if aegerUI.db.global.WatchFrame_Position == "RIGHT" then
 			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 180, -20)
 		end
 	end
@@ -373,20 +372,16 @@
 		WatchFrame:SetUserPlaced(true)
 		WatchFrame:ClearAllPoints()
 		local AceAddon = LibStub("AceAddon-3.0")
-		if WatchFrame_Position == "RIGHT" then
+		if aegerUI.db.global.WatchFrame_Position == "RIGHT" then
 			if MBar3:IsVisible() and not MBar4:IsVisible() then
-				WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 140, -20)
+				WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 160, -20)
 			elseif MBar4:IsVisible() then
-				WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 100, -20)
+				WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 120, -20)
 			else
-				WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 180, -20)
+				WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 200, -20)
 			end
-		elseif WatchFrame_Position == "LEFT" then
-			if IsAddOnLoaded("Bazooka") and AceAddon:GetAddon("Bazooka").db:GetCurrentProfile() == "MayronUI2" then
-				WatchFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 30, -200)
-			else
-				WatchFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 30, -290)
-			end
+		elseif aegerUI.db.global.WatchFrame_Position == "LEFT" then
+			WatchFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 30, -200)
 		end
 	end
 	

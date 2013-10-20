@@ -4,7 +4,7 @@
 
 --  Namespace -----------------------------------------------------------------	
     local addonname, aegerUI = ...
-		
+			
 --  Constants  ----------------------------------------------------------------
     local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
     local classcolor = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[(select(2, UnitClass("player")))]
