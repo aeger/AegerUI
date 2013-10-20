@@ -9,7 +9,7 @@
 	
 	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 	
-	local versionNumber  = "5.4.6";
+	local versionNumber  = "5.4.6A";
 	AUI_Beta = false;
 	
 		
@@ -30,7 +30,7 @@
     local ApplySetup
 	local aegerUI_MoveChatFrame1
 	local aegerUI_InstallAddonOptions
-	local aegerUI_PersonalProfiles = false
+	local aegerUI_PersonalProfiles = true
 	
 --  Default DB data  -----------------------------------------------------------	
 	local defaults = {
@@ -223,11 +223,10 @@
 			aegerUI:InstallHandyNotes()
 			aegerUI:InstallMapster()
 			aegerUI:InstallMasque()
-			aegerUI:InstalloUF_MovableFrames()
+			aegerUI:InstalloUF_Phanx()
 			aegerUI:InstallParrot()
 			aegerUI:InstallPrat()
 			aegerUI:InstallQuestUnTracker()
-			aegerUI:InstallRaven()
 			aegerUI:InstallSocialState()
 			aegerUI:InstallTinyDPS()
 			aegerUI:InstallTipTac()
@@ -266,16 +265,14 @@
 	
 	function aegerUI_SetNumBottomBars()
 		Bartender4.db:SetProfile("aegerUI")
-		--if not aegerUI.db.profile.NumBottomBars then
-			--aegerUI.db.profile.NumBottomBars = 1
-			--Bartender4.Bar.barregistry["6"]:SetVisibilityOption("always",true)
-           -- Bartender4.Bar.barregistry["5"]:SetVisibilityOption("always",true)
-		--end
-		if aegerUI.db.profile.NumBottomBars == 1 then
-			aegerUI.db.profile.NumBottomBars = 1
-		elseif aegerUI.db.profile.NumBottomBars == 2 then
-			aegerUI.db.profile.NumBottomBars = 2
-		end	
+			if not aegerUI.db.profile.NumBottomBars then
+				aegerUI.db.profile.NumBottomBars = 1
+			end
+			if aegerUI.db.profile.NumBottomBars == 1 then
+				aegerUI.db.profile.NumBottomBars = 1
+			elseif aegerUI.db.profile.NumBottomBars == 2 then
+				aegerUI.db.profile.NumBottomBars = 2
+			end	
 	end 
 	
 	function aegerUI_SetTopMenuVisible()
@@ -335,12 +332,12 @@
 	aegerUI_Version = aegerUI_SetVersion( versionNumber );
 	
 	function ApplySetup()  -- the Install button calls this when clicked.
-            aegerUI_SetScaleSmallOnInstall()
+            aegerUI_SetNumBottomBars()
+			aegerUI_SetScaleSmallOnInstall()
 			aegerUI_InstallAddonOptions()
 			aegerUI_LoadPersonalAddonProfiles()
 			aegerUI.db.profile.SetUpDone = true
 			aegerUI_SetTopMenuVisible()
-			aegerUI_SetNumBottomBars()
 			aegerUI_SetBazBarDisplayNum()
 			aegerUI_SetSideBars()
 			aegerUI_SetCVARSINSTALL()

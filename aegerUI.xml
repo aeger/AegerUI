@@ -7,7 +7,7 @@
 	<Script file="modules\Bottombars.lua"/>
 	<Script file="modules\Chatbuttons.lua"/>
 	<Script file="modules\eAlign.lua"/>
-	<Script file="modules\FrameMovers.lua"/>
+	<!--<Script file="modules\FrameMovers.lua"/> -->
 	<Script file="modules\MiniMap.lua"/>
 	<Script file="modules\Sidebars.lua"/>
 	<Script file="modules\topmenu.lua"/>
@@ -30,11 +30,10 @@
 	<Script file="install\addons\Mapster.lua"/>
 	<Script file="install\addons\Masque.lua"/>
 	<Script file="install\addons\Mounty.lua"/>
-	<Script file="install\addons\oUF_MovableFrames.lua"/>
+	<Script file="install\addons\oUF_Phanx.lua"/>
 	<Script file="install\addons\Parrot.lua"/>
 	<Script file="install\addons\Prat.lua"/>
 	<Script file="install\addons\QuestUnTracker.lua"/>
-	<Script file="install\addons\Raven.lua"/>
 	<Script file="install\addons\SocialState.lua"/>
 	<Script file="install\addons\TinyDPS.lua"/>
 	<Script file="install\addons\TipTac.lua"/>
