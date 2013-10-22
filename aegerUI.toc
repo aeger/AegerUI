@@ -1,0 +1,28 @@
+## Interface: 50400
+## Version: 5.4.6
+
+## Title: aegerUI
+## Notes: Aeger's UI Interface
+## Author: Aeger
+
+## SavedVariables: aegerUIdb
+
+## Dependencies: Bartender4, Bazooka
+embeds.xml
+locale\locale.xml
+Core.lua
+Setup.lua
+options\options.lua
+
+## Install ##
+install\addons.xml
+
+## Modules ##
+modules\Bottombars.lua
+modules\Chatbuttons.lua
+modules\eAlign.lua
+modules\Sidebars.lua
+modules\topmenu.lua
+modules\Minimap.lua
+
+## Credit for Minimap, Sidebars, and Chat buttons Mayron

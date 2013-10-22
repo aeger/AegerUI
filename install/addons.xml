@@ -1,0 +1,28 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- Install -->
+	<Script file="addons\Aanye_XP.lua"/>
+	<Script file="addons\bartender4.lua"/>
+	<Script file="addons\BagSync.lua"/>
+	<Script file="addons\Bazooka.lua"/>
+	<Script file="addons\Broker_DurabilityInfo.lua"/>
+	<Script file="addons\Broker_MicroMenu.lua"/>
+	<Script file="addons\Broker_MoneyFu.lua"/>
+	<Script file="addons\Combuctor.lua"/>
+	<Script file="addons\ExtSocialUI.lua"/>
+	<Script file="addons\ExtVendor.lua"/>
+	<Script file="addons\Farmhand.lua"/>
+	<Script file="addons\GatherMate2.lua"/>
+	<Script file="addons\HandyNotes.lua"/>
+	<Script file="addons\Mapster.lua"/>
+	<Script file="addons\Masque.lua"/>
+	<Script file="addons\Mounty.lua"/>
+	<Script file="addons\oUF_Phanx.lua"/>
+	<Script file="addons\Parrot.lua"/>
+	<Script file="addons\Prat.lua"/>
+	<Script file="addons\QuestUnTracker.lua"/>
+	<Script file="addons\SocialState.lua"/>
+	<Script file="addons\TinyDPS.lua"/>
+	<Script file="addons\TipTac.lua"/>
+	<Script file="addons\TotemTimers.lua"/>
+	<Script file="addons\ZygorsGuideViewer.lua"/>
+</Ui>
