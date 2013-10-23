@@ -9,7 +9,7 @@ local profileVersion = "1.0"
 function addon:InstallBartender()
 	if not IsAddOnLoaded("Bartender4") then return end
 	
-	if addon.db.profile.addonProfileVersionPC.Bartender4 ~= profileVersion then
+	if addon.db.global.addonProfileVersion.Bartender4 ~= profileVersion then
 	
 	local CharName = UnitName("player")
 	local ServerName = GetRealmName()
@@ -362,13 +362,14 @@ function addon:InstallBartender()
 		Bartender4DB.profiles[k] = v
 	end
 	
-	addon.db.profile.addonProfileVersionPC.Bartender4 = profileVersion
+	addon.db.global.addonProfileVersion.Bartender4 = profileVersion
 
-	if Bartender4DB.profileKeys[ProfileName] == nil then
+	--[[if Bartender4DB.profileKeys[ProfileName] == nil then
 		tinsert(Bartender4DB.profileKeys,ProfileName)
 		Bartender4DB.profileKeys[ProfileName] = aUI1bar
 	elseif Bartender4DB.profileKeys[ProfileName] ~= aUI1bar then
 		Bartender4DB.profileKeys[ProfileName] = aUI1bar
 	end
+	]]
 	end
 end

@@ -230,14 +230,32 @@ function addon:MiniMapRightClickMenu()
 		{ text = "Customer Support", func = function() ToggleHelpFrame() end },
 		{ text = "Close", func = function() menuFrame:Hide() end },
 	}
+	
+	local menuList2 = {
+		{
+			text = "Calendar",
+			func = function()
+				if (not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
+				Calendar_Toggle()
+			end
+		},
+		{ text = "Group Calendar", func = function() GroupCalendar.UI.Window:Show() end },
+		{ text = "Customer Support", func = function() ToggleHelpFrame() end },
+		{ text = "Close", func = function() menuFrame:Hide() end },
+	}
+	
 	Minimap:SetScript("OnMouseUp", function(self, btn)
 		if btn == "RightButton" then
+		if not IsAddOnLoaded("GroupCalendar5") then
 			EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
-
+		elseif IsAddOnLoaded("GroupCalendar5") then
+			EasyMenu(menuList2, menuFrame, "cursor", 0, 0, "MENU", 2)
+		end
 		else
 			Minimap_OnClick(self)
 		end
 	end)
+	
 end
 
 function addon:CalDisplay()

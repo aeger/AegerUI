@@ -261,6 +261,7 @@
 		SetCVar("enableCombatText", 0)
 		SetCVar("CombatDamage", 0)
 		SetCVar("CombatHealing", 0)
+		SetCVar("deselectOnClick", 1)
 	end
 	
 	function aegerUI_LoadPersonalAddonProfiles()
@@ -277,5 +278,6 @@
 			addon.db.profile.SetUpDone = true
 			aegerUI_SetCVARSINSTALL()
 			addon.db.profile.Version = aegerUI_Version
+			Bartender4.db:SetProfile("aegerUI")
 			print('Setup complete. Please reload UI to finish via "/rl".')
     end
