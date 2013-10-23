@@ -4,8 +4,12 @@ local LibStub = _G.LibStub
 local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 
+local profileVersion = "1.0"
+
 function addon:InstallTinyDPS()
 	if not IsAddOnLoaded("TinyDPS") then return end
+	
+	if addon.db.global.addonProfileVersion.TinyDPS ~= profileVersion then
 				
 	_G.aegerUI_TinyDPS_Install = {
 		["hideOOC"] = true,
@@ -64,5 +68,7 @@ _G.aegerUI_TinyDPS_Pos_Install = {
 		
 for k,v in pairs(aegerUI_TinyDPS_Pos_Install) do
 		tdpsPosition[k] = v
+		addon.db.global.addonProfileVersion.TinyDPS = profileVersion
+	end
 	end
 end

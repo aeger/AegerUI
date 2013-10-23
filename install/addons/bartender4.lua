@@ -4,8 +4,12 @@ local LibStub = _G.LibStub
 local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 
+local profileVersion = "1.0"
+
 function addon:InstallBartender()
 	if not IsAddOnLoaded("Bartender4") then return end
+	
+	if addon.db.profile.addonProfileVersionPC.Bartender4 ~= profileVersion then
 	
 	local CharName = UnitName("player")
 	local ServerName = GetRealmName()
@@ -357,11 +361,14 @@ function addon:InstallBartender()
 	for k,v in pairs(BTProfilesDefaults) do
 		Bartender4DB.profiles[k] = v
 	end
+	
+	addon.db.profile.addonProfileVersionPC.Bartender4 = profileVersion
 
 	if Bartender4DB.profileKeys[ProfileName] == nil then
 		tinsert(Bartender4DB.profileKeys,ProfileName)
 		Bartender4DB.profileKeys[ProfileName] = aUI1bar
 	elseif Bartender4DB.profileKeys[ProfileName] ~= aUI1bar then
 		Bartender4DB.profileKeys[ProfileName] = aUI1bar
+	end
 	end
 end

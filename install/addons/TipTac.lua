@@ -4,8 +4,12 @@ local LibStub = _G.LibStub
 local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 
+local profileVersion = "1.0"
+
 function addon:InstallTipTac()
 	if not IsAddOnLoaded("TipTac") then return end
+	
+	if addon.db.global.addonProfileVersion.TipTac ~= profileVersion then
 	
 		_G.aegerUI_TipTac_Install = {
 			["fontFace"] = "Fonts\\FRIZQT__.TTF",
@@ -84,5 +88,7 @@ function addon:InstallTipTac()
 		
 for k,v in pairs(aegerUI_TipTac_Install) do
 		TipTac_Config[k] = v
+		addon.db.global.addonProfileVersion.TipTac = profileVersion
+	end
 	end
 end

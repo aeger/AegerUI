@@ -4,8 +4,12 @@ local LibStub = _G.LibStub
 local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 
+local profileVersion = "1.0"
+
 function addon:InstallMounty()
 	if not IsAddOnLoaded("Mounty") then return end
+	
+	if addon.db.global.addonProfileVersion.Mounty ~= profileVersion then
 	
 		_G.aegerUI_Mounty_Install = {
 			["Horde"] = {
@@ -60,5 +64,7 @@ for k,v in pairs(aegerUI_Mounty_Install) do
 		
 for k,v in pairs(aegerUI_MountyPerChar_Install) do
 		Mounty[k] = v
+		addon.db.global.addonProfileVersion.Mounty = profileVersion
+	end
 	end
 end

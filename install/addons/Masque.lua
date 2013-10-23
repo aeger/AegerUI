@@ -4,8 +4,12 @@ local LibStub = _G.LibStub
 local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 
+local profileVersion = "1.0"
+
 function addon:InstallMasque()
 	if not IsAddOnLoaded("Masque") then return end
+	
+	if addon.db.global.addonProfileVersion.Masque ~= profileVersion then
 	
 	local Masqueprofile = "Default"
 		
@@ -108,5 +112,7 @@ function addon:InstallMasque()
 	
 	for k,v in pairs(aegerUI_Masque_Install) do
 		MasqueDB.profiles[k] = v
+		addon.db.global.addonProfileVersion.Masque = profileVersion
+	end
 	end
 end

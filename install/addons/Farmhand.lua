@@ -4,8 +4,12 @@ local LibStub = _G.LibStub
 local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 
+local profileVersion = "1.0"
+
 function addon:InstallFarmhand()
 	if not IsAddOnLoaded("Farmhand") then return end
+	
+	if addon.db.global.addonProfileVersion.Farmhand ~= profileVersion then
 				
 	_G.aegerUI_Farmhand_Install = {
 			["PlayScannerSounds"] = true,
@@ -23,5 +27,7 @@ function addon:InstallFarmhand()
 		
 for k,v in pairs(aegerUI_Farmhand_Install) do
 		FarmhandData[k] = v
+		addon.db.global.addonProfileVersion.Farmhand = profileVersion
+	end
 	end
 end

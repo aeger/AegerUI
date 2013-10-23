@@ -21,6 +21,7 @@ BINDING_HEADER_aegerUI = "aegerUI"
           ChatFrame_Position = "BOTTOM",
 		  WatchFrame_Position = "RIGHT",
 		  MiniMapEnabled = true,
+		  addonProfileVersion = {},
 		},
 		profile = {
           SetUpDone = false,
@@ -28,6 +29,7 @@ BINDING_HEADER_aegerUI = "aegerUI"
 		  NumBottomBars = 1,
 		  ShowBazBar = 1,
 		  SideBars = 1,
+		  addonProfileVersionPC = {},
 		},
 	}
 	 
