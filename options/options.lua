@@ -130,6 +130,8 @@
 							name = L["Reinstall aegerUI"],
 							order = 60,
 							func = function()
+								addon.db.global.addonProfileVersion = {}
+								addon.db.profile.addonProfileVersionPC = {}
 								addon:DoSetup()
 							end,
 							},
