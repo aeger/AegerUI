@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.6 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.7 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 
 --  Namespace -----------------------------------------------------------------	
@@ -316,7 +316,7 @@
 		Expand_Bar3:Hide()
 		MBar3:Show()
 		if addon.db.global.WatchFrame_Position == "RIGHT" then
-			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 140, -20)
+			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 160, -20)
 		end
 	end
 	
@@ -325,7 +325,7 @@
 		MBar3:Hide()
 		MBar4:Show()
 		if addon.db.global.WatchFrame_Position == "RIGHT" then
-			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 100, -20)
+			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 120, -20)
 		end
 	end
 
@@ -334,7 +334,7 @@
 		MBar4:Hide()
 		MBar3:Show()
 		if addon.db.global.WatchFrame_Position == "RIGHT" then
-			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 140, -20)
+			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 160, -20)
 		end
 	end
 
@@ -343,7 +343,7 @@
 		Expand_Bar3:Show()
 		MBar3:Hide()
 		if addon.db.global.WatchFrame_Position == "RIGHT" then
-			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 180, -20)
+			WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 200, -20)
 		end
 	end
 	
@@ -385,7 +385,7 @@
 				WatchFrame:SetPoint("TOPRIGHT", "Minimap", "BOTTOMLEFT", 200, -20)
 			end
 		elseif addon.db.global.WatchFrame_Position == "LEFT" then
-			WatchFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 30, -200)
+			WatchFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 30, -250)
 		end
 	end
 	

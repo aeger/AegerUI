@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.6 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.7 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 
 --  Namespace -----------------------------------------------------------------
@@ -18,7 +18,8 @@ BINDING_HEADER_aegerUI = "aegerUI"
 	
 	local defaults = {
 		global = {
-          WatchFrame_Position = "RIGHT",
+          ChatFrame_Position = "BOTTOM",
+		  WatchFrame_Position = "RIGHT",
 		  MiniMapEnabled = true,
 		},
 		profile = {

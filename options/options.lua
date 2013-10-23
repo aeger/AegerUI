@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.6 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.7 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
@@ -12,12 +12,9 @@
 	local AceConfig 	= LibStub("AceConfig-3.0")
 	local AceConfigReg 	= LibStub("AceConfigRegistry-3.0")
 	local AceConfigDialog 	= LibStub("AceConfigDialog-3.0")
-	
--- Define locals and local functions up here so they're in scope for the whole file
-    local GetAddOnMetadata = GetAddOnMetadata
-	local db
-	
+
 --  Options -------------------------------------------------------------------	
+-- Credit for options Torhal, I copied this from ARL --
 	local modularOptions = {}
 	
 	local function giveProfiles()
@@ -43,11 +40,6 @@
 							type = "description",
 							name = _G.GAME_VERSION_LABEL .. ": " .. addon.version .. "\n",
 							},
-							spacer1 = {
-							order = 12,
-							type = "description",
-							name = "\n",
-							},
 							header1 = {
 							order = 15,
 							type = "header",
@@ -58,19 +50,25 @@
 							type = "description",
 							name = "Set global options for aegerUI" .. "\n",
 							},
-							disableminimap = {
+							ChatFrame_Position = {
 							order = 25,
-							name = "Minimap enabled",
-							type = "toggle",
+							name = "ChatFrame Position",
+							type = "select",
 							confirm = true,
-							confirmText = "Disabling the Minimap will reload your UI, are you sure? You will need to exit wow and re-login to fully restore the Minimap",
+							confirmText = "Changes to Chatframe position will reload your UI, are you sure?",
 							get = function()
-								return addon.db.global.MiniMapEnabled
+								return addon.db.global.ChatFrame_Position
 							end,
 							set = function(info, value)
-								addon.db.global.MiniMapEnabled = value
+								addon.db.global.ChatFrame_Position = value
+								addon:ChatFrameInstall()
 								ReloadUI()
 							end,
+							values = { 
+								BOTTOM = L["Bottom"],
+								TOP = L["Top"],
+							},
+							style = "dropdown",
 							},
 							WatchFrame_Position = {
 							order = 30,
@@ -91,6 +89,26 @@
 							},
 							style = "dropdown",
 							},
+							spacer1 = {
+								order = 31,
+								type = "description",
+								width = "full",
+								name = "\n",
+							},
+							disableminimap = {
+							order = 32,
+							name = "Minimap enabled",
+							type = "toggle",
+							confirm = true,
+							confirmText = "Disabling the Minimap will reload your UI, are you sure? You will need to exit wow and re-login to fully restore the Minimap",
+							get = function()
+								return addon.db.global.MiniMapEnabled
+							end,
+							set = function(info, value)
+								addon.db.global.MiniMapEnabled = value
+								ReloadUI()
+							end,
+							},
 							spacer2 = {
 								order = 40,
 								type = "description",
@@ -107,9 +125,9 @@
 							type = "description",
 							name = "Reinstalls all addon options. This will overwrite any modifications you made!" .. "\n",
 							},
-							install = {
-								type = "execute",
-								name = L["Reinstall aegerUI"],
+							install1 = {
+							type = "execute",
+							name = L["Reinstall aegerUI"],
 							order = 60,
 							func = function()
 								addon:DoSetup()
@@ -117,8 +135,36 @@
 							},
 						},
 					},
+					scalesmall = {
+					type = "execute",
+					name = "Set UI scale to 0.64",
+					hidden = true,
+					order = 99,
+					func = function()
+						addon:SetScaleSmall()
+					end,
+					},
+					scalenormal = {
+					type = "execute",
+					name = "Set UI scale to 1",
+					hidden = true,
+					order = 99,
+					func = function()
+						addon:SetScaleNormal()
+					end,
+					},
+					install = {
+					type = "execute",
+					name = L["Reinstall aegerUI"],
+					hidden = true,
+					order = 60,
+					func = function()
+						addon:DoSetup()
+					end,
+					}
 				},
 			}
+		
 			for k, v in pairs(modularOptions) do
 			options.args[k] = (type(v) == "function") and v() or v
 		end
@@ -132,9 +178,9 @@ end
 		return
 	end
 	if not input or input:trim() == "" then
-		LibStub("AceConfigDialog-3.0"):Open("addon")
+		AceConfigDialog:Open(private.addon_name)
 	else
-		 LibStub("AceConfigCmd-3.0").HandleCommand("aui", "addon", input)
+		 LibStub("AceConfigCmd-3.0").HandleCommand(private.addon_name, "aui", "aegerUI", input)
 	end
 	end
 	
@@ -147,22 +193,6 @@ end
 	end
 	
 	function addon:RegisterModuleOptions(name, optionsTable, displayName)
-	modularOptions[name] = optionsTable
-	self.optionsFrame[name] = AceConfigDialog:AddToBlizOptions(private.addon_name, displayName, private.addon_name, name)
-end
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		modularOptions[name] = optionsTable
+		self.optionsFrame[name] = AceConfigDialog:AddToBlizOptions(private.addon_name, displayName, private.addon_name, name)
+end	

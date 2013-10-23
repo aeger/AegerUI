@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.6 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.7 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
@@ -9,7 +9,7 @@
 	local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
 	local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 		
-	local versionNumber  = "5.4.6A";
+	local versionNumber  = "5.4.7";
 	
 	local aegerUI_PersonalProfiles = true
 	
@@ -27,10 +27,8 @@
 
 -- Define locals and local functions up here so they're in scope for the whole file
     local InitSetupFrame
-    --local DoSetup
     local SetupFrame
-    --local ApplySetup
-	local aegerUI_MoveChatFrame1
+    local aegerUI_MoveChatFrame1
 	local aegerUI_InstallAddonOptions
 			
 --  Event logic  --------------------------------------------------------------
@@ -173,7 +171,7 @@
             SetupFrame:Show()
     end
 	
-    function aegerUI_MoveChatFrame1()
+    function addon:MoveChatFrame1Bottom()
             FCF_SetLocked(ChatFrame1, 1)
 		    ChatFrame1:ClearAllPoints()
             ChatFrame1:SetHeight(160)	
@@ -183,8 +181,27 @@
 		    FCF_SavePositionAndDimensions(ChatFrame1)
     end
 	
+	function addon:MoveChatFrame1Top()
+            FCF_SetLocked(ChatFrame1, 1)
+		    ChatFrame1:ClearAllPoints()
+            ChatFrame1:SetHeight(160)	
+            ChatFrame1:SetWidth(380)
+            ChatFrame1:SetPoint('TOPLEFT',UIParent,'TOPLEFT',30, -50)
+            ChatFrame1:SetUserPlaced(true);
+		    FCF_SavePositionAndDimensions(ChatFrame1)
+    end
+	
+	function addon:ChatFrameInstall()
+		if addon.db.global.ChatFrame_Position == "BOTTOM" then
+			addon:MoveChatFrame1Bottom()
+		elseif
+		addon.db.global.ChatFrame_Position == "TOP" then
+			addon:MoveChatFrame1Top()
+		end
+	end
+	
 	function aegerUI_InstallAddonOptions()
-			aegerUI_MoveChatFrame1()
+			addon:ChatFrameInstall()
 			addon:InstallAanye_XP()
 			addon:InstallBartender()
 			addon:BagSyncOptions()
@@ -221,13 +238,13 @@
 			end
 	end
 	
-	function aegerUI_SetScaleSmall()
+	function addon:SetScaleSmall()
 		UIParent:SetScale(0.64);
 		SetCVar("uiscale", "0.64");
 		SetCVar("useUiScale", 1);
 	end
 	
-	function aegerUI_SetScaleNormal()
+	function addon:SetScaleNormal()
 		UIParent:SetScale(1.0);
 		SetCVar("uiscale", "1.0");
 		SetCVar("useUiScale", 0);
@@ -262,20 +279,3 @@
 			addon.db.profile.Version = aegerUI_Version
 			print('Setup complete. Please reload UI to finish via "/rl".')
     end
-		
---  Slash Commands  -----------------------------------------------------------	
-    	
-	--SlashCmdList.INSTALLAEGERUI = function()
-            --aegerUI:DoSetup()
-    --end
-    --SLASH_INSTALLAEGERUI1 = '/install'
-	
-	SlashCmdList.AEGERUISETSMALLSCALE = function()
-            aegerUI_SetScaleSmall()
-    end
-    SLASH_AEGERUISETSMALLSCALE1 = '/auiscale1'
-	
-	SlashCmdList.AEGERUISETLARGESCALE = function()
-            aegerUI_SetScaleNormal()
-    end
-    SLASH_AEGERUISETLARGESCALE1 = '/auiscale2'

@@ -1,8 +1,8 @@
 local FOLDER_NAME, private = ...
 
-	local LibStub = _G.LibStub
-	local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-	local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local LibStub = _G.LibStub
+local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
+local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 
 function addon:InstallTipTac()
 	if not IsAddOnLoaded("TipTac") then return end

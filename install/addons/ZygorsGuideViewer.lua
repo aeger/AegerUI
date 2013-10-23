@@ -1,8 +1,8 @@
  local FOLDER_NAME, private = ...
 
-	local LibStub = _G.LibStub
-	local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-	local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local LibStub = _G.LibStub
+local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
+local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
  
  function addon:ZygorsGuideViewer()
 	if not IsAddOnLoaded("ZygorGuidesViewer") then return end
@@ -15,13 +15,18 @@
 			[ProfileName] = {
 				["tmp__was_sheened"] = true,
 				["mv_enabled"] = false,
+				["foglight"] = false,
 				["showmapbutton"] = false,
+				["fixblizzardautoaccept"] = true,
+				["showgreysellbutton"] = false,
+				["autoturnin"] = true,
 				["minicons"] = true,
 				["visible"] = false,
 				["ranconfig"] = true,
 				["skipauxsteps"] = true,
 				["magickey_bind"] = "",
 				["autogear"] = false,
+				["autoaccept"] = true,
 				["contractmobs"] = true,
 				["silentmode"] = true,
 				["frame_anchor"] = {

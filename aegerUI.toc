@@ -1,5 +1,5 @@
 ## Interface: 50400
-## Version: 5.4.6
+## Version: 5.4.7
 
 ## Title: aegerUI
 ## Notes: Aeger's UI Interface
@@ -25,4 +25,4 @@ modules\Sidebars.lua
 modules\topmenu.lua
 modules\Minimap.lua
 
-## Credit for Minimap, Sidebars, and Chat buttons Mayron
+## Credit for Minimap, Sidebars, and Chat buttons Mayron. Credit for In game options and namespace Torhal.

@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.6 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.7 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
@@ -19,6 +19,8 @@
 	L["Frame Positions"] = true
 	L["Profile Options"] = true
 	L["Profiles"] = true
+	L["Bottom"] = true
+	L["Top"] = true
 	
 -- Chat buttons  ----------------------------------------------------------------
 	L["Character"] = true
