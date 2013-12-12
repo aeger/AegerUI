@@ -1,9 +1,11 @@
 ## Interface: 50400
-## Version: 5.4.7
+## Version: 5.4.8
 
 ## Title: aegerUI
 ## Notes: Aeger's UI Interface
 ## Author: Aeger
+## X-Author-Server: Terokkar US
+## X-Author-Faction: Horde
 
 ## SavedVariables: aegerUIdb
 
@@ -12,17 +14,22 @@ embeds.xml
 locale\locale.xml
 Core.lua
 Setup.lua
-options\options.lua
 
 ## Install ##
 install\addons.xml
 
 ## Modules ##
 modules\Bottombars.lua
+modules\Chat.lua
 modules\Chatbuttons.lua
-modules\eAlign.lua
 modules\Sidebars.lua
 modules\topmenu.lua
 modules\Minimap.lua
+modules\StopAddonSpam.lua
 
-## Credit for Minimap, Sidebars, and Chat buttons Mayron. Credit for In game options and namespace Torhal.
+## X-credits: for Minimap, Sidebars, and Chat buttons Mayron.
+
+## X-Category: Suite
+## X-Localizations: enUS, deDE, esES, ruRU, zhCN
+## X-Website: http://www.aegerui.org
+## X-Feedback: http://www.wowinterface.com/downloads/info22493-aegerUI.html

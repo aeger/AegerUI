@@ -1,15 +1,15 @@
-local FOLDER_NAME, private = ...
+local aegerUI = ...
 
 local LibStub = _G.LibStub
-local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 local profileVersion = "1.0"
 
-function addon:InstallCombuctor()
+function aegerUI:InstallCombuctor()
 	if not IsAddOnLoaded("Combuctor") then return end
 	
-	if addon.db.profile.addonProfileVersionPC.Combuctor ~= profileVersion then
+	if aegerUI.db.profile.addonProfileVersionPC.Combuctor ~= profileVersion then
 	
 	local CharName = UnitName("player")
 	local ServerName = GetRealmName()
@@ -92,7 +92,7 @@ function addon:InstallCombuctor()
 		
 for k,v in pairs(aegerUI_Combuctor_Install) do
 		CombuctorDB2.profiles[k] = v
-		addon.db.profile.addonProfileVersionPC.Combuctor = profileVersion
+		aegerUI.db.profile.addonProfileVersionPC.Combuctor = profileVersion
 	end
 	end
 end

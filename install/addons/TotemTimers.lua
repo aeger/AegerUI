@@ -1,15 +1,15 @@
-local FOLDER_NAME, private = ...
+local aegerUI = ...
 
 local LibStub = _G.LibStub
-local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 local profileVersion = "1.0"
 
-function addon:InstallTotemTimers()
+function aegerUI:InstallTotemTimers()
 	if not IsAddOnLoaded("TotemTimers") then return end
 	
-	if addon.db.profile.addonProfileVersionPC.TotemTimers ~= profileVersion then
+	if aegerUI.db.profile.addonProfileVersionPC.TotemTimers ~= profileVersion then
 	
 	local CharName = UnitName("player")
 	local ServerName = GetRealmName()
@@ -480,7 +480,7 @@ function addon:InstallTotemTimers()
 
 	for k,v in pairs(aegerUITTdefProfile) do
 		TotemTimers_Profiles[k] = v
-		addon.db.profile.addonProfileVersionPC.TotemTimers = profileVersion
+		aegerUI.db.profile.addonProfileVersionPC.TotemTimers = profileVersion
 	end
 	end
 end

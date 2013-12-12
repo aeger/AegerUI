@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.7 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.8 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 
 --  Namespace -----------------------------------------------------------------	
-    local FOLDER_NAME, private = ...
+    local aegerUI = ...
 
 	local LibStub = _G.LibStub
-	local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-	local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+	local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 --  Constants  ----------------------------------------------------------------
     local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
@@ -31,6 +31,8 @@
 	local Chat1LBtext
 	local Chat1MBtext
 	local Chat1RBtext
+	local Bar4PetBar = Bartender4:GetModule("PetBar", true)
+	local Bar4StanceBar = Bartender4:GetModule("StanceBar", true)
 			
 --  Event logic  --------------------------------------------------------------
 	local ChatButtonsEvent = CreateFrame('Frame')
@@ -83,7 +85,7 @@
 		  local Chat1texture = Chat1Frame:CreateTexture(nil, "BACKGROUND")
 		  Chat1texture:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 12)
 	      Chat1texture:SetPoint("LEFT", UIParent, "LEFT", -5, 0)
-	      Chat1texture:SetSize(370, 270)
+	      Chat1texture:SetSize(370, 220)
 	      Chat1texture:SetTexture(MEDIA_PATH .. "textures\\chat-b")		
 	      Chat1texture:SetVertexColor(0, 0, 0, 0.5)
 		  Chat1Frame.Chat1texture = Chat1texture
@@ -106,23 +108,23 @@
 				if TMMenuFrame:IsVisible() then
                         TMMenuHide()
                         HideBazookaBars()
-                        addon.db.profile.TopMenuShow = false
+                        aegerUI.db.profile.TopMenuShow = false
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 else
                         TMMenuDisplay()
-                        if addon.db.profile.ShowBazBar == 1 then
+                        if aegerUI.db.profile.ShowBazBar == 1 then
 							ShowBazookaBar1()
 						elseif
-						addon.db.profile.ShowBazBar == 2 then
+						aegerUI.db.profile.ShowBazBar == 2 then
 							ShowBazookaBar2()
 						elseif
-						addon.db.profile.ShowBazBar == 3 then
+						aegerUI.db.profile.ShowBazBar == 3 then
 							ShowBazookaBar3()
 						elseif
-						addon.db.profile.ShowBazBar == 4 then
+						aegerUI.db.profile.ShowBazBar == 4 then
 							ShowBazookaBar4()
 						end
-                        addon.db.profile.TopMenuShow = true
+                        aegerUI.db.profile.TopMenuShow = true
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 end
             elseif button == "RightButton" then
@@ -130,15 +132,15 @@
 					print("Cannot toggle Bottom Bars during combat.")
 					return
 				end
-				if addon.db.profile.NumBottomBars == 1 then
+				if aegerUI.db.profile.NumBottomBars == 1 then
                         aegerUI_2Bar()
-                        addon.db.profile.NumBottomBars = 2
+                        aegerUI.db.profile.NumBottomBars = 2
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar2Display()
                         Bbar1Hide()
-                elseif addon.db.profile.NumBottomBars == 2 then
+                elseif aegerUI.db.profile.NumBottomBars == 2 then
                         aegerUI_1Bar()
-                        addon.db.profile.NumBottomBars = 1
+                        aegerUI.db.profile.NumBottomBars = 1
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar1Display()
                         Bbar2Hide()
@@ -330,7 +332,7 @@
 		  local Chat1texture = Chat1Frame:CreateTexture(nil, "BACKGROUND")
 		  Chat1texture:SetPoint("TOP", UIParent, "TOP", 0, -12)
 	      Chat1texture:SetPoint("LEFT", UIParent, "LEFT", -5, 0)
-	      Chat1texture:SetSize(370, 270)
+	      Chat1texture:SetSize(370, 220)
 	      Chat1texture:SetTexture(MEDIA_PATH .. "textures\\chat-t")		
 	      Chat1texture:SetVertexColor(0, 0, 0, 0.5)
 		  Chat1Frame.Chat1texture = Chat1texture
@@ -353,23 +355,23 @@
 				if TMMenuFrame:IsVisible() then
                         TMMenuHide()
                         HideBazookaBars()
-                        addon.db.profile.TopMenuShow = false
+                        aegerUI.db.profile.TopMenuShow = false
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 else
                         TMMenuDisplay()
-                        if addon.db.profile.ShowBazBar == 1 then
+                        if aegerUI.db.profile.ShowBazBar == 1 then
 							ShowBazookaBar1()
 						elseif
-						addon.db.profile.ShowBazBar == 2 then
+						aegerUI.db.profile.ShowBazBar == 2 then
 							ShowBazookaBar2()
 						elseif
-						addon.db.profile.ShowBazBar == 3 then
+						aegerUI.db.profile.ShowBazBar == 3 then
 							ShowBazookaBar3()
 						elseif
-						addon.db.profile.ShowBazBar == 4 then
+						aegerUI.db.profile.ShowBazBar == 4 then
 							ShowBazookaBar4()
 						end
-                        addon.db.profile.TopMenuShow = true
+                        aegerUI.db.profile.TopMenuShow = true
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                 end
             elseif button == "RightButton" then
@@ -377,15 +379,15 @@
 					print("Cannot toggle Bottom Bars during combat.")
 					return
 				end
-				if addon.db.profile.NumBottomBars == 1 then
+				if aegerUI.db.profile.NumBottomBars == 1 then
                         aegerUI_2Bar()
-                        addon.db.profile.NumBottomBars = 2
+                        aegerUI.db.profile.NumBottomBars = 2
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar2Display()
                         Bbar1Hide()
-                elseif addon.db.profile.NumBottomBars == 2 then
+                elseif aegerUI.db.profile.NumBottomBars == 2 then
                         aegerUI_1Bar()
-                        addon.db.profile.NumBottomBars = 1
+                        aegerUI.db.profile.NumBottomBars = 1
                         PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
                         Bbar1Display()
                         Bbar2Hide()
@@ -550,12 +552,18 @@
 
 --  Core logic  ---------------------------------------------------------------
     function Chat1Display()
-	  if addon.db.global.ChatFrame_Position == "BOTTOM" then
+	  if aegerUI.db.global.ChatFrame_Position == "BOTTOM" then
 	    ChatButtonsFrame()
 		Chat1Frame:Show()
+		if IsAddOnLoaded("Grid") then
+			Grid.db:SetProfile("aegerUIB")
+		end
 	  else
 	    ChatButtonsFrameTop()
 		Chat1Frame:Show()
+		if IsAddOnLoaded("Grid") then
+			Grid.db:SetProfile("aegerUI")
+		end
 	  end
 	    
     end
@@ -564,7 +572,17 @@
 		if Bartender4.db:GetCurrentProfile() == "aegerUI" then
                 Bartender4.Bar.barregistry["6"]:SetVisibilityOption("always",true)
                 Bartender4.Bar.barregistry["5"]:SetVisibilityOption("always",true)
-            else
+				if Bar4PetBar then
+					Bartender4DB["namespaces"]["PetBar"]["profiles"]["aegerUI"]["position"]["x"] = -179
+					Bartender4DB["namespaces"]["PetBar"]["profiles"]["aegerUI"]["position"]["y"] = 79
+					Bar4PetBar.bar:ApplyConfig(Bartender4DB["namespaces"]["PetBar"]["profiles"][aegerUI])
+				end
+				if Bar4StanceBar then
+					Bartender4DB["namespaces"]["StanceBar"]["profiles"]["aegerUI"]["position"]["x"] = -470
+					Bartender4DB["namespaces"]["StanceBar"]["profiles"]["aegerUI"]["position"]["y"] = 79
+					Bar4StanceBar.bar:ApplyConfig(Bartender4DB["namespaces"]["StanceBar"]["profiles"][aegerUI])
+				end
+			else
                 print("|cff00ccffaegerUI: |cffff0000Bartender Action Bars will not expand while there is a custom profile in use!")
             end
 	end
@@ -573,6 +591,16 @@
 		if Bartender4.db:GetCurrentProfile() == "aegerUI" then
                 Bartender4.Bar.barregistry["6"]:SetVisibilityOption("always",false)
                 Bartender4.Bar.barregistry["5"]:SetVisibilityOption("always",false)
+				if Bar4PetBar then
+					Bartender4DB["namespaces"]["PetBar"]["profiles"]["aegerUI"]["position"]["x"] = -179
+					Bartender4DB["namespaces"]["PetBar"]["profiles"]["aegerUI"]["position"]["y"] = 122
+					Bar4PetBar.bar:ApplyConfig(Bartender4DB["namespaces"]["PetBar"]["profiles"][aegerUI])
+				end
+				if Bar4StanceBar then
+					Bartender4DB["namespaces"]["StanceBar"]["profiles"]["aegerUI"]["position"]["x"] = -470
+					Bartender4DB["namespaces"]["StanceBar"]["profiles"]["aegerUI"]["position"]["y"] = 122
+					Bar4StanceBar.bar:ApplyConfig(Bartender4DB["namespaces"]["StanceBar"]["profiles"][aegerUI])
+				end
             else
                 print("|cff00ccffaegerUI: |cffff0000Bartender Action Bars will not expand while there is a custom profile in use!")
             end

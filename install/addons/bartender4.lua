@@ -1,15 +1,15 @@
-local FOLDER_NAME, private = ...
+local aegerUI = ...
 
 local LibStub = _G.LibStub
-local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
-local profileVersion = "1.0"
+local profileVersion = "1.1"
 
-function addon:InstallBartender()
+function aegerUI:InstallBartender()
 	if not IsAddOnLoaded("Bartender4") then return end
 	
-	if addon.db.global.addonProfileVersion.Bartender4 ~= profileVersion then
+	if aegerUI.db.global.addonProfileVersion.Bartender4 ~= profileVersion then
 	
 	local CharName = UnitName("player")
 	local ServerName = GetRealmName()
@@ -64,7 +64,7 @@ function addon:InstallBartender()
 		Bartender4DB.namespaces.XPBar.profiles[k] = v
 	end
 
-	if addon.db.profile.NumBottomBars == 1 then
+	if aegerUI.db.profile.NumBottomBars == 1 then
 	_G.ActionBarsDefaults = {
 		[aUI1bar] = {
 			["actionbars"] = {
@@ -101,8 +101,8 @@ function addon:InstallBartender()
 							["hidemacrotext"] = true,
 							["version"] = 3,
 							["position"] = {
-								["y"] = 200,
-								["x"] = -40,
+								["y"] = 288,
+								["x"] = -41,
 								["point"] = "RIGHT",
 								["scale"] = 0.95,
 							},
@@ -119,8 +119,8 @@ function addon:InstallBartender()
 							["hidemacrotext"] = true,
 							["version"] = 3,
 							["position"] = {
-								["y"] = 200,
-								["x"] = -75,
+								["y"] = 288,
+								["x"] = -71,
 								["point"] = "RIGHT",
 								["scale"] = 0.95,
 							},
@@ -175,7 +175,7 @@ function addon:InstallBartender()
 	end
 	end
 	
-	if addon.db.profile.NumBottomBars == 2 then
+	if aegerUI.db.profile.NumBottomBars == 2 then
 	_G.ActionBarsDefaults = {
 		[aUI1bar] = {
 			["actionbars"] = {
@@ -212,8 +212,8 @@ function addon:InstallBartender()
 							["padding"] = 3,
 							["version"] = 3,
 							["position"] = {
-								["y"] = 200,
-								["x"] = -40,
+								["y"] = 288,
+								["x"] = -41,
 								["point"] = "RIGHT",
 								["scale"] = 0.95,
 							},
@@ -230,8 +230,8 @@ function addon:InstallBartender()
 							["padding"] = 3,
 							["version"] = 3,
 							["position"] = {
-								["y"] = 200,
-								["x"] = -75,
+								["y"] = 288,
+								["x"] = -71,
 								["point"] = "RIGHT",
 								["scale"] = 0.95,
 							},
@@ -297,7 +297,27 @@ function addon:InstallBartender()
 	for k,v in pairs(VehicleDefaults) do
 		Bartender4DB.namespaces.Vehicle.profiles[k] = v
 	end
+	
+	if aegerUI.db.profile.NumBottomBars == 1 then
+	_G.StanceBarDefaults = {
+		[aUI1bar] = {
+			["position"] = {
+				["y"] = 79,
+				["x"] = -470,
+				["point"] = "BOTTOM",
+				["scale"] = 1,
+			},
+				["padding"] = 3,
+				["version"] = 3,
+		},
+	}
 
+	for k,v in pairs(StanceBarDefaults) do
+		Bartender4DB.namespaces.StanceBar.profiles[k] = v
+	end
+	end
+	
+	if aegerUI.db.profile.NumBottomBars == 2 then
 	_G.StanceBarDefaults = {
 		[aUI1bar] = {
 			["position"] = {
@@ -314,7 +334,26 @@ function addon:InstallBartender()
 	for k,v in pairs(StanceBarDefaults) do
 		Bartender4DB.namespaces.StanceBar.profiles[k] = v
 	end
+	end
+	
+	if aegerUI.db.profile.NumBottomBars == 1 then
+	_G.PetBarDefaults = {
+		[aUI1bar] = {
+			["version"] = 3,
+			["position"] = {
+				["y"] = 79,
+				["x"] = -179,
+				["point"] = "BOTTOM",
+			},
+		},
+	}
 
+	for k,v in pairs(PetBarDefaults) do
+		Bartender4DB.namespaces.PetBar.profiles[k] = v
+	end
+	end
+	
+	if aegerUI.db.profile.NumBottomBars == 2 then
 	_G.PetBarDefaults = {
 		[aUI1bar] = {
 			["version"] = 3,
@@ -328,6 +367,7 @@ function addon:InstallBartender()
 
 	for k,v in pairs(PetBarDefaults) do
 		Bartender4DB.namespaces.PetBar.profiles[k] = v
+	end
 	end
 
 	_G.MicroMenuDefaults = {
@@ -362,7 +402,7 @@ function addon:InstallBartender()
 		Bartender4DB.profiles[k] = v
 	end
 	
-	addon.db.global.addonProfileVersion.Bartender4 = profileVersion
+	aegerUI.db.global.addonProfileVersion.Bartender4 = profileVersion
 
 	--[[if Bartender4DB.profileKeys[ProfileName] == nil then
 		tinsert(Bartender4DB.profileKeys,ProfileName)

@@ -11,4 +11,5 @@
   <Include file="libs\CallbackHandler-1.0\CallbackHandler-1.0.xml"/>
   <Script file="libs\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
   <Script file="libs\LibDualSpec-1.0\LibDualSpec-1.0.lua"/>
+  <Script file="libs\LibAboutPanel.lua" />
 </Ui>

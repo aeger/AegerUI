@@ -12,10 +12,13 @@
 	<Script file="addons\ExtVendor.lua"/>
 	<Script file="addons\Farmhand.lua"/>
 	<Script file="addons\GatherMate2.lua"/>
+	<Script file="addons\Grid.lua"/>
 	<Script file="addons\HandyNotes.lua"/>
 	<Script file="addons\Mapster.lua"/>
 	<Script file="addons\Masque.lua"/>
 	<Script file="addons\Mounty.lua"/>
+	<Script file="addons\nibChatTabs.lua"/>
+	<Script file="addons\oUF_MovableFrames.lua"/>
 	<Script file="addons\oUF_Phanx.lua"/>
 	<Script file="addons\Parrot.lua"/>
 	<Script file="addons\Prat.lua"/>

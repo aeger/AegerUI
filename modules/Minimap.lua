@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.7 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.8 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 
 --  Namespace -----------------------------------------------------------------	
-	local FOLDER_NAME, private = ...
+	local aegerUI = ...
 
 	local LibStub = _G.LibStub
-	local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-	local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+	local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
     	
 --  Constants  ----------------------------------------------------------------
 	local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
@@ -35,19 +35,19 @@
 
 --  Events  ---------------------------------------------------------------------
     function EventFrame:PLAYER_LOGIN()
-		if not addon.db.global.MiniMapEnabled then return end
-			addon:InitializeMiniMap()
+		if not aegerUI.db.global.MiniMapEnabled then return end
+			aegerUI:InitializeMiniMap()
 	end
 
 	function EventFrame:CALENDAR_UPDATE_PENDING_INVITES()
-		addon:CalDisplay()
+		aegerUI:CalDisplay()
     end	
 	
 	function EventFrame:CALENDAR_ACTION_PENDING()
-		addon:CalDisplay()
+		aegerUI:CalDisplay()
     end	
 
-function addon:MiniMapDisplay()
+function aegerUI:MiniMapDisplay()
 	Minimap:ClearAllPoints()
 	Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -18, -18)
 	Minimap:SetSize(187, 187)
@@ -67,7 +67,7 @@ function addon:MiniMapDisplay()
 	}
 end
 
-function addon:HideBlizzardMM()
+function aegerUI:HideBlizzardMM()
 	MiniMapInstanceDifficulty:ClearAllPoints()
 	GuildInstanceDifficulty:ClearAllPoints()
 	MinimapBorder:Hide()
@@ -102,7 +102,7 @@ function CalendarDisplay()
 	end)
 end
 
-function addon:MMClockDisplay()
+function aegerUI:MMClockDisplay()
 	if not IsAddOnLoaded("Blizzard_TimeManager") then
 		LoadAddOn("Blizzard_TimeManager")
 	end
@@ -116,7 +116,7 @@ function addon:MMClockDisplay()
 	clockTime:SetTextColor(classcolor.r, classcolor.g, classcolor.b)
 end
 
-function addon:MMRaidDificulty()
+function aegerUI:MMRaidDificulty()
 	local _, class = UnitClass("player")
 	local raidc = RAID_CLASS_COLORS[class]
 	local id = CreateFrame("Frame", nil, UIParent)
@@ -162,7 +162,7 @@ function addon:MMRaidDificulty()
 	id:SetScript("OnEvent", settxt)
 end
 
-function addon:MMTracking()
+function aegerUI:MMTracking()
 	MiniMapTrackingBackground:Hide()
 	MiniMapTracking:Show()
 	MiniMapTracking:SetAlpha(1)
@@ -172,7 +172,7 @@ function addon:MMTracking()
 	MiniMapTracking:SetScale(0.8)
 end
 
-function addon:MinimapMailIcon()
+function aegerUI:MinimapMailIcon()
 	MiniMapMailFrame:ClearAllPoints()
 	MiniMapMailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 4, 4)
 	MiniMapMailFrame:SetFrameStrata("LOW")
@@ -181,7 +181,7 @@ function addon:MinimapMailIcon()
 	MiniMapMailBorder:Hide()
 end
 
-function addon:MiniMapQueueIcons()
+function aegerUI:MiniMapQueueIcons()
 	QueueStatusMinimapButton:SetParent(Minimap)
 	QueueStatusMinimapButton:ClearAllPoints()
 	QueueStatusMinimapButton:SetPoint("BOTTOMLEFT", -4, -4)
@@ -194,7 +194,7 @@ function addon:MiniMapQueueIcons()
 	end
 end
 
-function addon:MiniMapChanges()
+function aegerUI:MiniMapChanges()
 	Minimap:EnableMouseWheel(true)
 	Minimap:SetScript("OnMouseWheel", function(self, minimap)
 		if minimap > 0 then
@@ -217,7 +217,7 @@ function addon:MiniMapChanges()
 	--border:SetBackdropColor(1, 1, 1, 1)
 end
 
-function addon:MiniMapRightClickMenu()
+function aegerUI:MiniMapRightClickMenu()
 	local menuFrame = CreateFrame("Frame", "MinimapRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 	local menuList = {
 		{
@@ -258,8 +258,8 @@ function addon:MiniMapRightClickMenu()
 	
 end
 
-function addon:CalDisplay()
-	if not addon.db.global.MiniMapEnabled then return end
+function aegerUI:CalDisplay()
+	if not aegerUI.db.global.MiniMapEnabled then return end
 	if not aegerUIcal then
 		CalendarDisplay()
 	end
@@ -270,14 +270,14 @@ function addon:CalDisplay()
 		end
 end
 
-function addon:InitializeMiniMap()
-	addon:MiniMapDisplay()
-	addon:HideBlizzardMM()
-	addon:MMClockDisplay()
-	addon:MMRaidDificulty()
-	addon:MMTracking()
-	addon:MinimapMailIcon()
-	addon:MiniMapQueueIcons()
-	addon:MiniMapChanges()
-	addon:MiniMapRightClickMenu()
+function aegerUI:InitializeMiniMap()
+	aegerUI:MiniMapDisplay()
+	aegerUI:HideBlizzardMM()
+	aegerUI:MMClockDisplay()
+	aegerUI:MMRaidDificulty()
+	aegerUI:MMTracking()
+	aegerUI:MinimapMailIcon()
+	aegerUI:MiniMapQueueIcons()
+	aegerUI:MiniMapChanges()
+	aegerUI:MiniMapRightClickMenu()
 end

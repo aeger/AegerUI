@@ -1,15 +1,15 @@
-local FOLDER_NAME, private = ...
+local aegerUI = ...
 
 local LibStub = _G.LibStub
-local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 local profileVersion = "1.0"
 
-function addon:InstalloUF_Phanx()
+function aegerUI:InstalloUF_Phanx()
 	if not IsAddOnLoaded("oUF_Phanx") then return end
 	
-	if addon.db.global.addonProfileVersion.oUF_Phanx ~= profileVersion then
+	if aegerUI.db.global.addonProfileVersion.oUF_Phanx ~= profileVersion then
 	
 		_G.aegerUI_oUF_Phanx_Install = {
 		["backdropColor"] = {
@@ -60,7 +60,7 @@ function addon:InstalloUF_Phanx()
 		
 for k,v in pairs(aegerUI_oUF_Phanx_Install) do
 		oUFPhanxConfig[k] = v
-		addon.db.global.addonProfileVersion.oUF_Phanx = profileVersion
+		aegerUI.db.global.addonProfileVersion.oUF_Phanx = profileVersion
 	end
 	end
 end

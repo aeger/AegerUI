@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.7 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.8 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 
 --  Namespace -----------------------------------------------------------------	
-	local FOLDER_NAME, private = ...
+	local aegerUI = ...
 
 	local LibStub = _G.LibStub
-	local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-	local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+	local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
     	
 --  Constants  ----------------------------------------------------------------
 	local MEDIA_PATH = "Interface\\AddOns\\aegerUI\\media\\"
@@ -42,20 +42,20 @@
 
 --  Events  ---------------------------------------------------------------------
     function TMEventFrame:PLAYER_LOGIN()
-             if addon.db.profile.TopMenuShow then
-			 if addon.db.profile.ShowBazBar == 1 then
+             if aegerUI.db.profile.TopMenuShow then
+			 if aegerUI.db.profile.ShowBazBar == 1 then
 					TMMenuDisplay()
 					ShowBazookaBar1()
 			 elseif
-			    addon.db.profile.ShowBazBar == 2 then
+			    aegerUI.db.profile.ShowBazBar == 2 then
 					TMMenuDisplay()
 					ShowBazookaBar2()
 			 elseif
-				addon.db.profile.ShowBazBar == 3 then
+				aegerUI.db.profile.ShowBazBar == 3 then
 					TMMenuDisplay()
 					ShowBazookaBar3()
 			elseif
-				addon.db.profile.ShowBazBar == 4 then
+				aegerUI.db.profile.ShowBazBar == 4 then
 					TMMenuDisplay()
 					ShowBazookaBar4()
 			 end
@@ -128,24 +128,24 @@
 				print("Cannot toggle TopMenu during combat.")
 				return
 			end
-			if addon.db.profile.ShowBazBar == 1 then
+			if aegerUI.db.profile.ShowBazBar == 1 then
 				ShowBazookaBar2()
-				addon.db.profile.ShowBazBar = 2
+				aegerUI.db.profile.ShowBazBar = 2
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
 			elseif
-				addon.db.profile.ShowBazBar == 2 then
+				aegerUI.db.profile.ShowBazBar == 2 then
 				ShowBazookaBar3()
-				addon.db.profile.ShowBazBar = 3
+				aegerUI.db.profile.ShowBazBar = 3
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
 			elseif
-				addon.db.profile.ShowBazBar == 3 then
+				aegerUI.db.profile.ShowBazBar == 3 then
 				ShowBazookaBar4()
-				addon.db.profile.ShowBazBar = 4
+				aegerUI.db.profile.ShowBazBar = 4
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
 			elseif
-				addon.db.profile.ShowBazBar == 4 then
+				aegerUI.db.profile.ShowBazBar == 4 then
 				ShowBazookaBar1()
-				addon.db.profile.ShowBazBar = 1
+				aegerUI.db.profile.ShowBazBar = 1
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
 				end
 			end
@@ -173,24 +173,24 @@
 				print("Cannot toggle TopMenu during combat.")
 				return
 			end
-			if addon.db.profile.ShowBazBar == 1 then
+			if aegerUI.db.profile.ShowBazBar == 1 then
 				ShowBazookaBar4()
-				addon.db.profile.ShowBazBar = 4
+				aegerUI.db.profile.ShowBazBar = 4
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
 			elseif
-				addon.db.profile.ShowBazBar == 4 then
+				aegerUI.db.profile.ShowBazBar == 4 then
 				ShowBazookaBar3()
-				addon.db.profile.ShowBazBar = 3
+				aegerUI.db.profile.ShowBazBar = 3
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
 			elseif
-				addon.db.profile.ShowBazBar == 3 then
+				aegerUI.db.profile.ShowBazBar == 3 then
 				ShowBazookaBar2()
-				addon.db.profile.ShowBazBar = 2
+				aegerUI.db.profile.ShowBazBar = 2
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
 			elseif
-				addon.db.profile.ShowBazBar == 2 then
+				aegerUI.db.profile.ShowBazBar == 2 then
 				ShowBazookaBar1()
-				addon.db.profile.ShowBazBar = 1
+				aegerUI.db.profile.ShowBazBar = 1
 				PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
 				end
 			end
@@ -224,7 +224,7 @@
 
 	function ShowBazookaBar1()
       Bazooka.db:SetProfile("BazBar1")
-	  if addon.db.profile.SetUpDone then
+	  if aegerUI.db.profile.SetUpDone then
 	  BazookaBar_3:Show()
 	  BazookaBar_1:Hide()
 	end

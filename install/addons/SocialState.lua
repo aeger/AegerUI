@@ -1,15 +1,15 @@
-local FOLDER_NAME, private = ...
+local aegerUI = ...
 
 local LibStub = _G.LibStub
-local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 local profileVersion = "1.0"
 
-function addon:InstallSocialState()
+function aegerUI:InstallSocialState()
 	if not IsAddOnLoaded("SocialState") then return end
 	
-	if addon.db.global.addonProfileVersion.SocialState ~= profileVersion then
+	if aegerUI.db.global.addonProfileVersion.SocialState ~= profileVersion then
 				
 	_G.aegerUI_SocialState_Install = {
 			["RealIDSort"] = "REALID",
@@ -21,7 +21,7 @@ function addon:InstallSocialState()
 		
 for k,v in pairs(aegerUI_SocialState_Install) do
 		SocialStateDB[k] = v
-		addon.db.global.addonProfileVersion.SocialState = profileVersion
+		aegerUI.db.global.addonProfileVersion.SocialState = profileVersion
 	end
 	end
 end

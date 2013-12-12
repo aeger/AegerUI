@@ -192,6 +192,13 @@ end
 		self:RegisterModuleOptions("Profiles", giveProfiles(), L["Profile Options"])
 		addon:RegisterChatCommand( "aui", "ChatCommands")
 		addon:RegisterChatCommand( "aegerUI", "ChatCommands")
+		
+		-- Add in the about panel to the Bliz options (not a part of the ace3 config)
+	if LibStub:GetLibrary("LibAboutPanel", true) then
+		self.optionsFrame["About"] = LibStub:GetLibrary("LibAboutPanel").new(private.addon_name, private.addon_name)
+	else
+		self:Print("Lib AboutPanel not loaded.")
+	end
 	end
 	
 	function addon:RegisterModuleOptions(name, optionsTable, displayName)

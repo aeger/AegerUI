@@ -1,15 +1,15 @@
-local FOLDER_NAME, private = ...
+local aegerUI = ...
 
 local LibStub = _G.LibStub
-local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 local profileVersion = "1.0"
 
-function addon:InstallGatherMate2()
+function aegerUI:InstallGatherMate2()
 	if not IsAddOnLoaded("GatherMate2") then return end
 	
-	if addon.db.global.addonProfileVersion.GatherMate2 ~= profileVersion then
+	if aegerUI.db.global.addonProfileVersion.GatherMate2 ~= profileVersion then
 	
 	local GM2profile = "Default"
 		
@@ -41,7 +41,7 @@ function addon:InstallGatherMate2()
 	
 	for k,v in pairs(aegerUI_GatherMate2_Install) do
 		GatherMate2DB.profiles[k] = v
-		addon.db.global.addonProfileVersion.GatherMate2 = profileVersion
+		aegerUI.db.global.addonProfileVersion.GatherMate2 = profileVersion
 	end
 	end
 end

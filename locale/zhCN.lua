@@ -12,6 +12,15 @@
 	L["Cancel"] = "取消"
 	L["Reload"] = "刷新"
 	L["Watchframe Position"] = "Позиция Watchframe"
+	L["Right"] =  "右"
+	L["Left"] = "左"
+	L["Changes to Watchframe position will reload your UI, are you sure?"] = "更改到Watchframe位置会重新载入你的UI，你确定吗？"
+	L["Reinstall aegerUI"] = "重新安装"
+	L["Frame Positions"] = "帧位置"
+	L["Profile Options"] = "个人资料选项"
+	L["Profiles"] = "简介"
+	L["Bottom"] = "底部"
+	L["Top"] = "顶部"
 	
 -- Chat buttons  ----------------------------------------------------------------
 	L["Character"] = "字符"

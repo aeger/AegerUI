@@ -1,15 +1,15 @@
-local FOLDER_NAME, private = ...
+local aegerUI = ...
 
 local LibStub = _G.LibStub
-local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 local profileVersion = "1.0"
 
-function addon:InstallHandyNotes()
+function aegerUI:InstallHandyNotes()
 	if not IsAddOnLoaded("HandyNotes") then return end
 	
-	if addon.db.global.addonProfileVersion.HandyNotes ~= profileVersion then
+	if aegerUI.db.global.addonProfileVersion.HandyNotes ~= profileVersion then
 	
 		_G.aegerUI_HandyNotes_Install = {
 		["AhnQirajTheFallenKingdom"] = {
@@ -3474,7 +3474,7 @@ function addon:InstallHandyNotes()
 		
 for k,v in pairs(aegerUI_HandyNotes_Install) do
 		HandyNotes_HandyNotesDB.global[k] = v
-		addon.db.global.addonProfileVersion.HandyNotes = profileVersion
+		aegerUI.db.global.addonProfileVersion.HandyNotes = profileVersion
 	end
 	end
 end

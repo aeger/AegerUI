@@ -1,15 +1,15 @@
-local FOLDER_NAME, private = ...
+local aegerUI = ...
 
 local LibStub = _G.LibStub
-local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 local profileVersion = "1.0"
 
-function addon:InstallQuestUnTracker()
+function aegerUI:InstallQuestUnTracker()
 	if not IsAddOnLoaded("QuestUnTracker") then return end
 	
-	if addon.db.global.addonProfileVersion.QuestUnTracker ~= profileVersion then
+	if aegerUI.db.global.addonProfileVersion.QuestUnTracker ~= profileVersion then
 	
 		_G.aegerUI_QuestUnTracker_Install = {
 			["normals"] = true,
@@ -18,7 +18,7 @@ function addon:InstallQuestUnTracker()
 		
 for k,v in pairs(aegerUI_QuestUnTracker_Install) do
 		QuestUnTrackerDB.global[k] = v
-		addon.db.global.addonProfileVersion.QuestUnTracker = profileVersion
+		aegerUI.db.global.addonProfileVersion.QuestUnTracker = profileVersion
 	end
 	end
 end

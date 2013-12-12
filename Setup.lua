@@ -1,17 +1,17 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.7 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.8 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
-	local FOLDER_NAME, private = ...
+	local aegerUI = ...
 
 	local LibStub = _G.LibStub
-	local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-	local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+	local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 		
-	local versionNumber  = "5.4.7";
+	local versionNumber  = "5.4.8";
 	
-	local aegerUI_PersonalProfiles = true
+	local aegerUI_PersonalProfiles = false
 	
 	AUI_Beta = false;
 				
@@ -30,6 +30,7 @@
     local SetupFrame
     local aegerUI_MoveChatFrame1
 	local aegerUI_InstallAddonOptions
+	local CharName = UnitName("player")
 			
 --  Event logic  --------------------------------------------------------------
     local EventFrame = CreateFrame('Frame')
@@ -49,11 +50,14 @@
      
 --  Events  ---------------------------------------------------------------------
     function EventFrame:PLAYER_LOGIN()
-			if addon.db.profile.SetUpDone == false then
-                    addon:DoSetup()
+			if aegerUI.db.profile.SetUpDone == false then
+                    aegerUI:DoSetup()
             end
-			if addon.db.profile.Version ~= aegerUI_Version then
-					addon:DoSetup()
+			if aegerUI.db.profile.Version ~= aegerUI_Version then
+					aegerUI:DoSetup()
+			end
+			if aegerUI.db.global.DisableStartUpMessage == false then
+			DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Welcome back|r|cFFFF0000 "..CharName.."|r|cFF00FF00 type |r/aui |cFF00FF00for aegerUI options", 1.0, 1.0, 1.0, nil, true);
 			end
     end
 		
@@ -122,7 +126,7 @@
             SetupButton:SetScript("OnEnter", BigButton_OnEnter)
             SetupButton:SetScript("OnLeave", Button_OnLeave)
             SetupButton:SetScript("OnClick", function(self)
-                    addon:ApplySetup()
+                    aegerUI:ApplySetup()
                     self:Hide()
 					ReloadButton:Show()
             end)
@@ -163,7 +167,7 @@
 	end
          
 --  Core logic  ---------------------------------------------------------------
-    function addon:DoSetup()
+    function aegerUI:DoSetup()
             PlaySoundFile(MEDIA_PATH .. "sound\\click.mp3")
             if not SetupFrame then  -- the SetupFrame hasnt been created
                     InitSetupFrame()
@@ -171,7 +175,7 @@
             SetupFrame:Show()
     end
 	
-    function addon:MoveChatFrame1Bottom()
+    function aegerUI:MoveChatFrame1Bottom()
             FCF_SetLocked(ChatFrame1, 1)
 		    ChatFrame1:ClearAllPoints()
             ChatFrame1:SetHeight(160)	
@@ -181,7 +185,7 @@
 		    FCF_SavePositionAndDimensions(ChatFrame1)
     end
 	
-	function addon:MoveChatFrame1Top()
+	function aegerUI:MoveChatFrame1Top()
             FCF_SetLocked(ChatFrame1, 1)
 		    ChatFrame1:ClearAllPoints()
             ChatFrame1:SetHeight(160)	
@@ -191,41 +195,44 @@
 		    FCF_SavePositionAndDimensions(ChatFrame1)
     end
 	
-	function addon:ChatFrameInstall()
-		if addon.db.global.ChatFrame_Position == "BOTTOM" then
-			addon:MoveChatFrame1Bottom()
+	function aegerUI:ChatFrameInstall()
+		if aegerUI.db.global.ChatFrame_Position == "BOTTOM" then
+			aegerUI:MoveChatFrame1Bottom()
 		elseif
-		addon.db.global.ChatFrame_Position == "TOP" then
-			addon:MoveChatFrame1Top()
+		aegerUI.db.global.ChatFrame_Position == "TOP" then
+			aegerUI:MoveChatFrame1Top()
 		end
 	end
 	
 	function aegerUI_InstallAddonOptions()
-			addon:ChatFrameInstall()
-			addon:InstallAanye_XP()
-			addon:InstallBartender()
-			addon:BagSyncOptions()
-			addon:InstallBazooka()
-			addon:InstallBrokerDurability()
-			addon:InstallBrokerMicroMenu()
-			addon:InstallBrokerMoneyFu()
-			addon:InstallCombuctor()
-			addon:InstallExtSocialUI()
-			addon:InstallExtVendor()
-			addon:InstallFarmhand()
-			addon:InstallGatherMate2()
-			addon:InstallHandyNotes()
-			addon:InstallMapster()
-			addon:InstallMasque()
-			addon:InstalloUF_Phanx()
-			addon:InstallParrot()
-			addon:InstallPrat()
-			addon:InstallQuestUnTracker()
-			addon:InstallSocialState()
-			addon:InstallTinyDPS()
-			addon:InstallTipTac()
-			addon:InstallTotemTimers()
-			addon:ZygorsGuideViewer()
+			aegerUI:ChatFrameInstall()
+			aegerUI:InstallAanye_XP()
+			aegerUI:InstallBartender()
+			aegerUI:BagSyncOptions()
+			aegerUI:InstallBazooka()
+			aegerUI:InstallBrokerDurability()
+			aegerUI:InstallBrokerMicroMenu()
+			aegerUI:InstallBrokerMoneyFu()
+			aegerUI:InstallCombuctor()
+			aegerUI:InstallExtSocialUI()
+			aegerUI:InstallExtVendor()
+			aegerUI:InstallFarmhand()
+			aegerUI:InstallGatherMate2()
+			aegerUI:InstallGrid()
+			aegerUI:InstallHandyNotes()
+			aegerUI:InstallMapster()
+			aegerUI:InstallMasque()
+			aegerUI:InstallnibChatTabs()
+			aegerUI:InstalloUF_MovableFrames()
+			aegerUI:InstalloUF_Phanx()
+			aegerUI:InstallParrot()
+			aegerUI:InstallPrat()
+			aegerUI:InstallQuestUnTracker()
+			aegerUI:InstallSocialState()
+			aegerUI:InstallTinyDPS()
+			aegerUI:InstallTipTac()
+			aegerUI:InstallTotemTimers()
+			aegerUI:ZygorsGuideViewer()
 	end
 	
 	function aegerUI_SetScaleSmallOnInstall()
@@ -238,13 +245,13 @@
 			end
 	end
 	
-	function addon:SetScaleSmall()
+	function aegerUI:SetScaleSmall()
 		UIParent:SetScale(0.64);
 		SetCVar("uiscale", "0.64");
 		SetCVar("useUiScale", 1);
 	end
 	
-	function addon:SetScaleNormal()
+	function aegerUI:SetScaleNormal()
 		UIParent:SetScale(1.0);
 		SetCVar("uiscale", "1.0");
 		SetCVar("useUiScale", 0);
@@ -271,13 +278,13 @@
 						
 	aegerUI_Version = aegerUI_SetVersion( versionNumber );
 	
-	function addon:ApplySetup()  -- the Install button calls this when clicked.
+	function aegerUI:ApplySetup()  -- the Install button calls this when clicked.
             aegerUI_SetScaleSmallOnInstall()
 			aegerUI_InstallAddonOptions()
 			aegerUI_LoadPersonalAddonProfiles()
-			addon.db.profile.SetUpDone = true
+			aegerUI.db.profile.SetUpDone = true
 			aegerUI_SetCVARSINSTALL()
-			addon.db.profile.Version = aegerUI_Version
+			aegerUI.db.profile.Version = aegerUI_Version
 			Bartender4.db:SetProfile("aegerUI")
 			print('Setup complete. Please reload UI to finish via "/rl".')
     end

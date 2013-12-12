@@ -1,15 +1,15 @@
-local FOLDER_NAME, private = ...
+local aegerUI = ...
 
 local LibStub = _G.LibStub
-local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
+local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
 local profileVersion = "1.0"
 
-function addon:InstallBrokerMicroMenu()
+function aegerUI:InstallBrokerMicroMenu()
 	if not IsAddOnLoaded("Broker_MicroMenu") then return end
 	
-	if addon.db.global.addonProfileVersion.Aanye_XP ~= profileVersion then
+	if aegerUI.db.global.addonProfileVersion.Aanye_XP ~= profileVersion then
 	
 	local Microprofile = "Default"
 		
@@ -23,7 +23,7 @@ function addon:InstallBrokerMicroMenu()
 		
 for k,v in pairs(aegerUI_BrokerMicroMenu_Install) do
 		Broker_MicroMenuDB.profiles[k] = v
-		addon.db.global.addonProfileVersion.Aanye_XP = profileVersion
+		aegerUI.db.global.addonProfileVersion.Aanye_XP = profileVersion
 	end
 	end
 end
