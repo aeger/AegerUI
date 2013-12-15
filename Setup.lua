@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.8 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.9 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 	
 --  Namespace -----------------------------------------------------------------	
@@ -9,7 +9,7 @@
 	local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
 	local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 		
-	local versionNumber  = "5.4.8";
+	local versionNumber  = "5.4.9";
 	
 	local aegerUI_PersonalProfiles = false
 	
@@ -206,7 +206,6 @@
 	
 	function aegerUI_InstallAddonOptions()
 			aegerUI:ChatFrameInstall()
-			aegerUI:InstallAanye_XP()
 			aegerUI:InstallBartender()
 			aegerUI:BagSyncOptions()
 			aegerUI:InstallBazooka()
@@ -230,7 +229,6 @@
 			aegerUI:InstallQuestUnTracker()
 			aegerUI:InstallSocialState()
 			aegerUI:InstallTinyDPS()
-			aegerUI:InstallTipTac()
 			aegerUI:InstallTotemTimers()
 			aegerUI:ZygorsGuideViewer()
 	end
@@ -273,7 +271,7 @@
 	
 	function aegerUI_LoadPersonalAddonProfiles()
 		if not aegerUI_PersonalProfiles then end
-			aegerUI:InstallMounty()
+			
 	end
 						
 	aegerUI_Version = aegerUI_SetVersion( versionNumber );

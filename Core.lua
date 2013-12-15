@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---  aegerUI 5.4.8 http://www.wowinterface.com/downloads/info22493-aegerUI.html
+--  aegerUI 5.4.9 http://www.wowinterface.com/downloads/info22493-aegerUI.html
 -------------------------------------------------------------------------------
 
 --  Namespace -----------------------------------------------------------------
@@ -173,6 +173,7 @@ BINDING_HEADER_aegerUI = "aegerUI"
 				},
 				percharacter = {
 					name = "Character Specific",
+					hidden = true,
 					type = "group",
 					order = 10,
 					args = {

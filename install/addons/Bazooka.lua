@@ -4,7 +4,7 @@ local LibStub = _G.LibStub
 local aegerUI = LibStub("AceAddon-3.0"):GetAddon("aegerUI")
 local L = LibStub("AceLocale-3.0"):GetLocale("aegerUI")
 
-local profileVersion = "1.0"
+local profileVersion = "1.1"
 
 function aegerUI:InstallBazooka()
 	if not IsAddOnLoaded("Bazooka") then return end
@@ -50,11 +50,11 @@ function aegerUI:InstallBazooka()
 						["bar"] = 2,
 						["pos"] = 1,
 					},
-					["Aanye_XP"] = {
+					["Progress"] = {
 						["showIcon"] = false,
 						["area"] = "center",
-						["pos"] = 1,
 						["bar"] = 3,
+						["pos"] = 1,
 					},
 					["BagSyncLDB"] = {
 						["area"] = "left",
