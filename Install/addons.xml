@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- Install -->
+	<Script file="addons\AtlasLoot.lua"/>
+	<Script file="addons\BagSync.lua"/>
+	<Script file="addons\Bazooka.lua"/>
+	<Script file="addons\Broker_Currency.lua"/>
+	<Script file="addons\Broker_Garrison.lua"/>
+	<Script file="addons\Broker_MoneyFu.lua"/>
+	<Script file="addons\HandyNotes.lua"/>
+	<Script file="addons\Mapster.lua"/>
+	<Script file="addons\PetTracker.lua"/>
+	<Script file="addons\SocialState.lua"/>
+	<Script file="addons\TinyDPS.lua"/>
+	<Script file="addons\ZygorsGuideViewer.lua"/>
+</Ui>

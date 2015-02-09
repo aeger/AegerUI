@@ -1,0 +1,49 @@
+local function HideGarrisonMiniMapButton()
+if GarrisonLandingPageMinimapButton then
+		if GarrisonLandingPageMinimapButton:IsShown() then
+			if aegerUI.db.global.HideGarrison then
+				GarrisonLandingPageMinimapButton:Hide()
+			end
+		else
+			if not aegerUI.db.global.HideGarrison then
+				GarrisonLandingPageMinimapButton:Show()
+			end
+		end
+	end
+end
+aui.RegisterEvent("PLAYER_LOGIN", HideGarrisonMiniMapButton)
+
+
+
+
+if LeaPlusLC["ManageTradeGuild"] == "On" then
+
+			-- Function to check or uncheck trade and guild options in Blizzard options panel
+			local function TradeGuild()
+				if LeaPlusLC["ManageTradeGuild"] == "On" then
+					if LeaPlusLC["NoTradeRequests"] == "On" then
+						InterfaceOptionsControlsPanelBlockTrades:SetValue("1");
+					else
+						InterfaceOptionsControlsPanelBlockTrades:SetValue("0");
+					end
+					if LeaPlusLC["NoGuildInvites"] == "On" then
+						InterfaceOptionsControlsPanelBlockGuildInvites:SetValue("1");
+					else
+						InterfaceOptionsControlsPanelBlockGuildInvites:SetValue("0");
+					end
+				end
+			end
+
+			-- Set trade and guild checkboxes on startup and lock them to prevent confusion
+			TradeGuild();
+
+			InterfaceOptionsControlsPanelBlockTrades:Disable();
+			InterfaceOptionsControlsPanelBlockGuildInvites:Disable();
+			_G[InterfaceOptionsControlsPanelBlockTrades:GetName() .. 'Text']:SetAlpha(0.6)
+			_G[InterfaceOptionsControlsPanelBlockGuildInvites:GetName() .. 'Text']:SetAlpha(0.3)
+
+			-- Set trade and guild checkboxes when options are clicked in Leatrix Plus
+			LeaPlusCB["NoTradeRequests"]:HookScript("OnClick", TradeGuild);
+			LeaPlusCB["NoGuildInvites"]:HookScript("OnClick", TradeGuild);
+
+		end

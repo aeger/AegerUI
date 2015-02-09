@@ -1,0 +1,54 @@
+## Interface: 60000
+## Version: 6.0.3
+## Title: AegerUI
+## Author: Aeger
+## SavedVariables: aegerUIdb
+
+## libs ##
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+libs\AceAddon-3.0\AceAddon-3.0.lua
+libs\AceConsole-3.0\AceConsole-3.0.lua
+libs\AceGUI-3.0\AceGUI-3.0.xml
+libs\AceConfig-3.0\AceConfig-3.0.xml
+libs\AceDB-3.0\AceDB-3.0.lua
+libs\AceDBOptions-3.0\AceDBOptions-3.0.lua
+libs\AceEvent-3.0\AceEvent-3.0.xml
+libs\AceHook-3.0\AceHook-3.0.xml
+libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua
+libs\AceGUI-3.0-SharedMediaWidgets\widget.xml
+libs\LibDataBroker-1.1.lua
+libs\LibDBIcon-1.0\LibDBIcon-1.0\LibDBIcon-1.0.lua
+
+Core.lua
+Config.lua
+
+## Skins ##
+Skins\Recolor.lua
+
+## Install ##
+install\addons.xml
+
+## Modules ##
+Modules\api.lua
+Modules\Automation.lua
+Modules\BottomButtons.lua
+Modules\Durability.lua
+--  Modules\blizzImpBars.lua
+Modules\FollowMePlz.lua
+Modules\HelmCloakBtn.lua
+Modules\KingMe.lua
+Modules\Minimap.lua
+Modules\MinimapBtn.lua
+Modules\SetupUI.lua
+Modules\SlashCMDs.lua
+Modules\SlotItemLevel.lua
+Modules\StopAddonSpam.lua
+Modules\ToolTip.lua
+Modules\Topmenu.lua
+
+## Plugins ##
+Plugins\AutoLoot.lua
+Plugins\BDurability.lua
+Plugins\TinyDPS.lua
+Plugins\Zygors.lua
