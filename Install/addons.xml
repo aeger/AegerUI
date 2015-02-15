@@ -8,6 +8,7 @@
 	<Script file="addons\Broker_MoneyFu.lua"/>
 	<Script file="addons\HandyNotes.lua"/>
 	<Script file="addons\Mapster.lua"/>
+	<Script file="addons\oUF_Abu.lua"/>
 	<Script file="addons\PetTracker.lua"/>
 	<Script file="addons\SocialState.lua"/>
 	<Script file="addons\TinyDPS.lua"/>

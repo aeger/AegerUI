@@ -2,6 +2,21 @@ local AUI, aui = ...
 -- Most of the code below from Leatrix Plus and Abu essentials
 --auto sell/repair
 
+local function RareAlert()
+-- Based completely off Rare Alert by Haleth/Freethinker
+	if not aegerUI.db.global.Automation.RareAlert then return end
+
+	local blacklist = {
+	[971] = true, -- Alliance garrison
+	[976] = true, -- Horde garrison
+	}
+	
+	if blacklist[GetCurrentMapAreaID()] then return end
+
+	PlaySoundFile("Sound\\Interface\\RaidWarning.wav")
+	RaidNotice_AddMessage(RaidWarningFrame, "OMFG Rare Get It!", ChatTypeInfo["RAID_WARNING"])
+end
+
 local function MerchantOperations(event, ...)
 	local AutoRepair = aegerUI.db.global.Automation.AutoRepair
 	local SellGreyCrap = aegerUI.db.global.Automation.AutoSell
@@ -387,3 +402,4 @@ aui.RegisterEvent("ADDON_LOADED", HideErrors)
 aui.RegisterEvent("BANKFRAME_OPENED", autodeposit)
 --aui.RegisterEvent("PARTY_INVITE_REQUEST", autoparty)
 aui.RegisterEvent("CHAT_MSG_SYSTEM", Echo)
+aui.RegisterEvent("VIGNETTE_ADDED", RareAlert)

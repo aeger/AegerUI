@@ -33,6 +33,7 @@ StopAddonSpam.ruleset = {
 		"bagsync",
 		"ifthen",
 		"mounty",
+		"zygors",
 		
 		-- Default fallthrough.
 		"default"
@@ -117,6 +118,10 @@ StopAddonSpam.ruleset = {
 		},
 		["BodyGuardAway"] = {
 			test = function (msg, id, frame) return string.find(string.lower(msg), string.lower("BODYGUARD AWAY")) end,
+			action = DENY
+		},
+		["zygors"] = {
+			test = function (msg, id, frame) return string.find(string.lower(msg), string.lower("Zygor Guides Viewer:")) end,
 			action = DENY
 		},
 		["default"] = {

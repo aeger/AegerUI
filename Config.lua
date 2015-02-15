@@ -143,8 +143,17 @@ local function GetOptions()
 								set = function(info, value) aegerUI.db.global.Automation.FollowKeyWord = value
 								end,
 							},
-							autoRez = {
+							autoRareAlert = {
 								order = 191,
+								name = "Enable rare raid warning",
+								width = "full",
+								type = "toggle",
+								get = function() return aegerUI.db.global.Automation.RareAlert end,
+								set = function(info, value) aegerUI.db.global.Automation.RareAlert = value
+								end,
+							},
+							autoRez = {
+								order = 192,
 								name = "Auto accept resurrection requests",
 								width = "full",
 								type = "toggle",
@@ -153,7 +162,7 @@ local function GetOptions()
 								end,
 							},
 							autoSummon = {
-								order = 192,
+								order = 193,
 								name = "Auto accept summon requests",
 								width = "full",
 								type = "toggle",
@@ -386,8 +395,17 @@ local function GetOptions()
 				type = "group",
 				order = 200,
 				args = {
-					modHelmCloakbtn = {
+					modActionBars = {
 						order = 100,
+						name = "Action Bars enabled",
+						width = "full",
+						type = "toggle",
+						get = function() return aegerUI.db.global.ActionBars end,
+						set = function(info, value) aegerUI.db.global.ActionBars = value
+						end,
+					},
+					modHelmCloakbtn = {
+						order = 110,
 						name = "Show Helm/Cloak Buttons",
 						width = "full",
 						type = "toggle",
@@ -396,7 +414,7 @@ local function GetOptions()
 						end,
 					},
 					modMinimap = {
-						order = 110,
+						order = 120,
 						name = "Minimap enabled",
 						width = "full",
 						type = "toggle",
@@ -405,7 +423,7 @@ local function GetOptions()
 						end,
 					},
 					modBottombtns = {
-						order = 120,
+						order = 130,
 						name = "Buttons under chat",
 						width = "full",
 						type = "toggle",
@@ -414,7 +432,7 @@ local function GetOptions()
 						end,
 					},
 					modTooltips = {
-						order = 130,
+						order = 140,
 						name = "ToolTip Mods",
 						width = "full",
 						type = "toggle",
@@ -423,7 +441,7 @@ local function GetOptions()
 						end,
 					},
 					modReload = {
-						order = 140,
+						order = 150,
 						name = "Reload UI to set options",
 						type = "execute",
 						func = function() ReloadUI() end,
@@ -438,6 +456,7 @@ local function GetOptions()
 					colorpicker = {
 						order = 110,
 						name = "Skin color",
+						width = "full",
 						type = "color",
 						get = function(info)
 							return unpack(aegerUI.db.profile.AUIFrameColor)

@@ -8,7 +8,7 @@ bgMinimapButton:SetMovable(1)
 bgMinimapButton:SetUserPlaced(1)
 bgMinimapButton:EnableMouse(1)
 bgMinimapButton:RegisterForDrag('LeftButton')
-bgMinimapButton:SetFrameStrata('MEDIUM')
+bgMinimapButton:SetFrameStrata('DIALOG')
 bgMinimapButton:SetPoint('TOPRIGHT', -131, -22);
 bgMinimapButton:CreateTexture('bgMinimapButtonTexture', 'BACKGROUND')
 bgMinimapButton:SetClampedToScreen(true)
@@ -113,7 +113,7 @@ while object do
 	end
 	object = EnumerateFrames(object)
 end
-
+--[[
 ----------------------------------------------------------------------------------------
 --	Clear and Hide MinimapBtn -- Hover Over Time!
 ----------------------------------------------------------------------------------------
@@ -126,3 +126,17 @@ end)
 aegerUI_MinimapButton:SetScript("OnLeave", function()
 	aegerUI_MinimapButton:FadeOut()
 end)
+
+----------------------------------------------------------------------------------------
+--	Clear and Hide The GarryPMB -- Hover Over Time!
+----------------------------------------------------------------------------------------
+GarrisonLandingPageMinimapButton.ClearAllPoints = dummy
+GarrisonLandingPageMinimapButton.SetPoint = dummy
+GarrisonLandingPageMinimapButton:SetAlpha(0)
+GarrisonLandingPageMinimapButton:SetScript("OnEnter", function()
+	GarrisonLandingPageMinimapButton:FadeIn()
+end)
+GarrisonLandingPageMinimapButton:SetScript("OnLeave", function()
+	GarrisonLandingPageMinimapButton:FadeOut()
+end)
+--]]

@@ -5,37 +5,10 @@ aegerUI:SetDefaultModuleState(false)
 local CharName = UnitName("player")
 local versionNumber  = "6.0.3";
 local AUI_Beta = false;
-
--- Event Handler
-local eventframe = CreateFrame("Frame")
-eventframe:SetScript("OnEvent", function(self, event, ...)
-	if self[event] then
-		for _, func in pairs(self[event]) do
-			func(event, ...)
-		end
-	end
-end)
-
-function aui.RegisterEvent(event, func)
-	assert(type(event) == "string")
-	if not eventframe[event] then
-		eventframe[event] = {}
-	end
-	table.insert(eventframe[event], func)
-	return eventframe:RegisterEvent(event)
-end
-
-function aui.UnregisterEvent(event, func) 
-	if not eventframe[event] then return; end
-	if func and eventframe[event][func]  then
-		eventframe[event][func] = nil
-	end
-	if #eventframe[event] == 0 then
-		eventframe:UnregisterEvent(event)
-	end
-end
+BINDING_HEADER_aegerUI = "aegerUI"
 
 -- Modules
+aegerUI_ActionBars = aegerUI:NewModule("ActionBars");
 aegerUI_BottomButtons = aegerUI:NewModule("BottomButtons");
 aegerUI_Durability = aegerUI:NewModule("Durability");
 aegerUI_SetupUI = aegerUI:NewModule("SetupUI");
@@ -56,6 +29,7 @@ aegerUI_Zygors = aegerUI:NewModule("Zygors");
 -- DB default values
 local defaults = {
 	global = {
+		ActionBars = true,
 	  AutoLootSolo = true,
 	  AutoLootGroup = false,
 	  AutoLootRaid = false,
@@ -69,50 +43,69 @@ local defaults = {
 	  ToolTips = true,
 	  addonProfileVersion = {},
 	  Automation = {
-		AcceptInvites = true,
-		AutoDepositRegs = true,
-		AutoFollowWhisper = true,
-		AutoRepair = true,
-		AutoSell = true,
-		BlockPartyInvites = false,
-		FollowKeyWord = followme,
-		GuildRepair = true,
-		HideBodyGuard = true,
-		HideErrors = true,
-		InviteFromWhisper = true,
-		ShowErrorsFlag = 1,
-		ShowQuestUpdates = true,
-		WhisperKeyWord = invitemedumbass,
+			AcceptInvites = true,
+			AutoDepositRegs = true,
+			AutoFollowWhisper = true,
+			AutoRepair = true,
+			AutoSell = true,
+			BlockPartyInvites = false,
+			FollowKeyWord = followme,
+			GuildRepair = true,
+			HideBodyGuard = true,
+			HideErrors = true,
+			InviteFromWhisper = true,
+			RareAlert = true,
+			ShowErrorsFlag = 1,
+			ShowQuestUpdates = true,
+			WhisperKeyWord = invitemedumbass,
 	  },
 	  BrokerPlugins = {
-		AutoLoot = true,
-		BDurability = true,
-		Sidebar = false,
-		TinyDPS = true,
-		Zygors = true,
+			AutoLoot = true,
+			BDurability = true,
+			Sidebar = false,
+			TinyDPS = true,
+			Zygors = true,
 	  },
+	  FadeOutBars = { -- Fade these bars out if they're set to true.
+			['MultiBarLeft'] = true,
+			['MultiBarRight'] = false,
+			['MultiBarBottomRight'] = false,
+		},
+		HideStanceBar = { -- Hide stance bar for these classes if set to true.
+			['DEATHKNIGHT'] = false,
+			['DRUID'] = false,
+			['HUNTER'] = false,
+			['MAGE'] = false,
+			['MONK'] = false,
+			['PALADIN'] = false,
+			['PRIEST'] = false,
+			['ROGUE'] = false,
+			['SHAMAN'] = false,
+			['WARLOCK'] = false,
+			['WARRIOR'] = true,
+		},
 	  ToolTips = {
-		ShowTitle = false,
-		RoleIcon = true,
-		ShowGuildRanks = true,
-		FontSize = 13,
-		Position = {'BOTTOMRIGHT', UIParent, 'BOTTOMRIGHT', -57, 190},
-		["Colors"] = {
-			Border = { 0.9, 0.9, 0.8 },
-		},
-		["Fonts"] = {
-			Damage = 'Interface\\AddOns\\aegerUI\\Media\\Font\\Defused.ttf',
-			Normal = 'Interface\\AddOns\\aegerUI\\Media\\Font\\ExpresswayFree.ttf',
-			Actionbar = 'Interface\\AddOns\\aegerUI\\Media\\Font\\AccPrec.ttf',
-		},
-		["Statusbar"] = {
-			Normal = 'Interface\\AddOns\\aegerUI\\Media\\ToolTips\\statusbarTex.tga',
-			Light = 'Interface\\AddOns\\aegerUI\\Media\\ToolTips\\tex.tga',
-		},
+			ShowTitle = false,
+			RoleIcon = true,
+			ShowGuildRanks = true,
+			FontSize = 13,
+			Position = {'BOTTOMRIGHT', UIParent, 'BOTTOMRIGHT', -57, 190},
+			["Colors"] = {
+				Border = { 0.9, 0.9, 0.8 },
+			},
+			["Fonts"] = {
+				Damage = 'Interface\\AddOns\\aegerUI\\Media\\Font\\Defused.ttf',
+				Normal = 'Interface\\AddOns\\aegerUI\\Media\\Font\\ExpresswayFree.ttf',
+				Actionbar = 'Interface\\AddOns\\aegerUI\\Media\\Font\\AccPrec.ttf',
+			},
+			["Statusbar"] = {
+				Normal = 'Interface\\AddOns\\aegerUI\\Media\\ToolTips\\statusbarTex.tga',
+				Light = 'Interface\\AddOns\\aegerUI\\Media\\ToolTips\\tex.tga',
+			},
 	  },
 	},
 	profile = {
-      AUIFrameColor = {0.5, 0.5, 0.4, 1},
+    AUIFrameColor = {0.5, 0.5, 0.4, 1},
 	  SetUpDone = false,
 	  TopMenuShow = true,
 	  NumBottomBars = 1,
@@ -171,6 +164,9 @@ local function BrokerPluginCheck()
 end
 
 local function ModuleChecks()
+  if aegerUI.db.global.ActionBars then
+		aegerUI:EnableModule("ActionBars")
+	end
 	if aegerUI.db.global.BottomButtons then
 		aegerUI:EnableModule("BottomButtons")
 	end
@@ -227,19 +223,9 @@ local function SetupCheck()
 	BrokerPluginCheck()
 	ModuleChecks()
 	StartupMsg()
+	-- Check if Action Bars are enabled before loading ActionBarMenu
+	if aegerUI.db.global.ActionBars then
+		aui.InitABMenu()
+	end
 end
 aui.RegisterEvent("PLAYER_LOGIN", SetupCheck)
-
-function aui.Print(...)
-	if (not ...) then return; end
-	local s = ""
-	local t = {...}
-	for i = 1, #t do
-		s = s .. " " .. t[i]
-	end
-	return print("|cffffcf00AegerUI:|r"..s)
-end
-
-
-	
-
