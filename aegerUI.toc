@@ -35,12 +35,14 @@ Modules\ActionBars.lua
 Modules\ActionBarMenu.lua
 Modules\Automation.lua
 Modules\BottomButtons.lua
+Modules\BuffFrame.lua
 Modules\Durability.lua
 Modules\FollowMePlz.lua
 Modules\HelmCloakBtn.lua
 Modules\KingMe.lua
 Modules\Minimap.lua
 Modules\MinimapBtn.lua
+Modules\MovableFrames.lua
 Modules\ObjTracker.lua
 Modules\SetupUI.lua
 Modules\SlashCMDs.lua

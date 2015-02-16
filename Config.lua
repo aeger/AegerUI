@@ -370,8 +370,7 @@ local function GetOptions()
 								type = "select",
 								dialogControl = 'LSM30_Font',
 								values = AceGUIWidgetLSMlists.font,
-								get = function() return aegerUI.db.global.ToolTips.Fonts.Damage end,
-								set = function(self, key) current = key end,
+								
 							},
 							tipBorderColor = {
 								order = 160,

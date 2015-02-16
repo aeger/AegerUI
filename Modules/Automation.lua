@@ -59,11 +59,6 @@ local function MerchantOperations(event, ...)
 	end
 end
 
-local function CvarUpdates()
-	StanceButton1:SetPoint('BOTTOM', UIParent, -450, 5)
-	PetActionButton1:SetPoint('BOTTOM', UIParent, 382, 5)
-end
-
 		----------------------------------------------------------------------
 		--	Hide error text
 		----------------------------------------------------------------------
@@ -397,7 +392,6 @@ local function Echo(self, event, ...)
 end
 
 aui.RegisterEvent("MERCHANT_SHOW", MerchantOperations)
-aui.RegisterEvent("PLAYER_ENTERING_WORLD", CvarUpdates)
 aui.RegisterEvent("ADDON_LOADED", HideErrors)
 aui.RegisterEvent("BANKFRAME_OPENED", autodeposit)
 --aui.RegisterEvent("PARTY_INVITE_REQUEST", autoparty)

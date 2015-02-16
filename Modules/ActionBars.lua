@@ -2,6 +2,7 @@ local AUI, aui = ...
 
 function aegerUI_ActionBars:OnEnable()
 local playerClass
+local cfg = aegerUI.db.global.ActionBarOptions
 
 local FRAMES_DISABLE_MOVEMENT = {
 	'MultiBarLeft',
@@ -289,6 +290,47 @@ local function LoadActionBars()
 	EnableMouseOverBars()
 	BuildPetBar()
 end
+
+hooksecurefunc('ActionButton_UpdateUsable', function(self)
+    if (IsAddOnLoaded('RedRange') or IsAddOnLoaded('GreenRange') or IsAddOnLoaded('tullaRange') or IsAddOnLoaded('RangeColors')) then
+        return
+    end  
+
+    local normal = _G[self:GetName()..'NormalTexture']
+    if (normal) then
+        normal:SetVertexColor(cfg.color.Normal[1], cfg.color.Normal[2], cfg.color.Normal[3], 1) 
+    end
+
+    local isUsable, notEnoughMana = IsUsableAction(self.action)
+    if (isUsable) then
+        _G[self:GetName()..'Icon']:SetVertexColor(1, 1, 1)
+    elseif (notEnoughMana) then
+        _G[self:GetName()..'Icon']:SetVertexColor(unpack(cfg.color.OutOfMana))
+    else
+        _G[self:GetName()..'Icon']:SetVertexColor(unpack(cfg.color.NotUsable))
+    end
+end)
+
+hooksecurefunc('ActionButton_OnUpdate', function(self, elapsed)
+    if (IsAddOnLoaded('tullaRange') or IsAddOnLoaded('RangeColors')) then
+        return
+    end
+
+    if (self.rangeTimer) then
+        if (self.rangeTimer - elapsed <= 0) then
+            local isInRange = false
+            if (IsActionInRange(self.action) == false) then
+                _G[self:GetName()..'Icon']:SetVertexColor(unpack(cfg.color.OutOfRange))
+                isInRange = true
+            end
+
+            if (self.isInRange ~= isInRange) then
+                self.isInRange = isInRange
+                ActionButton_UpdateUsable(self)
+            end
+        end
+    end
+end)
 
 LoadActionBars()
 --aui:RegisterEvent("PLAYER_LOGIN", LoadActionBars)

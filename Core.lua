@@ -10,6 +10,7 @@ BINDING_HEADER_aegerUI = "aegerUI"
 -- Modules
 aegerUI_ActionBars = aegerUI:NewModule("ActionBars");
 aegerUI_BottomButtons = aegerUI:NewModule("BottomButtons");
+aegerUI_BuffFrame = aegerUI:NewModule("BuffFrame");
 aegerUI_Durability = aegerUI:NewModule("Durability");
 aegerUI_SetupUI = aegerUI:NewModule("SetupUI");
 aegerUI_MiniMap = aegerUI:NewModule("MiniMap");
@@ -37,11 +38,26 @@ local defaults = {
 	  StartUpMessage = true,
 	  Durability = true,
 	  MiniMapEnabled = true,
-	  ShowMinimapIcon = true,
+	  ShowMinimapIcon = false,
 	  ShowHelmCloakBtn = true,
 	  Recolor = true,
 	  ToolTips = true,
 	  addonProfileVersion = {},
+	  ActionBarOptions = {
+	  	color = {   -- Red, Green, Blue
+        Normal = { 1, 1, 1 },
+        IsEquipped = { 0, 1, 0 },
+
+        OutOfRange = { 0.9, 0, 0 },
+        OutOfMana = { 0.3, 0.3, 1 },
+
+        NotUsable = { 0.35, 0.35, 0.35 },
+
+        HotKeyText = { 0.6, 0.6, 0.6 },
+        MacroText = { 1, 1, 1 },
+        CountText = { 1, 1, 1 },
+    },
+	  },
 	  Automation = {
 			AcceptInvites = true,
 			AutoDepositRegs = true,
@@ -65,6 +81,83 @@ local defaults = {
 			Sidebar = false,
 			TinyDPS = true,
 			Zygors = true,
+	  },
+	  BuffFrame = {
+	  	adjustOneletterAbbrev = true,
+	  	consolidatedTooltipScale = 1.2,
+	  	combineBuffsAndDebuffs = true,
+	  	dragFrameList = {},
+	  	color         = "0000FFFF",
+	  	shortcut      = "rbfs",
+	  	pos             = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -70, y = 0 },
+    	gap             = 10, --gap between buff and debuff rows
+   		userplaced      = true, --want to place the bar somewhere else?
+    	rowSpacing      = 10,
+    	colSpacing      = 7,
+    	buttonsPerRow   = 10,
+    	button = {
+      	size              = 28,
+    	},
+    	icon = {
+      	padding           = -2,
+    	},
+    	border = {
+      	texture           = "Interface\\AddOns\\aegerUI\\Media\\BuffFrame\\gloss",
+      	color             = { r = 0.4, g = 0.35, b = 0.35, },
+      	classcolored      = false,
+    	},
+    	background = {
+      	show              = true,   --show backdrop
+      	edgeFile          = "Interface\\AddOns\\aegerUI\\Media\\BuffFrame\\outer_shadow",
+      	color             = { r = 0, g = 0, b = 0, a = 0.9},
+      	classcolored      = false,
+      	inset             = 6,
+      	padding           = 4,
+    	},
+    	duration = {
+      	font              = STANDARD_TEXT_FONT,
+      	size              = 11,
+      	pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+    	},
+    	count = {
+      	font              = STANDARD_TEXT_FONT,
+      	size              = 11,
+      	pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    	},
+	  },
+	  DeBuffFrame = {
+	  	pos             = { a1 = "TOPRIGHT", af = "rBFS_BuffDragFrame", a2 = "BOTTOMRIGHT", x = 0, y = -10 },
+    	userplaced      = true, --want to place the bar somewhere else?
+    	rowSpacing      = 10,
+    	colSpacing      = 7,
+    	buttonsPerRow   = 6,
+    	button = {
+    	  size              = 40,
+    	},
+    	icon = {
+    	  padding           = -2,
+    	},
+    	border = {
+    	  texture           = "Interface\\AddOns\\aegerUI\\Media\\BuffFrame\\gloss",
+    	},
+    	background = {
+    	  show              = true,   --show backdrop
+    	  edgeFile          = "Interface\\AddOns\\aegerUI\\Media\\BuffFrame\\outer_shadow",
+    	  color             = { r = 0, g = 0, b = 0, a = 0.9},
+    	  classcolored      = false,
+    	  inset             = 6,
+    	  padding           = 4,
+    	},
+    	duration = {
+    	  font              = STANDARD_TEXT_FONT,
+    	  size              = 13,
+    	  pos               = { a1 = "BOTTOM", x = 0, y = 0 },
+    	},
+    	count = {
+    	  font              = STANDARD_TEXT_FONT,
+    	  size              = 12,
+    	  pos               = { a1 = "TOPRIGHT", x = 0, y = 0 },
+    	},
 	  },
 	  FadeOutBars = { -- Fade these bars out if they're set to true.
 			['MultiBarLeft'] = true,
@@ -144,6 +237,7 @@ function aegerUI:OnInitialize()
 end
 
 aegerUI:EnableModule("TopMenu")
+aegerUI:EnableModule("BuffFrame")
 
 local function BrokerPluginCheck()
 	if aegerUI.db.global.BrokerPlugins.AutoLoot then
@@ -205,15 +299,11 @@ local function SetVersion( version )
 end
 aegerUI_Version = SetVersion( versionNumber );
 
-local function SetupCheck()
-	if aegerUI.db.profile.SetUpDone == false then
+local function Startup()
+	if aegerUI.db.profile.SetUpDone == false or aegerUI.db.profile.Version ~= aegerUI_Version then
 		aegerUI:EnableModule("SetupUI")
 		aui.DoSetup()
-    end
-	if aegerUI.db.profile.Version ~= aegerUI_Version then
-		aegerUI:EnableModule("SetupUI")
-		aui.DoSetup()
-	end
+  end
 	--check for minimap toggle
 	if aegerUI.db.global.ShowMinimapIcon and aegerUI_MinimapButton and not aegerUI_MinimapButton:IsVisible() then
 		aegerUI_MinimapButton:Show()
@@ -223,9 +313,10 @@ local function SetupCheck()
 	BrokerPluginCheck()
 	ModuleChecks()
 	StartupMsg()
-	-- Check if Action Bars are enabled before loading ActionBarMenu
+	aui.Print("Testing 123.")
+	 --Check if Action Bars are enabled before loading ActionBarMenu
 	if aegerUI.db.global.ActionBars then
 		aui.InitABMenu()
 	end
 end
-aui.RegisterEvent("PLAYER_LOGIN", SetupCheck)
+aui.RegisterEvent("PLAYER_LOGIN", Startup)
